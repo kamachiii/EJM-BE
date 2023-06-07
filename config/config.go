@@ -30,7 +30,7 @@ func NewConfig() *Config {
 		DB:    LoadDBConfig(),
 		App:   LoadAppConfig(),
 		Auth:  LoadAuthConfig(),
-		Redis: LoadRedisConfig(),
+		// Redis: LoadRedisConfig(),
 	}
 }
 
@@ -39,6 +39,6 @@ func NewConfigTest() *Config {
 		DB:    LoadDBConfig(),
 		App:   LoadAppConfig(),
 		Auth:  LoadAuthConfig(),
-		Redis: LoadRedisConfig(),
+		// Redis: LoadRedisConfig(),
 	}
 }

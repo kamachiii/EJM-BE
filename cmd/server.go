@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"TKD/config"
-	_ "TKD/docs"
 	"TKD/internal/logs"
 	"TKD/internal/routes"
 	"TKD/internal/server"
