@@ -1,0 +1,6 @@
+2023/03/29 17:00:47 app.go:48: INFO: [Configuration Loaded]
+2023/03/29 17:00:48 app.go:48: INFO: [Database Connected Successfully]
+2023/03/29 17:00:48 app.go:48: WARN: [Redis Skiped]
+2023/03/29 17:00:48 app.go:48: INFO: [Redis Skip Cache]
+2023/03/29 17:00:48 app.go:48: INFO: [Redis Job Queue skipped]
+2023/03/29 17:01:11 app.go:48: ERROR: [jl3R6Q3VE1BZZe7W9Bn22lOAAyHH0d76 Key: 'RefreshToken.Token' Error:Field validation for 'Token' failed on the 'required' tag]

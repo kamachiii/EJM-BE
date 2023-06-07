@@ -1,0 +1,19 @@
+{
+  "title" : "Master Dokumen",
+  "label" : "Dokumen",
+  "buttons" : {
+    "print_label_kotak" : "CETAK LABEL DOKUMEN",
+    "add" : "TAMBAH DOKUMEN BARU",
+    "export" : "UPLOAD BULK DOKUMEN"
+  },
+  "bulk" : "Bulk Upload Dokumen",
+  "table" : {
+    "no" : "No",
+    "nomor_dokumen" : "Nomor Dokumen",
+    "nomor_ordner" : "Nomor Ordner",
+    "nomor_kotak" : "Nomor Kotak",
+    "status_upload" : "Status Upload",
+    "total_berkas" : "Total Berkas",
+    "action" : "Action"
+  }
+}

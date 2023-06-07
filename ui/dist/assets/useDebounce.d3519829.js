@@ -1,0 +1,1 @@
+import{r as o}from"./index.d5331035.js";function c(e,t){const[r,u]=o.exports.useState(e);return o.exports.useEffect(()=>{const s=setTimeout(()=>{u(e)},t);return()=>{clearTimeout(s)}},[e,t]),r}export{c as u};

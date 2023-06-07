@@ -1,0 +1,7 @@
+{
+  "required" : "Field ini wajib diisi",
+  "email.invalid" : "Email tidak valid",
+  "number" : "Hanya Angka diperbolehkan",
+  "too.long" : "Karakter terlalu panjang",
+  "min" : "Minimal huruf/karakter berjumlah "
+}

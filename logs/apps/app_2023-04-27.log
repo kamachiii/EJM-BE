@@ -1,0 +1,6 @@
+2023/04/27 09:46:30 app.go:48: INFO: [Configuration Loaded]
+2023/04/27 09:46:30 app.go:48: INFO: [Database Connected Successfully]
+2023/04/27 09:46:45 app.go:48: INFO: [Configuration Loaded]
+2023/04/27 09:46:45 app.go:48: INFO: [Database Connected Successfully]
+2023/04/27 09:59:01 app.go:48: ERROR: [kJpSwwCeiaOVwLKjqUhssQHJdMNgzfWc Key: 'GetInventory.BasePagination.Page' Error:Field validation for 'Page' failed on the 'required' tag
+Key: 'GetInventory.BasePagination.PageSize' Error:Field validation for 'PageSize' failed on the 'required' tag]

@@ -1,0 +1,1 @@
+import{p as r,q as o,t as s}from"./index.0e24cb86.js";const n=(t,a,e)=>({type:r,data:{component:t,title:a,size:e}}),L=({component:t,title:a,size:e})=>({type:o,data:{component:t,title:a,size:e}}),O=()=>({type:s});export{L as a,O as c,n as o};

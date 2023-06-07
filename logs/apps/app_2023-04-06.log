@@ -1,0 +1,8 @@
+2023/04/06 07:02:29 app.go:48: INFO: [Configuration Loaded]
+2023/04/06 07:02:30 app.go:48: INFO: [Database Connected Successfully]
+2023/04/06 07:02:30 app.go:48: WARN: [Redis Skiped]
+2023/04/06 07:02:30 app.go:48: INFO: [Redis Skip Cache]
+2023/04/06 07:02:30 app.go:48: INFO: [Redis Job Queue skipped]
+2023/04/06 07:03:04 app.go:48: ERROR: [UA8P6k9rOg1bm5pAolgo8aatWCQLL8Bd Key: 'RefreshToken.Token' Error:Field validation for 'Token' failed on the 'required' tag]
+2023/04/06 18:53:55 app.go:48: DEBUG: [Shutdowning Server ...]
+2023/04/06 18:53:55 app.go:48: INFO: [Server Stopped Gracefully]

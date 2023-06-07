@@ -1,0 +1,54 @@
+2023/01/05 21:54:08 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:02:43 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:13:53 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:13:54 app.go:48: INFO: Database Connected Successfully
+2023/01/05 22:27:18 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:27:18 app.go:48: INFO: Database Connected Successfully
+2023/01/05 22:27:59 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:27:59 app.go:48: INFO: Database Connected Successfully
+2023/01/05 22:28:06 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:28:06 app.go:48: INFO: Database Connected Successfully
+2023/01/05 22:29:37 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:29:37 app.go:48: INFO: Database Connected Successfully
+2023/01/05 22:30:26 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:30:26 app.go:48: INFO: Database Connected Successfully
+2023/01/05 22:30:38 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:30:38 app.go:48: INFO: Database Connected Successfully
+2023/01/05 22:35:55 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:35:55 app.go:48: INFO: Database Connected Successfully
+2023/01/05 22:36:52 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:36:52 app.go:48: INFO: Database Connected Successfully
+2023/01/05 22:37:07 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:37:07 app.go:48: INFO: Database Connected Successfully
+2023/01/05 22:37:11 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:37:11 app.go:48: INFO: Database Connected Successfully
+2023/01/05 22:38:47 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:38:47 app.go:48: INFO: Database Connected Successfully
+2023/01/05 22:38:54 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:38:54 app.go:48: INFO: Database Connected Successfully
+2023/01/05 22:39:01 app.go:48: INFO: Configuration Loaded
+2023/01/05 22:39:01 app.go:48: INFO: Database Connected Successfully
+2023/01/05 23:07:12 app.go:48: INFO: Configuration Loaded
+2023/01/05 23:07:12 app.go:48: INFO: Database Connected Successfully
+2023/01/05 23:07:20 app.go:48: INFO: Configuration Loaded
+2023/01/05 23:07:20 app.go:48: INFO: Database Connected Successfully
+2023/01/05 23:07:23 app.go:48: INFO: Configuration Loaded
+2023/01/05 23:07:23 app.go:48: INFO: Database Connected Successfully
+2023/01/05 23:10:44 app.go:48: INFO: Configuration Loaded
+2023/01/05 23:10:44 app.go:48: INFO: Database Connected Successfully
+2023/01/05 23:12:10 app.go:48: INFO: Configuration Loaded
+2023/01/05 23:12:10 app.go:48: INFO: Database Connected Successfully
+2023/01/05 23:12:43 app.go:48: INFO: Configuration Loaded
+2023/01/05 23:12:43 app.go:48: INFO: Database Connected Successfully
+2023/01/05 23:19:09 app.go:48: INFO: Configuration Loaded
+2023/01/05 23:19:09 app.go:48: INFO: Database Connected Successfully
+2023/01/05 23:21:31 app.go:48: INFO: [Configuration Loaded]
+2023/01/05 23:21:31 app.go:48: INFO: [Database Connected Successfully]
+2023/01/05 23:21:54 app.go:48: INFO: [Configuration Loaded]
+2023/01/05 23:21:54 app.go:48: INFO: [Database Connected Successfully]
+2023/01/05 23:21:57 app.go:48: DEBUG: [[map[id:ec1cbb63-3ee1-4a27-b638-6c653ca81d2c name:Direktur IT parentId:0] map[id:6c2a188b-e3b6-4823-b93a-5028ee720a06 name:Department Risk Management 1 parentId:ec1cbb63-3ee1-4a27-b638-6c653ca81d2c] map[id:16f5ce19-b233-4cf4-8232-355129913d35 name:Department Risk Management 2 parentId:ec1cbb63-3ee1-4a27-b638-6c653ca81d2c] map[id:26bfbbca-1146-4e17-8ca2-086ac19dcae6 name:Divisi Data parentId:ec1cbb63-3ee1-4a27-b638-6c653ca81d2c] map[id:d09a8e60-7e6f-4839-94a2-ebf698cebde8 name:Departement IT Security parentId:26bfbbca-1146-4e17-8ca2-086ac19dcae6] map[id:672ae967-adb5-4e1c-846e-0a18baf66832 name:Departement Core Banking parentId:26bfbbca-1146-4e17-8ca2-086ac19dcae6] map[id:14f615fb-7324-4a71-b723-d455e47c5d40 name:Direktur Keuangan parentId:0] map[id:2ad8e32d-cb9f-42c3-b6c9-8d4d8da5dea0 name:Departement Pajak parentId:14f615fb-7324-4a71-b723-d455e47c5d40]]]
+2023/01/05 23:24:15 app.go:48: INFO: [Configuration Loaded]
+2023/01/05 23:24:15 app.go:48: INFO: [Database Connected Successfully]
+2023/01/05 23:24:25 app.go:48: DEBUG: [[map[id:ec1cbb63-3ee1-4a27-b638-6c653ca81d2c name:Direktur IT parentId:0] map[id:6c2a188b-e3b6-4823-b93a-5028ee720a06 name:Department Risk Management 1 parentId:ec1cbb63-3ee1-4a27-b638-6c653ca81d2c] map[id:16f5ce19-b233-4cf4-8232-355129913d35 name:Department Risk Management 2 parentId:ec1cbb63-3ee1-4a27-b638-6c653ca81d2c] map[id:26bfbbca-1146-4e17-8ca2-086ac19dcae6 name:Divisi Data parentId:ec1cbb63-3ee1-4a27-b638-6c653ca81d2c] map[id:d09a8e60-7e6f-4839-94a2-ebf698cebde8 name:Departement IT Security parentId:26bfbbca-1146-4e17-8ca2-086ac19dcae6] map[id:672ae967-adb5-4e1c-846e-0a18baf66832 name:Departement Core Banking parentId:26bfbbca-1146-4e17-8ca2-086ac19dcae6] map[id:14f615fb-7324-4a71-b723-d455e47c5d40 name:Direktur Keuangan parentId:0] map[id:2ad8e32d-cb9f-42c3-b6c9-8d4d8da5dea0 name:Departement Pajak parentId:14f615fb-7324-4a71-b723-d455e47c5d40]]]
+2023/01/05 23:34:55 app.go:48: DEBUG: [Shutdowning Server ...]
+2023/01/05 23:34:55 app.go:48: INFO: [Server Stopped Gracefully]

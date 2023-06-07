@@ -1,0 +1,16 @@
+{
+  "label" : "Users",
+  "modal.title.delete" : "Are you sure want to delete this user ?",
+  "buttons" : {
+    "add" : "Add User"
+  },
+  "table_users" : {
+    "table_no" : "No",
+    "pict" : "Picture",
+    "username" : "Username",
+    "name" : "Full Name",
+    "role" : "Role",
+    "status" : "Status",
+    "action" : "Action"
+  }
+}

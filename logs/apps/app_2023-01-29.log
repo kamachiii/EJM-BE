@@ -1,0 +1,4 @@
+2023/01/29 10:26:48 app.go:48: INFO: [Configuration Loaded]
+2023/01/29 10:26:49 app.go:48: INFO: [Database Connected Successfully]
+2023/01/29 14:00:46 app.go:48: DEBUG: [Shutdowning Server ...]
+2023/01/29 14:00:46 app.go:48: INFO: [Server Stopped Gracefully]

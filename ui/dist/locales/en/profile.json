@@ -1,0 +1,19 @@
+{
+  "label_user_information" : "User Information",
+  "user_information_content"  : {
+    "alamat" : "Address",
+    "handphone" : "Phone Number"
+  },
+  "label_action" : "Action",
+  "action_content"  : {
+    "change" : "Change Password",
+    "delete" : "Destroy Account"
+  },
+  "label_tab_assigned_task" : "Assigned Tasks",
+  "tab_assigned_task_content" : {
+    "table_no" : "No",
+    "table_projects_name" : "Project Name"
+  },
+  "label_tab_comments" : "Comments",
+  "label_tab_attachments" : "Uploaded Attachments"
+}

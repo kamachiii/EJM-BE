@@ -1,0 +1,26 @@
+{
+  "title" : "Master Box",
+  "label" : "Box",
+  "buttons" : {
+    "print_label_kotak" : "PRINT BOX LABEL",
+    "template" : "DOWNLOAD TEMPLATE IMPORT EXCEL",
+    "add" : "ADD NEW BOX",
+    "export" : "EXPORT"
+  },
+  "table" : {
+    "no" : "No",
+    "nomor_kotak" : "Box Number",
+    "borrow_status" : "Borrow Status",
+    "lokasi" : "Storage Location",
+    "action" : "Action"
+  },
+  "detailTable" : {
+    "printLabel" : "Print Label",
+    "range" : "Folder Number Range",
+    "update_by" : "Updated By",
+    "updated_at" : "Date Updated",
+    "storage" : "Storage Location",
+    "orders_total" : "Total Folders",
+    "docs_total" : "Total Documents"
+  }
+}

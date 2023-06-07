@@ -1,0 +1,1 @@
+import{a,B as e,d as t,r as s,h as r,O as h}from"./index.4b216aca.js";const n=()=>a(e,{height:"100vh",children:a(t,{padding:0,maxWidth:{base:"100%","2xl":2e3},height:"100%",children:a(s.exports.Suspense,{fallback:a(r,{}),children:a(h,{})})})});export{n as default};

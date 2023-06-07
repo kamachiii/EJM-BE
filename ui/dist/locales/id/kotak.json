@@ -1,0 +1,27 @@
+{
+  "title" : "Master Kotak",
+  "label" : "Kotak",
+  "buttons" : {
+    "print_label_kotak" : "PRINT LABEL KOTAK",
+    "template" : "DOWNLOAD TEMPLATE IMPORT EXCEL",
+    "add" : "TAMBAH KOTAK BARU",
+    "export" : "EXPORT"
+  },
+  "table" : {
+    "no" : "No",
+    "nomor_kotak" : "Nomor Kotak",
+    "borrow_status" : "Status Peminjaman",
+    "lokasi" : "Lokasi Penyimpanan",
+    "action" : "Tindakan"
+  },
+
+  "detailTable" : {
+    "printLabel" : "Cetak Label",
+    "range" : "Rentang Nomor Ordner",
+    "update_by" : "Update Oleh",
+    "updated_at" : "Tanggal Diupdate",
+    "storage" : "Lokasi Penyimpanan",
+    "orders_total" : "Total Ordner",
+    "docs_total" : "Total Dokumen"
+  }
+}

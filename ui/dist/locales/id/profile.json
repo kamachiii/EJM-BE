@@ -1,0 +1,19 @@
+{
+  "label_user_information" : "Informasi User",
+  "user_information_content"  : {
+    "alamat" : "Alamat",
+    "handphone" : "Nomor Telefon"
+  },
+  "label_action" : "Action",
+  "action_content"  : {
+    "change" : "Ganti Password",
+    "delete" : "Hapus Akun"
+  },
+  "label_tab_assigned_task" : "Tugas Diberikan",
+  "tab_assigned_task_content" : {
+    "table_no" : "No",
+    "table_projects_name" : "Nama Project"
+  },
+  "label_tab_comments" : "Komentar",
+  "label_tab_attachments" : "Attachment Terupload"
+}

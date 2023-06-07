@@ -1,0 +1,26 @@
+{
+  "title" : "Master Folder",
+  "label" : "Folder",
+  "buttons" : {
+    "print_label_kotak" : "PRINT FOLDER LABEL",
+    "add" : "ADD NEW FOLDER",
+    "export" : "EXPORT"
+  },
+  "table" : {
+    "no" : "No",
+    "nomor_ordner" : "Folder Number",
+    "nomor_kotak" : "Box Number",
+    "borrow_status" : "Borrow Status",
+    "total_dokumen" : "Total Document",
+    "action" : "Action"
+  },
+  "detailTable" : {
+    "printLabel" : "Print Label",
+    "range" : "Document Number Range",
+    "update_by" : "Updated By",
+    "updated_at" : "Date Updated",
+    "storage" : "Storage Location",
+    "orders_total" : "Total Folders",
+    "docs_total" : "Total Documents"
+  }
+}

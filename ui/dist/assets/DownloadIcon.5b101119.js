@@ -1,0 +1,1 @@
+import{a as o,I as n}from"./index.0e24cb86.js";const e=({...r})=>o(n,{...r,children:o("path",{d:"M1 13L1 14C1 15.6569 2.34315 17 4 17L14 17C15.6569 17 17 15.6569 17 14L17 13M13 9L9 13M9 13L5 9M9 13L9 1",stroke:"currentColor",strokeWidth:"2",fill:"transparent",strokeLinecap:"round",strokeLinejoin:"round"})});export{e as D};

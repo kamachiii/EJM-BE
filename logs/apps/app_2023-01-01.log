@@ -1,0 +1,367 @@
+2023/01/01 00:00:20 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:00:20 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:01:06 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:01:07 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:02:07 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:02:07 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:14:30 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:14:30 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:14:39 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:14:39 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:15:27 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:15:27 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:15:46 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:15:46 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:16:15 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:16:15 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:16:22 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:16:22 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:17:43 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:17:43 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:18:57 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:18:57 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:19:34 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:19:34 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:19:43 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:19:43 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:19:57 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:19:57 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:20:03 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:20:03 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:26:41 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:26:41 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:26:43 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:26:43 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:47:25 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:47:25 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:47:55 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:47:55 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:48:26 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:48:26 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:48:34 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:48:34 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:49:26 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:49:26 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:49:54 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:49:54 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:50:09 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:50:09 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:50:55 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:50:55 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:51:03 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:51:03 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:51:04 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:51:04 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:51:18 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:51:18 app.go:48: INFO: Database Connected Successfully
+2023/01/01 00:52:52 app.go:48: INFO: Configuration Loaded
+2023/01/01 00:52:52 app.go:48: INFO: Database Connected Successfully
+2023/01/01 01:32:54 app.go:48: DEBUG: Shutdowning Server ...
+2023/01/01 01:32:54 app.go:48: INFO: Server Stopped Gracefully
+2023/01/01 15:41:42 app.go:48: INFO: Configuration Loaded
+2023/01/01 15:41:42 app.go:48: INFO: Database Connected Successfully
+2023/01/01 15:41:43 app.go:48: INFO: Configuration Loaded
+2023/01/01 15:41:43 app.go:48: INFO: Database Connected Successfully
+2023/01/01 15:43:13 app.go:48: INFO: Configuration Loaded
+2023/01/01 15:43:13 app.go:48: INFO: Database Connected Successfully
+2023/01/01 15:43:31 app.go:48: INFO: Configuration Loaded
+2023/01/01 15:43:31 app.go:48: INFO: Database Connected Successfully
+2023/01/01 15:59:03 app.go:48: INFO: Configuration Loaded
+2023/01/01 15:59:03 app.go:48: INFO: Database Connected Successfully
+2023/01/01 15:59:44 app.go:48: INFO: Configuration Loaded
+2023/01/01 15:59:44 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:00:04 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:00:05 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:00:53 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:00:53 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:01:27 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:01:27 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:01:34 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:01:34 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:01:56 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:01:56 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:02:18 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:02:18 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:02:24 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:02:24 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:22:02 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:22:02 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:22:03 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:22:04 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:23:06 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:23:06 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:23:12 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:23:12 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:23:48 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:23:48 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:23:58 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:23:58 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:24:29 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:24:29 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:25:05 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:25:05 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:26:56 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:26:56 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:27:17 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:27:17 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:27:18 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:27:18 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:27:29 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:27:29 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:27:36 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:27:36 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:28:36 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:28:36 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:28:43 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:28:43 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:28:52 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:28:52 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:28:57 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:28:57 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:39:07 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:39:07 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:40:09 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:40:09 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:42:13 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:42:13 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:43:11 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:43:11 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:44:03 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:44:03 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:44:04 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:44:04 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:44:15 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:44:15 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:44:25 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:44:25 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:44:25 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:44:25 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:44:32 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:44:32 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:44:33 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:44:33 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:49:28 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:49:28 app.go:48: INFO: Database Connected Successfully
+2023/01/01 16:49:29 app.go:48: INFO: Configuration Loaded
+2023/01/01 16:49:29 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:24:10 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:24:10 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:24:10 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:24:10 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:24:10 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:24:13 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:24:13 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:24:28 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:24:28 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:27:28 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:27:28 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:27:33 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:27:33 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:27:44 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:27:44 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:34:14 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:34:14 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:38:06 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:38:06 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:41:29 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:41:29 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:41:30 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:41:30 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:43:39 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:43:39 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:44:26 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:44:26 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:44:36 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:44:36 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:44:45 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:44:45 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:44:50 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:44:50 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:46:55 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:46:55 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:50:07 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:50:07 app.go:48: INFO: Database Connected Successfully
+2023/01/01 19:53:27 app.go:48: INFO: Configuration Loaded
+2023/01/01 19:53:27 app.go:48: INFO: Database Connected Successfully
+2023/01/01 20:23:54 app.go:48: INFO: Configuration Loaded
+2023/01/01 20:23:54 app.go:48: INFO: Database Connected Successfully
+2023/01/01 20:23:55 app.go:48: INFO: Configuration Loaded
+2023/01/01 20:23:55 app.go:48: INFO: Configuration Loaded
+2023/01/01 20:23:55 app.go:48: INFO: Configuration Loaded
+2023/01/01 20:23:55 app.go:48: INFO: Database Connected Successfully
+2023/01/01 20:58:11 app.go:48: INFO: Configuration Loaded
+2023/01/01 20:58:11 app.go:48: INFO: Database Connected Successfully
+2023/01/01 20:58:11 app.go:48: INFO: Configuration Loaded
+2023/01/01 20:58:11 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:31:14 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:31:14 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:31:15 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:31:15 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:31:32 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:31:32 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:31:32 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:31:32 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:31:45 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:31:45 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:32:31 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:32:31 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:32:31 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:32:31 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:33:11 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:33:11 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:33:20 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:33:20 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:33:36 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:33:36 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:34:01 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:34:01 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:34:14 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:34:14 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:34:45 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:34:45 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:34:53 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:34:53 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:35:03 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:35:03 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:35:11 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:35:11 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:35:26 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:35:26 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:35:52 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:35:52 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:35:59 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:35:59 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:37:04 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:37:04 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:37:08 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:37:08 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:37:46 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:37:46 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:38:50 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:38:50 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:39:03 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:39:03 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:39:54 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:39:54 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:40:01 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:40:01 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:40:39 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:40:39 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:40:48 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:40:48 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:40:57 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:40:57 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:41:43 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:41:43 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:43:42 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:43:42 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:43:54 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:43:54 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:43:58 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:43:58 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:44:11 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:44:11 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:44:11 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:44:11 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:44:17 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:44:17 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:46:32 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:46:32 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:46:41 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:46:41 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:47:00 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:47:00 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:47:45 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:47:45 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:48:58 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:48:58 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:49:04 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:49:04 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:49:11 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:49:11 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:49:17 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:49:17 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:49:33 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:49:33 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:49:33 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:49:34 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:49:39 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:49:39 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:49:44 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:49:44 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:50:34 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:50:34 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:50:52 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:50:52 app.go:48: INFO: Database Connected Successfully
+2023/01/01 21:50:56 app.go:48: INFO: Configuration Loaded
+2023/01/01 21:50:56 app.go:48: INFO: Database Connected Successfully
+2023/01/01 22:07:01 app.go:48: INFO: Configuration Loaded
+2023/01/01 22:07:01 app.go:48: INFO: Database Connected Successfully
+2023/01/01 22:07:45 app.go:48: INFO: Configuration Loaded
+2023/01/01 22:07:45 app.go:48: INFO: Database Connected Successfully
+2023/01/01 22:59:32 app.go:48: INFO: Configuration Loaded
+2023/01/01 22:59:32 app.go:48: INFO: Configuration Loaded
+2023/01/01 22:59:32 app.go:48: INFO: Database Connected Successfully
+2023/01/01 22:59:32 app.go:48: INFO: Database Connected Successfully
+2023/01/01 22:59:47 app.go:48: INFO: Configuration Loaded
+2023/01/01 22:59:47 app.go:48: INFO: Database Connected Successfully
+2023/01/01 22:59:52 app.go:48: INFO: Configuration Loaded
+2023/01/01 22:59:52 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:00:02 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:00:02 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:00:03 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:00:03 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:00:18 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:00:18 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:00:19 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:00:19 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:00:39 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:00:39 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:00:59 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:00:59 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:01:48 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:01:48 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:02:01 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:02:02 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:02:02 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:02:02 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:02:11 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:02:11 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:02:25 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:02:25 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:02:30 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:02:30 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:02:40 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:02:40 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:02:58 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:02:58 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:03:19 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:03:19 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:03:35 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:03:35 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:03:36 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:03:36 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:03:52 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:03:53 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:04:07 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:04:07 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:04:51 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:04:51 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:05:04 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:05:04 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:05:25 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:05:25 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:05:25 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:05:25 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:05:33 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:05:34 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:05:48 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:05:48 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:08:18 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:08:19 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:08:20 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:08:20 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:08:23 app.go:48: INFO: Configuration Loaded
+2023/01/01 23:08:23 app.go:48: INFO: Database Connected Successfully
+2023/01/01 23:10:09 app.go:48: DEBUG: Shutdowning Server ...
+2023/01/01 23:10:09 app.go:48: INFO: Server Stopped Gracefully

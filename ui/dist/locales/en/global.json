@@ -1,0 +1,5 @@
+{
+  "active" : "Active",
+  "nonactive" : "Non Active",
+  "error.fetching" : "Error while fetching data, please try again"
+}

@@ -1,0 +1,14 @@
+{
+  "label" : "Role",
+  "modal.title.delete" : "Apakah kamu yakin ingin menghapus role ini ?",
+  "buttons" : {
+    "add" : "Tambah Role"
+  },
+  "table_roles" : {
+    "table_no" : "No",
+    "name" : "Nama Role",
+    "total_access" : "Total Akses",
+    "status" : "Status",
+    "action" : "Action"
+  }
+}

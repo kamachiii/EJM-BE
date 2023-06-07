@@ -1,0 +1,27 @@
+{
+  "title" : "Master Ordner",
+  "label" : "Ordner",
+  "buttons" : {
+    "print_label_kotak" : "PRINT LABEL ORDNER",
+    "add" : "TAMBAH ORDNER BARU",
+    "export" : "EXPORT"
+  },
+  "table" : {
+    "no" : "No",
+    "nomor_ordner" : "Nomor Ordner",
+    "nomor_kotak" : "Nomor Kotak",
+    "borrow_status" : "Status Peminjaman",
+    "total_dokumen" : "Total Dokumen",
+    "action" : "Tindakan"
+  },
+
+  "detailTable" : {
+    "printLabel" : "Cetak Label",
+    "range" : "Rentang Nomor Dokumen",
+    "update_by" : "Update Oleh",
+    "updated_at" : "Tanggal Diupdate",
+    "storage" : "Lokasi Penyimpanan",
+    "orders_total" : "Total Ordner",
+    "docs_total" : "Total Dokumen"
+  }
+}

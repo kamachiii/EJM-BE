@@ -1,0 +1,19 @@
+{
+  "title" : "Master Document",
+  "label" : "Document",
+  "buttons" : {
+    "print_label_kotak" : "PRINT DOCUMENT LABEL",
+    "add" : "ADD NEW DOCUMENT",
+    "export" : "BULK UPLOAD DOCUMENTS"
+  },
+  "bulk" : "Upload Bulk Documents",
+  "table" : {
+    "no" : "No",
+    "nomor_dokumen" : "Document Number",
+    "nomor_ordner" : "Folder Number",
+    "nomor_kotak" : "Box Number",
+    "status_upload" : "Upload Status",
+    "total_berkas" : "Total Files",
+    "action" : "Action"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "searchinput" : {
+    "placeholder" : "Cari Data",
+    "menu" : "Cari Menu"
+  },
+  "menus" : {
+    "overview" : "Overview",
+    "dashboard"  : "Dashboard",
+    "companies" : "Perusahaan",
+    "audit" : "Log",
+    "setup_questions" : "Setup Pertanyaan",
+    "company_structure" : "Struktur Perusahaan",
+    "ordner" : "Sarana & Media Simpan",
+    "component" : {
+      "table" : "Tabel",
+      "form" : "Form"
+    },
+    "projects" : "Proyek",
+    "assigned" : "Tugas Diberikan",
+    "user" : "User",
+    "role" : "Role",
+    "settings" : "Pengaturan Aplikasi",
+    "answered" : "Questionaire"
+  }
+}

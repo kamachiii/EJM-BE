@@ -1,0 +1,25 @@
+{
+  "searchinput" : {
+    "placeholder" : "Find Data",
+    "menu" : "Find Menu"
+  },
+  "menus" : {
+    "overview" : "Overview",
+    "dashboard"  : "Dashboard",
+    "companies" : "Company",
+    "audit" : "Log",
+    "setup_questions" : "Setup Questions",
+    "company_structure" : "Company Structure",
+    "ordner" : "Storage Facilities",
+    "component" : {
+      "table" : "Table",
+      "form" : "Form"
+    },
+    "projects" : "Projects",
+    "assigned" : "Assigned Task",
+    "user" : "User",
+    "role" : "Role",
+    "settings" : "Settings",
+    "answered" : "Questionaire"
+  }
+}

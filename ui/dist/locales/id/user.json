@@ -1,0 +1,16 @@
+{
+  "label" : "User",
+  "modal.title.delete" : "Apakah kamu yakin ingin menghapus user ini ?",
+  "buttons" : {
+    "add" : "Tambah User"
+  },
+  "table_users" : {
+    "table_no" : "No",
+    "pict" : "Gambar",
+    "username" : "Username",
+    "name" : "Name Lengkap",
+    "role" : "Role",
+    "status" : "Status",
+    "action" : "Action"
+  }
+}

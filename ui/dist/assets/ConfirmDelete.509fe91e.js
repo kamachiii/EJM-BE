@@ -1,0 +1,1 @@
+import{d as t,j as i,a as s}from"./index.94f4ac20.js";import{c as a}from"./uiActions.e41b0bc7.js";import{f as c}from"./index.esm.4627e16a.js";import{B as o}from"./index.esm.634a2674.js";const d=({onDelete:r})=>{const e=t();return i(c,{children:[s(o,{onClick:()=>e(a()),size:"sm",variant:"ghost",mr:3,children:"Cancel"}),s(o,{onClick:r,size:"sm",children:"Oke"})]})};export{d as C};

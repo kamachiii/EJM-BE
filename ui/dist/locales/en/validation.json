@@ -1,0 +1,7 @@
+{
+  "required" : "This field required",
+  "email.invalid" : "Email Invalid",
+  "number" : "Only number allowed",
+  "too.long" : "Character too long",
+  "min" : "Minimum character is "
+}

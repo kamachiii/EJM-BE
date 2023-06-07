@@ -1,0 +1,1 @@
+import{R as c,r as p}from"./index.4df5dae3.js";import{u}from"./useDebounce.b8118708.js";const g=()=>{const[a,t]=c.useState(""),[r,e]=p.exports.useState({pageIndex:0,pageSize:10}),s=u(a,500);return{handleSearch:n=>{e(o=>({...o,pageIndex:0})),t(n)},pagination:r,setPagination:e,searchValue:s}};export{g as U};

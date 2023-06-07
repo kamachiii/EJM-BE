@@ -1,0 +1,1 @@
+import{j as e,I as s,a as r}from"./index.4df5dae3.js";const n=({...o})=>e(s,{...o,children:[r("path",{d:"M12 6L12 18",stroke:"currentColor",strokeWidth:"2",strokeLinecap:"square",strokeLinejoin:"round"}),r("path",{d:"M18 12L6 12",stroke:"currentColor",strokeWidth:"2",strokeLinecap:"square",strokeLinejoin:"round"})]});export{n as A};

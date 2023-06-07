@@ -1,0 +1,1 @@
+import{n as o,o as r,p as s}from"./index.4df5dae3.js";const p=(a,e,t)=>({type:o,data:{component:a,title:e,size:t}}),L=({component:a,title:e,size:t})=>({type:r,data:{component:a,title:e,size:t}}),O=()=>({type:s});export{L as a,O as c,p as o};

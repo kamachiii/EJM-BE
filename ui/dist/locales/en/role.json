@@ -1,0 +1,14 @@
+{
+  "label" : "Role",
+  "modal.title.delete" : "Are you sure wants to delete this role ?",
+  "buttons" : {
+    "add" : "Add Role"
+  },
+  "table_roles" : {
+    "table_no" : "No",
+    "name" : "Nama Role",
+    "total_access" : "Total Akses",
+    "status" : "Status",
+    "action" : "Action"
+  }
+}
