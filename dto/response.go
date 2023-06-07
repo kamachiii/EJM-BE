@@ -43,7 +43,7 @@ type ReturnProject struct {
 }
 
 type ProjectDetail struct {
-	models.Project
+	// models.Project
 	TotalAssignedUsers     uint   `json:"total_assigned_users"`
 	SelectStatusLabel      string `json:"select_status_label"`
 	SelectStatusValue      string `json:"select_status_value"`
@@ -52,7 +52,7 @@ type ProjectDetail struct {
 }
 
 type AssignUsers struct {
-	models.ProjectAssignedUsers
+	// models.ProjectAssignedUsers
 	FullName       string `json:"full_name"`
 	ProfilePict    string `json:"profile_pict"`
 	SelectLabelJob string `json:"select_label_job"`

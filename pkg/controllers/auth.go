@@ -24,8 +24,8 @@ func NewAuthController(srv *server.Server) *AuthController {
 		authService: services.NewAuthService(&services.AuthService{
 			RegisterRepository: repository.NewRegisterRepository(srv.DB),
 			RoleRepository:     repository.NewRoleRepository(srv.DB),
-			ActionRepository:   repository.NewActionRepository(srv.DB),
-			CasbinRepository:   repository.NewCasbinRepository(srv.DB),
+			// ActionRepository:   repository.NewActionRepository(srv.DB),
+			// CasbinRepository:   repository.NewCasbinRepository(srv.DB),
 			JWTWhitelist:       repository.JWTWhitelistImplementation(srv.DB),
 			Config:             srv.Config,
 		}),

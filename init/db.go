@@ -3,11 +3,11 @@ package init
 import (
 	"TKD/config"
 	"TKD/internal/logs"
-	"TKD/pkg/models"
+	// "TKD/pkg/models"
 	"fmt"
 	"github.com/casbin/casbin/v2"
-	"github.com/casbin/casbin/v2/model"
-	gormadapter "github.com/casbin/gorm-adapter/v3"
+	// "github.com/casbin/casbin/v2/model"
+	// gormadapter "github.com/casbin/gorm-adapter/v3"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
@@ -40,42 +40,43 @@ func DBInitialize(cfg *config.Config) *gorm.DB {
 }
 
 func DBCasbin(db *gorm.DB) *casbin.Enforcer {
-	modelText := `
-		[request_definition]
-		r = sub, obj, act
+	// modelText := `
+	// 	[request_definition]
+	// 	r = sub, obj, act
 
-		[policy_definition]
-		p = sub, obj, act
+	// 	[policy_definition]
+	// 	p = sub, obj, act
 
-		[role_definition]
-		g = _, _
+	// 	[role_definition]
+	// 	g = _, _
 
-		[policy_effect]
-		e = some(where (p.eft == allow))
+	// 	[policy_effect]
+	// 	e = some(where (p.eft == allow))
 
-		[matchers]
-		m = g(r.sub, p.sub) && keyMatch(r.obj, p.obj) && (r.act == p.act || p.act == "*")
-			`
+	// 	[matchers]
+	// 	m = g(r.sub, p.sub) && keyMatch(r.obj, p.obj) && (r.act == p.act || p.act == "*")
+	// 		`
 
-	a, errAdapter := gormadapter.NewAdapterByDBWithCustomTable(db, &models.CasbinRule{}, "casbin_rules")
-	if errAdapter != nil {
-		logs.Error(fmt.Sprintf("errAdapter : %s", errAdapter.Error()))
-	}
+	// a, errAdapter := gormadapter.NewAdapterByDBWithCustomTable(db, &models.CasbinRule{}, "casbin_rules")
+	// if errAdapter != nil {
+	// 	logs.Error(fmt.Sprintf("errAdapter : %s", errAdapter.Error()))
+	// }
 
-	m, errModel := model.NewModelFromString(modelText)
-	if errModel != nil {
-		logs.Error(fmt.Sprintf("errModel : %s", errModel.Error()))
-	}
+	// m, errModel := model.NewModelFromString(modelText)
+	// if errModel != nil {
+	// 	logs.Error(fmt.Sprintf("errModel : %s", errModel.Error()))
+	// }
 
-	e, _ := casbin.NewEnforcer(m, a)
+	// e, _ := casbin.NewEnforcer(m, a)
 
-	e.AddPolicy("1", "/api/*", "GET")
-	e.AddPolicy("1", "/api/*", "PUT")
-	e.AddPolicy("1", "/api/*", "PATCH")
-	e.AddPolicy("1", "/api/*", "DELETE")
-	e.AddPolicy("1", "/api/*", "POST")
+	// e.AddPolicy("1", "/api/*", "GET")
+	// e.AddPolicy("1", "/api/*", "PUT")
+	// e.AddPolicy("1", "/api/*", "PATCH")
+	// e.AddPolicy("1", "/api/*", "DELETE")
+	// e.AddPolicy("1", "/api/*", "POST")
 
-	e.LoadPolicy()
+	// e.LoadPolicy()
 
-	return e
+	// return e
+	return nil
 }

@@ -9,7 +9,7 @@ import (
 )
 
 type MenuRepository interface {
-	TransactionRepository
+	// TransactionRepository
 	FindAll() ([]models.Menu, error)
 	FindAllPaginated(pagination *models.Paginate, search, value string) ([]dto.ResponseMenu, *models.Paginate, error)
 	FindMenuById(id uint) (models.Menu, error)

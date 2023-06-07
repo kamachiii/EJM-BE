@@ -3,7 +3,7 @@ package repository
 import (
 	"TKD/dto"
 	"TKD/pkg/models"
-	"TKD/utils"
+	// "TKD/utils"
 	"errors"
 	"strings"
 
@@ -11,7 +11,7 @@ import (
 )
 
 type RoleRepository interface {
-	TransactionRepository
+	// TransactionRepository
 	CreateRole(role *dto.CreateRole) (models.Role, error)
 	FindRoleById(id uint) (models.Role, error)
 	FindRoles(pagination *models.Paginate, search string, usingActive bool, value string) ([]models.Role, *models.Paginate, error)
@@ -93,7 +93,7 @@ func (roleObject *Role) FindRoleByName(name string) error {
 	}
 
 	if err := roleObject.RoleModel().First(&checkrole, "roles.name = ?", name).Error; err == nil {
-		return utils.ErrRoleAlreadyExists
+		// return utils.ErrRoleAlreadyExists
 	}
 
 	return nil

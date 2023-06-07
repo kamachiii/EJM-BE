@@ -4,9 +4,9 @@ import (
 	"TKD/dto"
 	"TKD/pkg/models"
 	"TKD/pkg/repository"
-	"TKD/utils"
 	"sync"
-
+	
+	// "TKD/utils"
 	"gorm.io/gorm"
 )
 
@@ -94,7 +94,7 @@ func (service *MenuService) CreateMenu(request *dto.PayloadCreateMenu) error {
 	menus = service.MenuRepository
 
 	if len(request.Data) < 1 {
-		return utils.ErrMenuCannotLessThanOne
+		// return utils.ErrMenuCannotLessThanOne
 	}
 
 	for _, datum := range request.Data {
@@ -148,7 +148,7 @@ func (service *MenuService) DeleteMenuBulk(request *dto.DeleteMenuBulk) error {
 	menus = service.MenuRepository
 
 	if len(request.Ids) < 1 {
-		return utils.ErrMenuCannotLessThanOne
+		// return utils.ErrMenuCannotLessThanOne
 	}
 
 	for _, id := range request.Ids {

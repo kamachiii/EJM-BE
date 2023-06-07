@@ -43,8 +43,8 @@ func NewRoleController(srv *server.Server) *RoleController {
 		db:     db,
 		roleService: services.NewRoleService(&services.RoleService{
 			RoleRepository:   repository.NewRoleRepository(srv.DB),
-			ActionRepository: repository.NewActionRepository(srv.DB),
-			CasbinRepository: repository.NewCasbinRepository(srv.DB),
+			// ActionRepository: repository.NewActionRepository(srv.DB),
+			// CasbinRepository: repository.NewCasbinRepository(srv.DB),
 			MenuRepository:   repository.NewMenuRepository(srv.DB),
 		}),
 	}
@@ -82,10 +82,10 @@ func (roleConttroller *RoleController) UpdateRole(c echo.Context) error {
 	userID := utils.User(c).ID
 
 	// transaction
-	roleRepoDB := roleConttroller.roleService.RoleRepository
-	casbinRepoDB := roleConttroller.roleService.CasbinRepository
-	casbinRepoDB.Begin(roleConttroller.db)
-	roleRepoDB.Begin(roleConttroller.db)
+	// roleRepoDB := roleConttroller.roleService.RoleRepository
+	// casbinRepoDB := roleConttroller.roleService.CasbinRepository
+	// casbinRepoDB.Begin(roleConttroller.db)
+	// roleRepoDB.Begin(roleConttroller.db)
 
 	// services
 	var roleService IRoleService
@@ -93,8 +93,8 @@ func (roleConttroller *RoleController) UpdateRole(c echo.Context) error {
 
 	errUpdate := roleService.UpdateRole(request, userID)
 	if errUpdate != nil {
-		casbinRepoDB.Rollback()
-		roleRepoDB.Rollback()
+		// casbinRepoDB.Rollback()
+		// roleRepoDB.Rollback()
 		return errUpdate
 	}
 
@@ -103,13 +103,13 @@ func (roleConttroller *RoleController) UpdateRole(c echo.Context) error {
 		Actions: request.Actions,
 	})
 	if errAkses != nil {
-		roleRepoDB.Rollback()
-		casbinRepoDB.Rollback()
+		// roleRepoDB.Rollback()
+		// casbinRepoDB.Rollback()
 		return errAkses
 	}
 
-	casbinRepoDB.Commit()
-	roleRepoDB.Commit()
+	// casbinRepoDB.Commit()
+	// roleRepoDB.Commit()
 
 	res := utils.Response{
 		Data: nil,
@@ -149,7 +149,7 @@ func (roleController *RoleController) FindRoleById(c echo.Context) error {
 	data, err := roleServices.FindRoleById(uint(id))
 
 	if err != nil {
-		return utils.ErrRoleNotExists
+		// return utils.ErrRoleNotExists
 	}
 
 	res := utils.Response{
@@ -179,11 +179,11 @@ func (roleController *RoleController) DeleteRole(c echo.Context) error {
 	roleId, _ := strconv.Atoi(data)
 
 	// transaction
-	roleRepoDB := roleController.roleService.RoleRepository
-	casbinRepoDB := roleController.roleService.CasbinRepository
+	// roleRepoDB := roleController.roleService.RoleRepository
+	// casbinRepoDB := roleController.roleService.CasbinRepository
 
-	casbinRepoDB.Begin(roleController.db)
-	roleRepoDB.Begin(roleController.db)
+	// casbinRepoDB.Begin(roleController.db)
+	// roleRepoDB.Begin(roleController.db)
 
 	// services
 	var roleServices IRoleService
@@ -192,13 +192,13 @@ func (roleController *RoleController) DeleteRole(c echo.Context) error {
 	errDeleteRole := roleServices.DeleteRole(uint(roleId))
 
 	if errDeleteRole != nil {
-		casbinRepoDB.Rollback()
-		roleRepoDB.Rollback()
-		return errDeleteRole
+		// casbinRepoDB.Rollback()
+		// roleRepoDB.Rollback()
+		// return errDeleteRole
 	}
 
-	casbinRepoDB.Commit()
-	roleRepoDB.Commit()
+	// casbinRepoDB.Commit()
+	// roleRepoDB.Commit()
 
 	res := utils.Response{
 		Translating: &i18n.Message{
@@ -235,10 +235,10 @@ func (roleController *RoleController) CreateRole(c echo.Context) error {
 	}
 
 	userLoginID := utils.User(c).ID
-	roleRepoDB := roleController.roleService.RoleRepository
-	casbinRepoDB := roleController.roleService.CasbinRepository
-	casbinRepoDB.Begin(roleController.db)
-	roleRepoDB.Begin(roleController.db)
+	// roleRepoDB := roleController.roleService.RoleRepository
+	// casbinRepoDB := roleController.roleService.CasbinRepository
+	// casbinRepoDB.Begin(roleController.db)
+	// roleRepoDB.Begin(roleController.db)
 
 	// service
 	var roleService IRoleService
@@ -246,8 +246,8 @@ func (roleController *RoleController) CreateRole(c echo.Context) error {
 
 	data, err := roleService.CreateRole(request, userLoginID)
 	if err != nil {
-		roleRepoDB.Rollback()
-		casbinRepoDB.Rollback()
+		// roleRepoDB.Rollback()
+		// casbinRepoDB.Rollback()
 		return err
 	}
 
@@ -256,13 +256,13 @@ func (roleController *RoleController) CreateRole(c echo.Context) error {
 		Actions: request.Actions,
 	})
 	if errAkses != nil {
-		roleRepoDB.Rollback()
-		casbinRepoDB.Rollback()
+		// roleRepoDB.Rollback()
+		// casbinRepoDB.Rollback()
 		return errAkses
 	}
 
-	roleRepoDB.Commit()
-	casbinRepoDB.Commit()
+	// roleRepoDB.Commit()
+	// casbinRepoDB.Commit()
 
 	res := utils.Response{
 		Data: data,
@@ -518,10 +518,10 @@ func (roleConttroller *RoleController) DeleteRoleBulk(c echo.Context) error {
 		return err
 	}
 
-	casbinRepoDB := roleConttroller.roleService.CasbinRepository
-	roleRepoDB := roleConttroller.roleService.RoleRepository
-	casbinRepoDB.Begin(roleConttroller.db)
-	roleRepoDB.Begin(roleConttroller.db)
+	// casbinRepoDB := roleConttroller.roleService.CasbinRepository
+	// roleRepoDB := roleConttroller.roleService.RoleRepository
+	// casbinRepoDB.Begin(roleConttroller.db)
+	// roleRepoDB.Begin(roleConttroller.db)
 
 	var roleServices IRoleService
 	roleServices = roleConttroller.roleService
@@ -530,14 +530,14 @@ func (roleConttroller *RoleController) DeleteRoleBulk(c echo.Context) error {
 		errDeleteRole := roleServices.DeleteRole(id)
 
 		if errDeleteRole != nil {
-			casbinRepoDB.Rollback()
-			roleRepoDB.Rollback()
+			// casbinRepoDB.Rollback()
+			// roleRepoDB.Rollback()
 			return errDeleteRole
 		}
 	}
 
-	casbinRepoDB.Commit()
-	roleRepoDB.Commit()
+	// casbinRepoDB.Commit()
+	// roleRepoDB.Commit()
 
 	responses := utils.Response{
 		Data: nil,

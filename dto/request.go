@@ -1,7 +1,7 @@
 package dto
 
 import (
-	"TKD/utils"
+	// "TKD/utils"
 	"mime/multipart"
 	"time"
 )
@@ -607,7 +607,7 @@ type UpdateVolume struct {
 	VolumeStorageMediaPercentage float64                 `json:"volume_storage_media_percentage" form:"volume_storage_media_percentage" `
 	RemovedFiles                 []uint                  `json:"removed_files" form:"removed_files" swaggerignore:"true"`
 	Files                        []*multipart.FileHeader `swaggerignore:"true" validate:"max=6"`
-	UploadedFiles                []utils.UploadedFile    `json:"-" swaggerignore:"true"`
+	// UploadedFiles                []utils.UploadedFile    `json:"-" swaggerignore:"true"`
 }
 
 type CreateVolume struct {
@@ -621,5 +621,5 @@ type CreateVolume struct {
 	FilledBy                     uint                    `json:"-" swaggerignore:"true" validate:"required"`
 	VolumeStorageMediaPercentage float64                 `json:"volume_storage_media_percentage" form:"volume_storage_media_percentage"`
 	Files                        []*multipart.FileHeader `swaggerignore:"true" validate:"required,max=6,min=1"`
-	UploadedFiles                []utils.UploadedFile    `json:"-" swaggerignore:"true"`
+	// UploadedFiles                []utils.UploadedFile    `json:"-" swaggerignore:"true"`
 }

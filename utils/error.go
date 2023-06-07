@@ -18,11 +18,11 @@ func (e *BeError) SetLocalizer(c echo.Context) {
 	e.localizer = c
 }
 
-func (e *BeError) Error() string {
-	translate, _ := Translate(e.localizer, e.msg)
+// func (e *BeError) Error() string {
+// 	// translate, _ := Translate(e.localizer, e.msg)
 
-	return translate
-}
+// 	// return translate
+// }
 
 func (e *BeError) GetIDTranslate() string {
 	return e.id
