@@ -40,8 +40,8 @@ type ResponseHealthFundEmployeeProfileTotal struct {
 
 func (r *Response) ReturnSingleMessage(c echo.Context) error {
 	if r.Translating != nil {
-		translate, _ := Translate(c, r.Translating)
-		r.Message = translate
+		// translate, _ := Translate(c, r.Translating)
+		// r.Message = translate
 	}
 
 	return c.JSON(r.StatusCode, &r)
@@ -59,8 +59,8 @@ func (rt *ResponsePaginate) ReturnPaginates(c echo.Context) error {
 	res[rt.Key] = rt.Data
 	res["message"] = rt.Message
 	if rt.Translating != nil {
-		translate, _ := Translate(c, rt.Translating)
-		res["message"] = translate
+		// translate, _ := Translate(c, rt.Translating)
+		// res["message"] = translate
 	}
 
 	for i := 0; i < v.NumField(); i++ {

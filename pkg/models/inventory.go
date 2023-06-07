@@ -13,8 +13,8 @@ type Inventory struct {
 	ArchiveYearTo               string                    `json:"archive_year_to"`
 	StorageMediaId              int                       `json:"storage_media_id" `
 	StorageFacilitiesId         int                       `json:"storage_facilities_id"`
-	FrequencyOfChangeAddition   FrequencyOfChangeAddition `json:"frequency_of_change_addition" gorm:"foreignKey:FrequencyOfChangeAdditionId"`
-	StorageFacilities           StorageFacilities         `json:"storage_facilities" gorm:"foreignKey:StorageFacilitiesId"`
-	StorageMedia                StorageMedia              `json:"storage_media" gorm:"foreignKey:StorageMediaId"`
-	InventoryDocuments          []InventoryDocument       `json:"inventory_documents"`
+	// FrequencyOfChangeAddition   FrequencyOfChangeAddition `json:"frequency_of_change_addition" gorm:"foreignKey:FrequencyOfChangeAdditionId"`
+	// StorageFacilities           StorageFacilities         `json:"storage_facilities" gorm:"foreignKey:StorageFacilitiesId"`
+	// StorageMedia                StorageMedia              `json:"storage_media" gorm:"foreignKey:StorageMediaId"`
+	// InventoryDocuments          []InventoryDocument       `json:"inventory_documents"`
 }

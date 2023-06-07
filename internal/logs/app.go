@@ -1,13 +1,13 @@
 package logs
 
 import (
-	"TKD/utils"
-	"errors"
-	"fmt"
+	// "TKD/utils"
+	// "errors"
+	// "fmt"
 	"log"
 	"os"
 	"sync"
-	"time"
+	// "time"
 )
 
 type Log struct {
@@ -26,19 +26,19 @@ type ILog interface {
 
 func (l *Log) NewLogger(prefix string) {
 	// logging
-	currentTime := time.Now()
-	formatLog := fmt.Sprintf("/logs/apps/app_%s.log", currentTime.Format("2006-01-02"))
-	logDirectory := utils.GetWorkingDirectoryContent(formatLog)
+	// currentTime := time.Now()
+	// formatLog := fmt.Sprintf("/logs/apps/app_%s.log", currentTime.Format("2006-01-02"))
+	// logDirectory := utils.GetWorkingDirectoryContent(formatLog)
 
-	f, err := os.OpenFile(logDirectory, os.O_RDWR|os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
-	if err != nil {
-		if errors.Is(err, os.ErrNotExist) {
-			f, _ = os.Create(logDirectory)
-			f, err = os.OpenFile(logDirectory, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-		}
-	}
-	l.file = f
-	l.log = log.New(f, prefix, log.LstdFlags|log.Lshortfile|log.Lmsgprefix)
+	// f, err := os.OpenFile(logDirectory, os.O_RDWR|os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
+	// if err != nil {
+		// if errors.Is(err, os.ErrNotExist) {
+			// f, _ = os.Create(logDirectory)
+			// f, err = os.OpenFile(logDirectory, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+		// }
+	// }
+	// l.file = f
+	// l.log = log.New(f, prefix, log.LstdFlags|log.Lshortfile|log.Lmsgprefix)
 	l.defaultLogger = log.New(os.Stdout, prefix, log.LstdFlags|log.Lshortfile|log.Lmsgprefix)
 }
 

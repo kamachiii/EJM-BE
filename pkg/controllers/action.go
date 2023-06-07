@@ -3,8 +3,8 @@ package controllers
 import (
 	"TKD/dto"
 	"TKD/internal/server"
-	"TKD/pkg/repository"
-	"TKD/pkg/services"
+	// "TKD/pkg/repository"
+	// "TKD/pkg/services"
 	"TKD/utils"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"net/http"
@@ -14,16 +14,16 @@ import (
 
 type ActionController struct {
 	server        *server.Server
-	actionService *services.ActionService
+	// actionService *services.ActionService
 }
 
 func NewActionController(srv *server.Server) *ActionController {
 	return &ActionController{
 		server: srv,
-		actionService: services.NewActionService(&services.ActionService{
-			DB:               srv.DB,
-			ActionRepository: repository.NewActionRepository(srv.DB),
-		}),
+		// actionService: services.NewActionService(&services.ActionService{
+		// 	DB:               srv.DB,
+		// 	ActionRepository: repository.NewActionRepository(srv.DB),
+		// }),
 	}
 }
 
@@ -51,28 +51,29 @@ func (actionController *ActionController) GetAllPaginated(c echo.Context) error 
 		return errValidate
 	}
 
-	var actionService services.IActionService
-	actionService = actionController.actionService
+	// var actionService services.IActionService
+	// actionService = actionController.actionService
 
-	data, meta, err := actionService.FindAllPaginated(request)
-	if err != nil {
-		return err
-	}
+	// data, meta, err := actionService.FindAllPaginated(request)
+	// if err != nil {
+	// 	return err
+	// }
 
-	res := utils.ResponsePaginate{
-		Key:  "actions",
-		Meta: meta,
-		Response: utils.Response{
-			Data: data,
-			Translating: &i18n.Message{
-				ID:    "actions.success",
-				Other: "Success Get Data API",
-			},
-			StatusCode: 200,
-		},
-	}
+	// res := utils.ResponsePaginate{
+	// 	Key:  "actions",
+	// 	Meta: meta,
+	// 	Response: utils.Response{
+	// 		Data: data,
+	// 		Translating: &i18n.Message{
+	// 			ID:    "actions.success",
+	// 			Other: "Success Get Data API",
+	// 		},
+	// 		StatusCode: 200,
+	// 	},
+	// }
 
-	return res.ReturnPaginates(c)
+	// return res.ReturnPaginates(c)
+return nil
 }
 
 // Create Action Bulk
@@ -97,19 +98,19 @@ func (actionController *ActionController) CreateActionBulk(c echo.Context) error
 		return errValidate
 	}
 
-	var menuService services.IActionService
-	menuService = actionController.actionService
+	// var menuService services.IActionService
+	// menuService = actionController.actionService
 
-	actionRepo := actionController.actionService.ActionRepository
-	actionRepo.Begin(actionController.server.DB)
+	// actionRepo := actionController.actionService.ActionRepository
+	// actionRepo.Begin(actionController.server.DB)
 
-	err := menuService.CreateAction(request)
-	if err != nil {
-		actionRepo.Rollback()
-		return err
-	}
+	// err := menuService.CreateAction(request)
+	// if err != nil {
+	// 	actionRepo.Rollback()
+	// 	return err
+	// }
 
-	actionRepo.Commit()
+	// actionRepo.Commit()
 
 	res := utils.Response{
 		Data: nil,
@@ -145,19 +146,19 @@ func (actionController *ActionController) DeleteAction(c echo.Context) error {
 		return errValidate
 	}
 
-	var actionService services.IActionService
-	actionService = actionController.actionService
+	// var actionService services.IActionService
+	// actionService = actionController.actionService
 
-	actionRepo := actionController.actionService.ActionRepository
-	actionRepo.Begin(actionController.server.DB)
+	// actionRepo := actionController.actionService.ActionRepository
+	// actionRepo.Begin(actionController.server.DB)
 
-	err := actionService.DeleteActionById(request)
-	if err != nil {
-		actionRepo.Rollback()
-		return err
-	}
+	// err := actionService.DeleteActionById(request)
+	// if err != nil {
+	// 	actionRepo.Rollback()
+	// 	return err
+	// }
 
-	actionRepo.Commit()
+	// actionRepo.Commit()
 
 	res := utils.Response{
 		Data: nil,
@@ -193,24 +194,25 @@ func (actionController *ActionController) FindDetailAction(c echo.Context) error
 		return errValidate
 	}
 
-	var actionService services.IActionService
-	actionService = actionController.actionService
+	// var actionService services.IActionService
+	// actionService = actionController.actionService
 
-	data, err := actionService.FindActionById(request)
-	if err != nil {
-		return err
-	}
+	// data, err := actionService.FindActionById(request)
+	// if err != nil {
+	// 	return err
+	// }
 
-	res := utils.Response{
-		Data: data,
-		Translating: &i18n.Message{
-			ID:    "success.getdetail.action",
-			Other: "Success get detail Action",
-		},
-		StatusCode: http.StatusCreated,
-	}
+	// res := utils.Response{
+	// 	Data: data,
+	// 	Translating: &i18n.Message{
+	// 		ID:    "success.getdetail.action",
+	// 		Other: "Success get detail Action",
+	// 	},
+	// 	StatusCode: http.StatusCreated,
+	// }
 
-	return res.ReturnSingleMessage(c)
+	// return res.ReturnSingleMessage(c)
+	return nil
 
 }
 
@@ -236,13 +238,13 @@ func (actionController *ActionController) FindActionByMenu(c echo.Context) error
 		return errValidate
 	}
 
-	var actionService services.IActionService
-	actionService = actionController.actionService
+	// var actionService services.IActionService
+	// actionService = actionController.actionService
 
-	data := actionService.FindActionByMenu(request)
+	// data := actionService.FindActionByMenu(request)
 
 	res := utils.Response{
-		Data: data,
+		// Data: data,
 		Translating: &i18n.Message{
 			ID:    "success.getdetail.action",
 			Other: "Success get detail Action",
@@ -277,19 +279,19 @@ func (actionController *ActionController) UpdateAction(c echo.Context) error {
 		return errValidate
 	}
 
-	var actionService services.IActionService
-	actionService = actionController.actionService
+	// var actionService services.IActionService
+	// actionService = actionController.actionService
 
-	actionRepo := actionController.actionService.ActionRepository
-	actionRepo.Begin(actionController.server.DB)
+	// actionRepo := actionController.actionService.ActionRepository
+	// actionRepo.Begin(actionController.server.DB)
 
-	err := actionService.UpdateAction(request)
-	if err != nil {
-		actionRepo.Rollback()
-		return err
-	}
+	// err := actionService.UpdateAction(request)
+	// if err != nil {
+	// 	actionRepo.Rollback()
+	// 	return err
+	// }
 
-	actionRepo.Commit()
+	// actionRepo.Commit()
 
 	res := utils.Response{
 		Data: nil,
@@ -326,19 +328,19 @@ func (actionController *ActionController) DeleteActionBulk(c echo.Context) error
 		return errValidate
 	}
 
-	var actionService services.IActionService
-	actionService = actionController.actionService
+	// var actionService services.IActionService
+	// actionService = actionController.actionService
 
-	actionRepo := actionController.actionService.ActionRepository
-	actionRepo.Begin(actionController.server.DB)
+	// actionRepo := actionController.actionService.ActionRepository
+	// actionRepo.Begin(actionController.server.DB)
 
-	err := actionService.DeleteActionBulk(request)
-	if err != nil {
-		actionRepo.Rollback()
-		return err
-	}
+	// err := actionService.DeleteActionBulk(request)
+	// if err != nil {
+	// 	actionRepo.Rollback()
+	// 	return err
+	// }
 
-	actionRepo.Commit()
+	// actionRepo.Commit()
 
 	res := utils.Response{
 		Data: nil,

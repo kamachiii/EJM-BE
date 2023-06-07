@@ -131,16 +131,16 @@ func (menuController *MenuController) CreateMenuBulk(c echo.Context) error {
 	var menuService services.IMenuService
 	menuService = menuController.menuService
 
-	menuRepo := menuController.menuService.MenuRepository
-	menuRepo.Begin(menuController.server.DB)
+	// menuRepo := menuController.menuService.MenuRepository
+	// menuRepo.Begin(menuController.server.DB)
 
 	err := menuService.CreateMenu(request)
 	if err != nil {
-		menuRepo.Rollback()
+		// menuRepo.Rollback()
 		return err
 	}
 
-	menuRepo.Commit()
+	// menuRepo.Commit()
 
 	res := utils.Response{
 		Data: nil,
@@ -179,16 +179,16 @@ func (menuController *MenuController) DeleteMenu(c echo.Context) error {
 	var menuService services.IMenuService
 	menuService = menuController.menuService
 
-	menuRepo := menuController.menuService.MenuRepository
-	menuRepo.Begin(menuController.server.DB)
+	// menuRepo := menuController.menuService.MenuRepository
+	// menuRepo.Begin(menuController.server.DB)
 
 	err := menuService.DeleteMenuById(request)
 	if err != nil {
-		menuRepo.Rollback()
+		// menuRepo.Rollback()
 		return err
 	}
 
-	menuRepo.Commit()
+	// menuRepo.Commit()
 
 	res := utils.Response{
 		Data: nil,
@@ -271,16 +271,16 @@ func (menuController *MenuController) UpdateMenu(c echo.Context) error {
 	var menuService services.IMenuService
 	menuService = menuController.menuService
 
-	menuRepo := menuController.menuService.MenuRepository
-	menuRepo.Begin(menuController.server.DB)
+	// menuRepo := menuController.menuService.MenuRepository
+	// menuRepo.Begin(menuController.server.DB)
 
 	err := menuService.UpdateMenu(request)
 	if err != nil {
-		menuRepo.Rollback()
+		// menuRepo.Rollback()
 		return err
 	}
 
-	menuRepo.Commit()
+	// menuRepo.Commit()
 
 	res := utils.Response{
 		Data: nil,
@@ -320,16 +320,16 @@ func (menuController *MenuController) DeleteMenuBulk(c echo.Context) error {
 	var menuService services.IMenuService
 	menuService = menuController.menuService
 
-	menuRepo := menuController.menuService.MenuRepository
-	menuRepo.Begin(menuController.server.DB)
+	// menuRepo := menuController.menuService.MenuRepository
+	// menuRepo.Begin(menuController.server.DB)
 
 	err := menuService.DeleteMenuBulk(request)
 	if err != nil {
-		menuRepo.Rollback()
+		// menuRepo.Rollback()
 		return err
 	}
 
-	menuRepo.Commit()
+	// menuRepo.Commit()
 
 	res := utils.Response{
 		Data: nil,

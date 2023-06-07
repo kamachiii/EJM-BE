@@ -2,14 +2,14 @@ package repository
 
 import (
 	"TKD/pkg/models"
-	"TKD/utils"
+	// "TKD/utils"
 	"errors"
 	"fmt"
 	"gorm.io/gorm"
 )
 
 type JWTWhitelistRepository interface {
-	TransactionRepository
+	// TransactionRepository
 	DeleteToken(accessToken string) error
 	AddToken(accessToken string, refreshToken string) error
 	UpdateToken(accessToken string, refreshToken string, tokenString string) error
@@ -86,7 +86,7 @@ func (jwt *JWTWhitelist) UpdateToken(accessToken string, refreshToken string, to
 func (jwt *JWTWhitelist) CheckToken(token, tokenKey string) error {
 	if err := jwt.JWTWhitelistModel().Where(fmt.Sprintf("%s = ?", tokenKey), token).Debug().First(&models.JWTWhitelist{}).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return utils.ErrUserUnauhotirzed
+			// return utils.ErrUserUnauhotirzed
 		} else {
 			return err
 		}

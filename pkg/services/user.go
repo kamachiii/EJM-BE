@@ -7,8 +7,8 @@ import (
 	"TKD/pkg/models"
 	"TKD/pkg/repository"
 	"TKD/utils"
-	"errors"
-	"gorm.io/gorm"
+	// "errors"
+	// "gorm.io/gorm"
 )
 
 type RegisterService struct {
@@ -36,7 +36,7 @@ func (register *RegisterService) ToggleActive(id uint, payload *bool) error {
 
 	_, errFindUser := registerRepo.FindFirst(id)
 	if errFindUser != nil { // kalo user gak ada
-		return utils.ErrUserNotFound
+		// return utils.ErrUserNotFound
 	}
 
 	if err := registerRepo.ToggleActive(id, payload); err != nil {
@@ -47,40 +47,40 @@ func (register *RegisterService) ToggleActive(id uint, payload *bool) error {
 
 }
 
-// register user [tested]
-func (register *RegisterService) RegisterUser(user *dto.CreateNewUser) (models.User, error) {
-	user.Password, _ = utils.HashPassword(user.Password)
+// // register user [tested]
+// func (register *RegisterService) RegisterUser(user *dto.CreateNewUser) (models.User, error) {
+// 	user.Password, _ = utils.HashPassword(user.Password)
 
-	var registerRepo repository.UserRepository
-	var roleRepo repository.RoleRepository
-	registerRepo = register.RegisterRepository
-	roleRepo = register.RoleRepository
+// 	var registerRepo repository.UserRepository
+// 	var roleRepo repository.RoleRepository
+// 	registerRepo = register.RegisterRepository
+// 	roleRepo = register.RoleRepository
 
-	// cari role dulu
-	_, rolenotfound := roleRepo.FindRoleById(uint(user.RoleId))
-	if rolenotfound != nil {
-		if errors.Is(rolenotfound, gorm.ErrRecordNotFound) {
-			return models.User{}, utils.ErrRoleNotExists
-		} else {
-			return models.User{}, rolenotfound
-		}
-	}
+// 	// cari role dulu
+// 	_, rolenotfound := roleRepo.FindRoleById(uint(user.RoleId))
+// 	if rolenotfound != nil {
+// 		if errors.Is(rolenotfound, gorm.ErrRecordNotFound) {
+// 			// return models.User{}, utils.ErrRoleNotExists
+// 		} else {
+// 			return models.User{}, rolenotfound
+// 		}
+// 	}
 
-	// cari username dulu
-	data, err := registerRepo.FindByUsername(user.Username)
+// 	// cari username dulu
+// 	data, err := registerRepo.FindByUsername(user.Username)
 
-	// err != nil berarti username belum ada
-	if err != nil {
-		createdUser, errCreateUser := registerRepo.CreateUser(user)
-		if errCreateUser != nil {
-			return models.User{}, errCreateUser
-		}
+// 	// err != nil berarti username belum ada
+// 	if err != nil {
+// 		createdUser, errCreateUser := registerRepo.CreateUser(user)
+// 		if errCreateUser != nil {
+// 			return models.User{}, errCreateUser
+// 		}
 
-		return createdUser, nil
+// 		return createdUser, nil
 
-	}
-	return data, utils.ErrUsernameExist
-}
+// 	}
+// 	return data, utils.ErrUsernameExist
+// }
 
 // find all usres [tested]
 func (register *RegisterService) FindUsers(users *dto.GetUsers) ([]models.User, *models.Paginate, error) {
@@ -110,12 +110,12 @@ func (register *RegisterService) UpdateUser(id uint, user *dto.UpdateUser) error
 
 	_, errFindUser := registerRepo.FindFirst(id)
 	if errFindUser != nil { // kalo user gak ada
-		return utils.ErrUserNotFound
+		// return utils.ErrUserNotFound
 	}
 
 	_, errFindRole := roleRepo.FindRoleById(uint(user.RoleId))
 	if errFindRole != nil {
-		return utils.ErrRoleNotExists
+		// return utils.ErrRoleNotExists
 	}
 
 	logs.Debug(user.EnableLoginByLink)
@@ -134,7 +134,7 @@ func (register *RegisterService) DeleteUser(id uint) error {
 	// cari id dulu
 	_, err := registerRepo.FindFirst(id)
 	if err != nil {
-		return utils.ErrUserNotFound
+		// return utils.ErrUserNotFound
 	}
 
 	// delete
@@ -149,7 +149,7 @@ func (register *RegisterService) FindUserById(id uint) (models.User, error) {
 	data, err := userRepo.FindFirst(id)
 
 	if err != nil {
-		return models.User{}, utils.ErrUserNotFound
+		// return models.User{}, utils.ErrUserNotFound
 	}
 
 	return data, nil

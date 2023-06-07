@@ -10,7 +10,7 @@ import (
 )
 
 type UserRepository interface {
-	TransactionRepository
+	// TransactionRepository
 	FindUsers(pagination *models.Paginate, search string, value string) ([]models.User, *models.Paginate, error)
 	FindFirst(id uint) (models.User, error)
 	FindByEmail(email string) (models.User, error)
@@ -88,7 +88,7 @@ func (register *User) FindFirst(id uint) (models.User, error) {
 
 // create user
 func (register *User) CreateUser(user *dto.CreateNewUser) (models.User, error) {
-	otp, _ := utils.GenerateOTP(12)
+	// otp, _ := utils.GenerateOTP(12)
 	userModel := models.User{
 		Phone:             user.Phone,
 		Address:           user.Address,
@@ -99,7 +99,7 @@ func (register *User) CreateUser(user *dto.CreateNewUser) (models.User, error) {
 		Password:          user.Password,
 		RoleID:            user.RoleId,
 		EnableLoginByLink: user.EnableLoginByLink,
-		Pin:               &otp,
+		// Pin:               &otp,
 	}
 	err := register.Db.Debug().Create(&userModel).Preload("Role").Error
 
@@ -186,10 +186,10 @@ func (register *User) FindUsers(pagination *models.Paginate, search string, valu
 // update user
 func (register *User) UpdateUser(id uint, user *dto.UpdateUser) error {
 	cariPin, _ := register.FindById(id)
-	otp, _ := utils.GenerateOTP(12)
+	// otp, _ := utils.GenerateOTP(12)
 	var pin *string
 	if cariPin.Pin == nil {
-		pin = &otp
+		// pin = &otp
 	} else {
 		pin = cariPin.Pin
 	}

@@ -54,7 +54,7 @@ func TestMiddleware2(t *testing.T) {
 		t.Run(testCase.Name, func(t *testing.T) {
 			s := new(MockServer).NewServer()
 			s.Echo.Validator = &CustomValidator{Validator: validator.New()}
-			s.Echo.HTTPErrorHandler = HttpErrorHandler()
+			// s.Echo.HTTPErrorHandler = HttpErrorHandler()
 			if testCase.UseValidation == true {
 				s.Echo.Use(MiddlewareValidator(&testCase.Type))
 			}
@@ -100,7 +100,7 @@ func TestMiddleware(t *testing.T) {
 func TestMiddlewareWithCustomErrorHandler(t *testing.T) {
 	s := new(MockServer).NewServer()
 	s.Echo.Validator = &CustomValidator{Validator: validator.New()}
-	s.Echo.HTTPErrorHandler = HttpErrorHandler()
+	// s.Echo.HTTPErrorHandler = HttpErrorHandler()
 	s.Echo.Use(MiddlewareValidator(&User{}))
 	s.Echo.GET("/", func(c echo.Context) error {
 		return c.String(200, "Hello")
@@ -117,7 +117,7 @@ func TestMiddlewarePassed(t *testing.T) {
 	s := new(MockServer).NewServer()
 	s.Echo.Validator = &CustomValidator{Validator: validator.New()}
 	s.Echo.Use(MiddlewareValidator(&User{}))
-	s.Echo.HTTPErrorHandler = HttpErrorHandler()
+	// s.Echo.HTTPErrorHandler = HttpErrorHandler()
 	s.Echo.POST("/user", func(c echo.Context) error {
 		return c.String(201, "Hello")
 	})

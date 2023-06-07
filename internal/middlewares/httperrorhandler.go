@@ -2,11 +2,11 @@ package middlewares
 
 import (
 	"TKD/config"
-	"TKD/internal/logs"
+	// "TKD/internal/logs"
 	"TKD/utils"
 	"errors"
 	"fmt"
-	"github.com/nicksnyder/go-i18n/v2/i18n"
+	// "github.com/nicksnyder/go-i18n/v2/i18n"
 	"log"
 	"net/http"
 	"time"
@@ -25,24 +25,24 @@ func HttpErrorHandler(config *config.Config) echo.HTTPErrorHandler {
 	return func(err error, c echo.Context) {
 		report, ok := err.(*echo.HTTPError)
 
-		requestId := utils.GetRequestId(c)
+		// requestId := utils.GetRequestId(c)
 
 		var errorApp *utils.BeError
 		if !ok {
 			if errors.As(err, &errorApp) {
 				errorApp.SetLocalizer(c)
-				report = echo.NewHTTPError(errorApp.GetCode(), errorApp.Error())
+				// report = echo.NewHTTPError(errorApp.GetCode(), errorApp.Error())
 			} else {
 				if config.App.Debug == "false" {
-					msg, _ := utils.Translate(c, &i18n.Message{
-						ID:    "something.went.wrong",
-						Other: "Oops something went wrong, Contact Developer for the issue",
-					})
-					report = echo.NewHTTPError(http.StatusInternalServerError, msg)
+					// msg, _ := utils.Translate(c, &i18n.Message{
+					// 	ID:    "something.went.wrong",
+					// 	Other: "Oops something went wrong, Contact Developer for the issue",
+					// })
+					// report = echo.NewHTTPError(http.StatusInternalServerError, msg)
 				} else {
 					report = echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 				}
-				logs.Error(requestId, err.Error())
+				// logs.Error(requestId, err.Error())
 			}
 		}
 
@@ -70,7 +70,7 @@ func HttpErrorHandler(config *config.Config) echo.HTTPErrorHandler {
 		}
 		err2 := c.JSON(report.Code, ResponseError{
 			Time:      time.Now(),
-			RequestID: requestId,
+			// RequestID: requestId,
 			Message:   report.Message,
 		})
 		if err2 != nil {

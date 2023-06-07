@@ -3,7 +3,7 @@ package controllers
 import (
 	"TKD/dto"
 	"TKD/internal/server"
-	"TKD/pkg/repository"
+	// "TKD/pkg/repository"
 	"TKD/pkg/services"
 	"TKD/utils"
 	"net/http"
@@ -19,10 +19,11 @@ type InventoryController struct {
 }
 
 func NewInventoryController(srv *server.Server) *InventoryController {
-	return &InventoryController{server: srv, inventoryServices: services.NewInventoryService(&services.InventoryService{
-		DB:                  srv.DB,
-		InventoryRepository: *repository.NewInventoryRepository(srv.DB),
-	})}
+	// return &InventoryController{server: srv, inventoryServices: services.NewInventoryService(&services.InventoryService{
+	// 	DB:                  srv.DB,
+	// 	InventoryRepository: *repository.NewInventoryRepository(srv.DB),
+	// })}
+	return nil
 }
 
 // Ambil Daftar Inventory
@@ -100,21 +101,21 @@ func (i *InventoryController) FindAllDocument(c echo.Context) error {
 	}
 
 	// service
-	var inventoryServices services.IInventoryService
-	inventoryServices = i.inventoryServices
-	data, total, err := inventoryServices.FindAllDocument(request)
-	if err != nil {
-		return err
-	}
+	// var inventoryServices services.IInventoryService
+	// inventoryServices = i.inventoryServices
+	// data, total, err := inventoryServices.FindAllDocument(request)
+	// if err != nil {
+	// 	return err
+	// }
 
 	res := &utils.ResponsePaginate{
 		Key:  "inventory_documents",
-		Meta: total,
-		Response: utils.Response{
-			Data:       data,
-			Message:    "Sukses mengambil data inventories documents",
-			StatusCode: 200,
-		},
+		// Meta: total,
+		// Response: utils.Response{
+		// 	Data:       data,
+		// 	Message:    "Sukses mengambil data inventories documents",
+		// 	StatusCode: 200,
+		// },
 	}
 
 	return res.ReturnPaginates(c)
@@ -175,7 +176,7 @@ func (i *InventoryController) Create(c echo.Context) error {
 // @Router  /inventories/document [post]
 func (i *InventoryController) CreateInventoryDocument(c echo.Context) error {
 	var (
-		inventoryServices = i.inventoryServices
+		// inventoryServices = i.inventoryServices
 		request           = new(dto.CreateInventoryDocument)
 	)
 
@@ -185,13 +186,13 @@ func (i *InventoryController) CreateInventoryDocument(c echo.Context) error {
 
 	request.FilledBy = utils.User(c).ID
 
-	inventory, errCreate := inventoryServices.CreateInventoryDocument(request)
-	if errCreate != nil {
-		return errCreate
-	}
+	// inventory, errCreate := inventoryServices.CreateInventoryDocument(request)
+	// if errCreate != nil {
+	// 	return errCreate
+	// }
 
 	res := utils.Response{
-		Data: inventory,
+		// Data: inventory,
 		Translating: &i18n.Message{
 			ID:    "inventory.created",
 			Other: "Success Create New Inventory Document",

@@ -56,16 +56,16 @@ func (userController *UserController) ToggleActiveNonActive(c echo.Context) erro
 		return err
 	}
 
-	userRepo := userController.registerService.RegisterRepository
-	userRepo.Begin(userController.db)
+	// userRepo := userController.registerService.RegisterRepository
+	// userRepo.Begin(userController.db)
 
 	err := userController.registerService.ToggleActive(req.ID, req.Payload)
 	if err != nil {
-		userRepo.Rollback()
+		// userRepo.Rollback()
 		return err
 	}
 
-	userRepo.Commit()
+	// userRepo.Commit()
 
 	res := utils.Response{
 		Data: nil,
@@ -102,33 +102,33 @@ func (userController *UserController) RegisterUser(c echo.Context) error {
 		return err
 	}
 
-	userRepo := userController.registerService.RegisterRepository
-	roleRepo := userController.registerService.RoleRepository
+	// userRepo := userController.registerService.RegisterRepository
+	// roleRepo := userController.registerService.RoleRepository
 
 	file, _ := c.FormFile("file")
 	if file != nil {
-		fileName, errUpload := utils.UploadSingleFile(file)
-		if errUpload != nil {
-			return errUpload
-		}
-		req.ProfilePict = &fileName
+		// fileName, errUpload := utils.UploadSingleFile(file)
+		// if errUpload != nil {
+		// 	return errUpload
+		// }
+		// req.ProfilePict = &fileName
 	}
 
-	roleRepo.Begin(userController.db)
-	userRepo.Begin(userController.db)
+	// roleRepo.Begin(userController.db)
+	// userRepo.Begin(userController.db)
 
-	data, err := userController.registerService.RegisterUser(req)
-	if err != nil {
-		roleRepo.Rollback()
-		userRepo.Rollback()
-		return err
-	}
+	// data, err := userController.registerService.RegisterUser(req)
+	// if err != nil {
+	// 	roleRepo.Rollback()
+	// 	userRepo.Rollback()
+	// 	return err
+	// }
 
-	roleRepo.Commit()
-	userRepo.Commit()
+	// roleRepo.Commit()
+	// userRepo.Commit()
 
 	res := utils.Response{
-		Data:       data,
+		// Data:       data,
 		Message:    "Berhasil Insert data",
 		StatusCode: 201,
 	}
@@ -208,30 +208,30 @@ func (userController *UserController) UpdateUser(c echo.Context) error {
 		return err
 	}
 
-	userRepo := userController.registerService.RegisterRepository
-	roleRepo := userController.registerService.RoleRepository
+	// userRepo := userController.registerService.RegisterRepository
+	// roleRepo := userController.registerService.RoleRepository
 
 	file, _ := c.FormFile("file")
 	if file != nil {
-		fileName, errUpload := utils.UploadSingleFile(file)
-		if errUpload != nil {
-			return errUpload
-		}
-		req.ProfilePict = &fileName
+		// fileName, errUpload := utils.UploadSingleFile(file)
+		// if errUpload != nil {
+		// 	return errUpload
+		// }
+		// req.ProfilePict = &fileName
 	}
 
-	roleRepo.Begin(userController.db)
-	userRepo.Begin(userController.db)
+	// roleRepo.Begin(userController.db)
+	// userRepo.Begin(userController.db)
 
 	err := userController.registerService.UpdateUser(uint(id), req)
 	if err != nil {
-		roleRepo.Rollback()
-		userRepo.Rollback()
+		// roleRepo.Rollback()
+		// userRepo.Rollback()
 		return err
 	}
 
-	roleRepo.Commit()
-	userRepo.Commit()
+	// roleRepo.Commit()
+	// userRepo.Commit()
 
 	res := utils.Response{
 		Data:       nil,
@@ -257,21 +257,21 @@ func (userController *UserController) UpdateUser(c echo.Context) error {
 func (userController *UserController) DeleteUser(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 
-	userRepo := userController.registerService.RegisterRepository
-	roleRepo := userController.registerService.RoleRepository
+	// userRepo := userController.registerService.RegisterRepository
+	// roleRepo := userController.registerService.RoleRepository
 
-	roleRepo.Begin(userController.db)
-	userRepo.Begin(userController.db)
+	// roleRepo.Begin(userController.db)
+	// userRepo.Begin(userController.db)
 
 	err := userController.registerService.DeleteUser(uint(id))
 	if err != nil {
-		roleRepo.Rollback()
-		userRepo.Rollback()
+		// roleRepo.Rollback()
+		// userRepo.Rollback()
 		return err
 	}
 
-	roleRepo.Commit()
-	userRepo.Commit()
+	// roleRepo.Commit()
+	// userRepo.Commit()
 
 	res := utils.Response{
 		Data: nil,
@@ -306,23 +306,23 @@ func (userController *UserController) DeleteUserBulk(c echo.Context) error {
 		return err
 	}
 
-	userRepo := userController.registerService.RegisterRepository
-	roleRepo := userController.registerService.RoleRepository
+	// userRepo := userController.registerService.RegisterRepository
+	// roleRepo := userController.registerService.RoleRepository
 
-	roleRepo.Begin(userController.db)
-	userRepo.Begin(userController.db)
+	// roleRepo.Begin(userController.db)
+	// userRepo.Begin(userController.db)
 
 	for _, id := range req.Ids {
 		err := userController.registerService.DeleteUser(uint(id))
 		if err != nil {
-			roleRepo.Rollback()
-			userRepo.Rollback()
+			// roleRepo.Rollback()
+			// userRepo.Rollback()
 			return err
 		}
 	}
 
-	roleRepo.Commit()
-	userRepo.Commit()
+	// roleRepo.Commit()
+	// userRepo.Commit()
 
 	res := utils.Response{
 		Data: nil,

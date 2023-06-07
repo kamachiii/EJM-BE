@@ -22,8 +22,8 @@ type IAuthService interface {
 type AuthService struct {
 	RegisterRepository repository.UserRepository
 	RoleRepository     repository.RoleRepository
-	ActionRepository   repository.ActionRepository
-	CasbinRepository   repository.CasbinRepository
+	// ActionRepository   repository.ActionRepository
+	// CasbinRepository   repository.CasbinRepository
 	JWTWhitelist       repository.JWTWhitelistRepository
 	Config             *config.Config
 }
@@ -54,7 +54,7 @@ func (authService *AuthService) Session(userId uint, token string) (models.User,
 	}
 
 	if !*user.IsActive {
-		return models.User{}, utils.ErrTokenInvalid
+		// return models.User{}, utils.ErrTokenInvalid
 	}
 
 	return user, nil
@@ -72,15 +72,15 @@ func (authService AuthService) LoginByPin(login *dto.LoginByPin) (LoginResponse,
 	//find username first
 	data, err := loginServiceRepo.FindUserByPin(login.Pin)
 	if err != nil {
-		return LoginResponse{}, utils.ErrCredentialInvalid
+		// return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 
 	if !*data.IsActive {
-		return LoginResponse{}, utils.ErrCredentialInvalid
+		// return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 
 	if !*data.EnableLoginByLink {
-		return LoginResponse{}, utils.ErrForbiddenLoginByLink
+		// return LoginResponse{}, utils.ErrForbiddenLoginByLink
 	}
 
 	// assign jwt payload
@@ -128,16 +128,16 @@ func (authService AuthService) LoginUser(login *dto.Login) (LoginResponse, error
 
 	user, err := loginServiceRepo.FindByUsername(login.Username)
 	if err != nil {
-		return LoginResponse{}, utils.ErrCredentialInvalid
+		// return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 
 	isPasswordMatch := utils.DoPasswordMatch(user.Password, login.Password)
 	if !isPasswordMatch {
-		return LoginResponse{}, utils.ErrCredentialInvalid
+		// return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 
 	if !*user.IsActive {
-		return LoginResponse{}, utils.ErrCredentialInvalid
+		// return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 
 	accessClaims := &utils.UserJWTPayload{
@@ -192,7 +192,7 @@ func (authService AuthService) parseToken(key []byte, token string) (*jwt.Token,
 
 	if err != nil {
 		if errors.Is(err, jwt.ErrTokenExpired) {
-			return &jwt.Token{}, utils.ErrTokenInvalid
+			// return &jwt.Token{}, utils.ErrTokenInvalid
 		} else {
 			return &jwt.Token{}, err
 		}
@@ -222,7 +222,7 @@ func (authService AuthService) RefreshToken(tokenString string) (LoginResponse, 
 	}
 
 	if !parsedToken.Valid {
-		return LoginResponse{}, utils.ErrTokenInvalid
+		// return LoginResponse{}, utils.ErrTokenInvalid
 	}
 
 	// get data by token user ID
