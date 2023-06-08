@@ -1,7 +1,7 @@
 package dto
 
 import (
-	"TKD/pkg/models"
+	"EJM/pkg/models"
 	"time"
 )
 

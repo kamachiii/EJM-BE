@@ -1,12 +1,12 @@
 package controllers
 
 import (
-	"TKD/dto"
-	"TKD/internal/server"
-	"TKD/pkg/models"
-	"TKD/pkg/repository"
-	"TKD/pkg/services"
-	"TKD/utils"
+	"EJM/dto"
+	"EJM/internal/server"
+	"EJM/pkg/models"
+	"EJM/pkg/repository"
+	"EJM/pkg/services"
+	"EJM/utils"
 	"github.com/labstack/echo/v4"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"gorm.io/gorm"
@@ -42,10 +42,10 @@ func NewRoleController(srv *server.Server) *RoleController {
 		server: srv,
 		db:     db,
 		roleService: services.NewRoleService(&services.RoleService{
-			RoleRepository:   repository.NewRoleRepository(srv.DB),
+			RoleRepository: repository.NewRoleRepository(srv.DB),
 			// ActionRepository: repository.NewActionRepository(srv.DB),
 			// CasbinRepository: repository.NewCasbinRepository(srv.DB),
-			MenuRepository:   repository.NewMenuRepository(srv.DB),
+			MenuRepository: repository.NewMenuRepository(srv.DB),
 		}),
 	}
 }

@@ -1,7 +1,7 @@
 package config
 
 import (
-	"TKD/internal/logs"
+	"EJM/internal/logs"
 	"fmt"
 	"github.com/joho/godotenv"
 	"os"

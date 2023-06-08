@@ -1,12 +1,12 @@
 package services
 
 import (
-	"TKD/config"
-	"TKD/dto"
-	"TKD/internal/logs"
-	"TKD/pkg/models"
-	"TKD/pkg/repository"
-	"TKD/utils"
+	"EJM/config"
+	"EJM/dto"
+	"EJM/internal/logs"
+	"EJM/pkg/models"
+	"EJM/pkg/repository"
+	"EJM/utils"
 	// "errors"
 	// "gorm.io/gorm"
 )

@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"TKD/dto"
-	"TKD/internal/server"
-	"TKD/pkg/repository"
-	"TKD/pkg/services"
-	"TKD/utils"
+	"EJM/dto"
+	"EJM/internal/server"
+	"EJM/pkg/repository"
+	"EJM/pkg/services"
+	"EJM/utils"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"net/http"
 

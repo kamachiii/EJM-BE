@@ -1,11 +1,11 @@
 package services
 
 import (
-	"TKD/config"
-	"TKD/dto"
-	"TKD/pkg/models"
-	"TKD/pkg/repository"
-	"TKD/utils"
+	"EJM/config"
+	"EJM/dto"
+	"EJM/pkg/models"
+	"EJM/pkg/repository"
+	"EJM/utils"
 	"errors"
 	jwt "github.com/golang-jwt/jwt/v4"
 	"time"
@@ -24,8 +24,8 @@ type AuthService struct {
 	RoleRepository     repository.RoleRepository
 	// ActionRepository   repository.ActionRepository
 	// CasbinRepository   repository.CasbinRepository
-	JWTWhitelist       repository.JWTWhitelistRepository
-	Config             *config.Config
+	JWTWhitelist repository.JWTWhitelistRepository
+	Config       *config.Config
 }
 
 type LoginResponse struct {

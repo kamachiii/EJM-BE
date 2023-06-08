@@ -1,8 +1,8 @@
 package scripts
 
 import (
-	"TKD/pkg/models"
-	"TKD/utils"
+	"EJM/pkg/models"
+	"EJM/utils"
 	"gorm.io/gorm"
 )
 

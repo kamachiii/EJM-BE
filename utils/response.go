@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"TKD/pkg/models"
+	"EJM/pkg/models"
 	"github.com/labstack/echo/v4"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"reflect"

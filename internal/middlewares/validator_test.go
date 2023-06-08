@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"TKD/internal/server"
+	"EJM/internal/server"
 	"io"
 	"log"
 	"net/http"

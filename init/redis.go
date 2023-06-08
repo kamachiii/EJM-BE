@@ -1,8 +1,8 @@
 package init
 
 import (
-	"TKD/config"
-	"TKD/internal/logs"
+	"EJM/config"
+	"EJM/internal/logs"
 	"context"
 	"fmt"
 	"os"

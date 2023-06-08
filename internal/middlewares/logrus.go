@@ -2,7 +2,7 @@
 package middlewares
 
 import (
-	"TKD/internal/request_logger"
+	"EJM/internal/request_logger"
 	"github.com/labstack/echo/v4"
 	"time"
 )

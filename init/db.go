@@ -1,9 +1,9 @@
 package init
 
 import (
-	"TKD/config"
-	"TKD/internal/logs"
-	"TKD/pkg/models"
+	"EJM/config"
+	"EJM/internal/logs"
+	"EJM/pkg/models"
 	"fmt"
 	"github.com/casbin/casbin/v2"
 	"github.com/casbin/casbin/v2/model"

@@ -8531,8 +8531,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "",
 	BasePath:         "",
 	Schemes:          []string{"http"},
-	Title:            "TKD Assessment & Monitoring API Documentation",
-	Description:      "Aplikasi Assessment & Monitoring",
+	Title:            "Elektronik Journal Centralized by Mandiri",
+	Description:      "Aplikasi Elektronik Journal Monitoring",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }

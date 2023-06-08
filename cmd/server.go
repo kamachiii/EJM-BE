@@ -1,11 +1,11 @@
 package cmd
 
 import (
-	"TKD/config"
-	"TKD/internal/logs"
-	"TKD/internal/routes"
-	"TKD/internal/server"
-	"TKD/ui"
+	"EJM/config"
+	"EJM/internal/logs"
+	"EJM/internal/routes"
+	"EJM/internal/server"
+	"EJM/ui"
 	"context"
 	"fmt"
 	"github.com/labstack/echo/v4/middleware"
@@ -43,7 +43,7 @@ func initServer(cfg *config.Config) {
 	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
 	<-quit
 
-	ctx,_:= context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
 	// redis shutdown
 	if r.Redis != nil {

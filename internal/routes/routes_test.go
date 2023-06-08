@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"TKD/config"
-	"TKD/internal/server"
+	"EJM/config"
+	"EJM/internal/server"
 	"net/http"
 	"net/http/httptest"
 	"testing"

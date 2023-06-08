@@ -1,7 +1,7 @@
 package dto
 
 import (
-	// "TKD/utils"
+	// "EJM/utils"
 	"mime/multipart"
 	"time"
 )

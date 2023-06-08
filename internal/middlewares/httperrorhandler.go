@@ -1,9 +1,9 @@
 package middlewares
 
 import (
-	"TKD/config"
-	// "TKD/internal/logs"
-	"TKD/utils"
+	"EJM/config"
+	// "EJM/internal/logs"
+	"EJM/utils"
 	"errors"
 	"fmt"
 	// "github.com/nicksnyder/go-i18n/v2/i18n"
@@ -69,9 +69,9 @@ func HttpErrorHandler(config *config.Config) echo.HTTPErrorHandler {
 			}
 		}
 		err2 := c.JSON(report.Code, ResponseError{
-			Time:      time.Now(),
+			Time: time.Now(),
 			// RequestID: requestId,
-			Message:   report.Message,
+			Message: report.Message,
 		})
 		if err2 != nil {
 			log.Fatal("Gak bisa return")

@@ -17,7 +17,7 @@ type QueueLists struct {
 }
 
 var (
-	tag = "TKD Queues"
+	tag = "EJM Queues"
 )
 
 const (

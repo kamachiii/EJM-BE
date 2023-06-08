@@ -1,10 +1,10 @@
 package cmd
 
 import (
-	"TKD/config"
-	db "TKD/init"
-	"TKD/scripts"
-	"TKD/utils"
+	"EJM/config"
+	db "EJM/init"
+	"EJM/scripts"
+	"EJM/utils"
 	"fmt"
 	"log"
 	"reflect"

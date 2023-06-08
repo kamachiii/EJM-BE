@@ -1,11 +1,12 @@
 package controllers
 
 import (
-	"TKD/dto"
-	"TKD/internal/server"
-	// "TKD/pkg/repository"
-	"TKD/pkg/services"
-	"TKD/utils"
+	"EJM/dto"
+	"EJM/internal/server"
+
+	// "EJM/pkg/repository"
+	"EJM/pkg/services"
+	"EJM/utils"
 	"net/http"
 	"strconv"
 
@@ -109,7 +110,7 @@ func (i *InventoryController) FindAllDocument(c echo.Context) error {
 	// }
 
 	res := &utils.ResponsePaginate{
-		Key:  "inventory_documents",
+		Key: "inventory_documents",
 		// Meta: total,
 		// Response: utils.Response{
 		// 	Data:       data,
@@ -177,7 +178,7 @@ func (i *InventoryController) Create(c echo.Context) error {
 func (i *InventoryController) CreateInventoryDocument(c echo.Context) error {
 	var (
 		// inventoryServices = i.inventoryServices
-		request           = new(dto.CreateInventoryDocument)
+		request = new(dto.CreateInventoryDocument)
 	)
 
 	if errBindAndValidate := utils.BindAndValidate[*dto.CreateInventoryDocument](request, c); errBindAndValidate != nil {

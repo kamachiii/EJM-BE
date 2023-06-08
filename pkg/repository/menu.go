@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"TKD/dto"
-	"TKD/pkg/models"
+	"EJM/dto"
+	"EJM/pkg/models"
 	"strings"
 
 	"gorm.io/gorm"

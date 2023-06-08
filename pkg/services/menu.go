@@ -1,12 +1,12 @@
 package services
 
 import (
-	"TKD/dto"
-	"TKD/pkg/models"
-	"TKD/pkg/repository"
+	"EJM/dto"
+	"EJM/pkg/models"
+	"EJM/pkg/repository"
 	"sync"
-	
-	// "TKD/utils"
+
+	// "EJM/utils"
 	"gorm.io/gorm"
 )
 

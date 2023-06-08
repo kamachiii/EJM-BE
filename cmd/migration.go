@@ -1,10 +1,10 @@
 package cmd
 
 import (
-	"TKD/config"
-	db "TKD/init"
-	"TKD/pkg/models"
-	"TKD/utils"
+	"EJM/config"
+	db "EJM/init"
+	"EJM/pkg/models"
+	"EJM/utils"
 	"log"
 	"reflect"
 	"time"

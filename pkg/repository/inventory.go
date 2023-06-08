@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"TKD/dto"
-	"TKD/pkg/models"
-	// "TKD/utils"
+	"EJM/dto"
+	"EJM/pkg/models"
+	// "EJM/utils"
 	"errors"
 	"fmt"
 	"strings"

@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"TKD/pkg/models"
-	// "TKD/utils"
+	"EJM/pkg/models"
+	// "EJM/utils"
 	"errors"
 	"fmt"
 	"gorm.io/gorm"

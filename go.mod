@@ -1,4 +1,4 @@
-module TKD
+module EJM
 
 go 1.19
 

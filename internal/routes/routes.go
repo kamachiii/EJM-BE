@@ -1,12 +1,12 @@
 package routes
 
 import (
-	"TKD/config"
-	"TKD/internal/middlewares"
-	"TKD/internal/request_logger"
-	"TKD/internal/server"
-	"TKD/pkg/controllers"
-	"TKD/utils"
+	"EJM/config"
+	"EJM/internal/middlewares"
+	"EJM/internal/request_logger"
+	"EJM/internal/server"
+	"EJM/pkg/controllers"
+	"EJM/utils"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -34,11 +34,13 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 	// masterLookupController := controllers.NewMasterLookupController(server)
 	// projectController := controllers.NewProjectController(server)
 	// reportController := controllers.NewReportController(server)
-	inventoryController := controllers.NewInventoryController(server)
+	// inventoryController := controllers.NewInventoryController(server)
 	// volumeController := controllers.NewVolumeController(server)
 
 	// middleware
-	server.Echo.Validator = &middlewares.CustomValidator{Validator: validator.New()}
+	server.Echo.Validator = &middlewares.CustomValidator{
+		Validator: validator.New(),
+	}
 
 	// Logger
 	request_logger.Logger().SetOutput(os.Stdout)
@@ -59,7 +61,14 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 		AllowOrigins:     []string{"*"},
 		AllowCredentials: true,
 		ExposeHeaders:    []string{"Content-Disposition"},
-		AllowHeaders:     []string{echo.HeaderOrigin, echo.HeaderAuthorization, echo.HeaderContentType, "module", "Content-Range", "Accept-Language"},
+		AllowHeaders:     []string{
+			echo.HeaderOrigin, 
+			echo.HeaderAuthorization, 
+			echo.HeaderContentType, 
+			"module", 
+			"Content-Range", 
+			"Accept-Language",
+		},
 	}))
 
 	prefix := server.Echo.Group(fmt.Sprintf("/api/v%s", server.Config.App.Version))
@@ -221,32 +230,32 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 		// projects
 		// projectRoutes := prefix.Group("/projects")
 		// {
-			// projectRoutes.GET("/logs/:project_id", projectController.FindLogByProject)
-			// projectRoutes.GET("/stats", projectController.StatProject)
-			// projectRoutes.PUT("/create-structure-for-project", projectController.CreateStructureForProject)
-			// projectRoutes.GET("/logs-by-user/:user_id", projectController.FindLogByUser)
-			// projectRoutes.GET("/statistic/:project_id", projectController.FindProjectStatistics)
-			// projectRoutes.PUT("/info/:project_id", projectController.UpdateProjectInfo)
-			// projectRoutes.GET("/info-structure", projectController.DetailProjectCompanyStructure)
-			// projectRoutes.POST("", projectController.CreateProject)
-			// projectRoutes.GET("", projectController.FindProject)
-			// projectRoutes.GET("/:project_id", projectController.FindDetailProject)
-			// projectRoutes.DELETE("/:project_id", projectController.DeleteProject)
-			// projectRoutes.DELETE("/delete-structure", projectController.DeleteStructureByIdAndProject)
-			// projectRoutes.GET("/questions", projectController.FindQuestionaireByStructure)
-			// projectRoutes.POST("/questions", projectController.SetProjectQuestion)
-			// projectRoutes.POST("/assign-users", projectController.SetProjectAssignUsers)
-			// projectRoutes.DELETE("/assigned-user/:user_id", projectController.DeleteAssignedUser)
-			// projectRoutes.GET("/assigned-user/:user_id", projectController.FindDetailAssignedUser)
-			// projectRoutes.PUT("/assigned-user/:user_id", projectController.UpdateDetailAssignUser)
-			// projectRoutes.GET("/users-not-assigned", projectController.FindUsersNotAssigned)
-			// projectRoutes.GET("/users-assigned", projectController.FindUsersAssigned)
-			// projectRoutes.GET("/users-assigned-paginated", projectController.FindUsersAssignedPaginated)
-			// projectRoutes.POST("/question/answer", projectController.AnswerQuestion)
-			// projectRoutes.GET("/question/answer/:question_id", projectController.FindAnswerQuestion)
-			// projectRoutes.GET("/by-company", projectController.FindProjectByCompany)
-			// projectRoutes.GET("/structure/by-project", projectController.FindProjectStructureByProject)
-			// projectRoutes.PUT("/update-pic", projectController.EditDetailProjectCompanyStructure)
+		// projectRoutes.GET("/logs/:project_id", projectController.FindLogByProject)
+		// projectRoutes.GET("/stats", projectController.StatProject)
+		// projectRoutes.PUT("/create-structure-for-project", projectController.CreateStructureForProject)
+		// projectRoutes.GET("/logs-by-user/:user_id", projectController.FindLogByUser)
+		// projectRoutes.GET("/statistic/:project_id", projectController.FindProjectStatistics)
+		// projectRoutes.PUT("/info/:project_id", projectController.UpdateProjectInfo)
+		// projectRoutes.GET("/info-structure", projectController.DetailProjectCompanyStructure)
+		// projectRoutes.POST("", projectController.CreateProject)
+		// projectRoutes.GET("", projectController.FindProject)
+		// projectRoutes.GET("/:project_id", projectController.FindDetailProject)
+		// projectRoutes.DELETE("/:project_id", projectController.DeleteProject)
+		// projectRoutes.DELETE("/delete-structure", projectController.DeleteStructureByIdAndProject)
+		// projectRoutes.GET("/questions", projectController.FindQuestionaireByStructure)
+		// projectRoutes.POST("/questions", projectController.SetProjectQuestion)
+		// projectRoutes.POST("/assign-users", projectController.SetProjectAssignUsers)
+		// projectRoutes.DELETE("/assigned-user/:user_id", projectController.DeleteAssignedUser)
+		// projectRoutes.GET("/assigned-user/:user_id", projectController.FindDetailAssignedUser)
+		// projectRoutes.PUT("/assigned-user/:user_id", projectController.UpdateDetailAssignUser)
+		// projectRoutes.GET("/users-not-assigned", projectController.FindUsersNotAssigned)
+		// projectRoutes.GET("/users-assigned", projectController.FindUsersAssigned)
+		// projectRoutes.GET("/users-assigned-paginated", projectController.FindUsersAssignedPaginated)
+		// projectRoutes.POST("/question/answer", projectController.AnswerQuestion)
+		// projectRoutes.GET("/question/answer/:question_id", projectController.FindAnswerQuestion)
+		// projectRoutes.GET("/by-company", projectController.FindProjectByCompany)
+		// projectRoutes.GET("/structure/by-project", projectController.FindProjectStructureByProject)
+		// projectRoutes.PUT("/update-pic", projectController.EditDetailProjectCompanyStructure)
 		// }
 
 		// reportRoutes := prefix.Group("/report")
@@ -263,20 +272,20 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 		// }
 
 		// invetory
-		inventoryRoutes := prefix.Group("/inventories")
-		{
-			inventoryRoutes.GET("/select/:id", inventoryController.FindOneSelectInventory)
-			inventoryRoutes.PUT("/select/update", inventoryController.UpdateDataSelectInventory)
-			inventoryRoutes.POST("/select/create", inventoryController.CreateDataSelectInventory)
-			inventoryRoutes.GET("/select", inventoryController.FindSelectInventory)
-			inventoryRoutes.GET("", inventoryController.FindAll)
-			inventoryRoutes.GET("/document", inventoryController.FindAllDocument)
-			inventoryRoutes.GET("/:inventory_id", inventoryController.FindById)
-			inventoryRoutes.POST("", inventoryController.Create)
-			inventoryRoutes.POST("/document", inventoryController.CreateInventoryDocument)
-			inventoryRoutes.PUT("/:inventory_id", inventoryController.Update)
-			inventoryRoutes.DELETE("/:inventory_id", inventoryController.Delete)
-		}
+		// inventoryRoutes := prefix.Group("/inventories")
+		// {
+		// 	inventoryRoutes.GET("/select/:id", inventoryController.FindOneSelectInventory)
+		// 	inventoryRoutes.PUT("/select/update", inventoryController.UpdateDataSelectInventory)
+		// 	inventoryRoutes.POST("/select/create", inventoryController.CreateDataSelectInventory)
+		// 	inventoryRoutes.GET("/select", inventoryController.FindSelectInventory)
+		// 	inventoryRoutes.GET("", inventoryController.FindAll)
+		// 	inventoryRoutes.GET("/document", inventoryController.FindAllDocument)
+		// 	inventoryRoutes.GET("/:inventory_id", inventoryController.FindById)
+		// 	inventoryRoutes.POST("", inventoryController.Create)
+		// 	inventoryRoutes.POST("/document", inventoryController.CreateInventoryDocument)
+		// 	inventoryRoutes.PUT("/:inventory_id", inventoryController.Update)
+		// 	inventoryRoutes.DELETE("/:inventory_id", inventoryController.Delete)
+		// }
 
 		// volume
 		// volumeRoutes := prefix.Group("/volumes")

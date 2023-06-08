@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"TKD/config"
-	db "TKD/init"
-	// "TKD/pkg/models"
+	"EJM/config"
+	db "EJM/init"
+	// "EJM/pkg/models"
 	// "encoding/json"
 	"fmt"
 	"github.com/spf13/cobra"
@@ -21,7 +21,7 @@ type QuestionerInfo struct {
 func getPic(db *gorm.DB) []QuestionerInfo {
 	var (
 		// scanners []models.ProjectCompanyStructure
-		result   []QuestionerInfo
+		result []QuestionerInfo
 	)
 
 	// db.Model(&models.ProjectCompanyStructure{}).Where("questioner_info is not null").Find(&scanners)

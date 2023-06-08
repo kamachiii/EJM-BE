@@ -7,4 +7,3 @@ type JWTWhitelist struct {
 	AccessToken  string `json:"access_token" gorm:"not null"`
 	RefreshToken string `json:"refresh_token" gorm:"not null"`
 }
-

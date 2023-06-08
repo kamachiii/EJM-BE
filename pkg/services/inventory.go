@@ -1,10 +1,10 @@
 package services
 
 import (
-	"TKD/dto"
-	"TKD/pkg/models"
-	"TKD/pkg/repository"
-	"TKD/utils"
+	"EJM/dto"
+	"EJM/pkg/models"
+	"EJM/pkg/repository"
+	"EJM/utils"
 	"encoding/json"
 	"errors"
 

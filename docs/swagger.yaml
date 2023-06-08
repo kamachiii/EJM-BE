@@ -1243,7 +1243,7 @@ info:
   description: Aplikasi Assessment & Monitoring
   license:
     name: Private License
-  title: TKD Assessment & Monitoring API Documentation
+  title: EJM Assessment & Monitoring API Documentation
   version: "1.0"
 paths:
   /:

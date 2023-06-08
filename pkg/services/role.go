@@ -1,20 +1,20 @@
 package services
 
 import (
-	"TKD/dto"
-	"TKD/pkg/models"
-	"TKD/pkg/repository"
-	"TKD/utils"
+	"EJM/dto"
+	"EJM/pkg/models"
+	"EJM/pkg/repository"
+	"EJM/utils"
 	"errors"
-	
+
 	"gorm.io/gorm"
 	// "strconv"
 )
 
 type RoleService struct {
 	*gorm.DB
-	RoleRepository   repository.RoleRepository
-	MenuRepository   repository.MenuRepository
+	RoleRepository repository.RoleRepository
+	MenuRepository repository.MenuRepository
 }
 
 func NewRoleService(service *RoleService) *RoleService {

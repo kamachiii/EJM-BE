@@ -1,10 +1,10 @@
 package server
 
 import (
-	"TKD/config"
-	connections "TKD/init"
-	"TKD/internal/logs"
-	"TKD/internal/queues"
+	"EJM/config"
+	connections "EJM/init"
+	"EJM/internal/logs"
+	"EJM/internal/queues"
 	"context"
 	"github.com/casbin/casbin/v2"
 	"github.com/labstack/echo/v4"

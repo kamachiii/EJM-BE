@@ -1,7 +1,7 @@
 package server
 
 import (
-	"TKD/config"
+	"EJM/config"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"

@@ -1,4 +1,4 @@
-# TKD Assesment & Monitoring Backend
+# EJM Assesment & Monitoring Backend
 
 ## Cara setup
 

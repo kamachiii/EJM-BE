@@ -1,7 +1,7 @@
 package logs
 
 import (
-	"TKD/utils"
+	"EJM/utils"
 	"errors"
 	"fmt"
 	"log"
