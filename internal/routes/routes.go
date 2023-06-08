@@ -22,20 +22,11 @@ import (
 
 func InitializeRoute(server *server.Server, cfg *config.Config) {
 	// controller
-	// notificationContoller := controllers.NewNotificationController(server)
 	userController := controllers.NewUserController(server)
 	roleController := controllers.NewRoleController(server)
 	authController := controllers.NewAuthController(server)
-	// assignedTaskController := controllers.NewAssignedTaskController(server)
 	menuController := controllers.NewMenuController(server)
-	// companyController := controllers.NewCompanyController(server)
-	// questionController := controllers.NewQuestionController(server)
 	actionController := controllers.NewActionController(server)
-	// masterLookupController := controllers.NewMasterLookupController(server)
-	// projectController := controllers.NewProjectController(server)
-	// reportController := controllers.NewReportController(server)
-	// inventoryController := controllers.NewInventoryController(server)
-	// volumeController := controllers.NewVolumeController(server)
 
 	// middleware
 	server.Echo.Validator = &middlewares.CustomValidator{
@@ -56,7 +47,6 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 	server.Echo.Use(middlewares.ContextDB(server.DB))
 	server.Echo.Use(middleware.Gzip())
 	server.Echo.Use(middleware.Recover())
-	// server.Echo.Use(middlewares.I18n())
 	server.Echo.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins:     []string{"*"},
 		AllowCredentials: true,
@@ -148,14 +138,6 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			userRoutes.DELETE("", userController.DeleteUserBulk)
 		}
 
-		// Notification
-		// notificationRoutes := prefix.Group("/notification")
-		// {
-		// 	notificationRoutes.GET("", notificationContoller.GetAllNotification)
-		// 	notificationRoutes.PATCH("/read/:id", notificationContoller.ReadNotification)
-		// 	notificationRoutes.DELETE("/delete/:id", notificationContoller.DeleteNotification)
-		// }
-
 		// menus
 		menuRoutes := prefix.Group("/menus")
 		{
@@ -194,107 +176,5 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			roleRoutes.POST("/set-access-role", roleController.SetAccessRole)
 			roleRoutes.DELETE("/delete-access-role", roleController.DeleteAccessRole)
 		}
-
-		// company
-		// companyRoutes := prefix.Group("/company")
-		// {
-		// 	companyRoutes.POST("", companyController.CreateCompany)
-		// 	companyRoutes.GET("", companyController.FindCompanies)
-		// 	companyRoutes.DELETE("/:companyId", companyController.DeleteCompany)
-		// 	companyRoutes.DELETE("/bulk", companyController.DeleteCompanyBulk)
-		// 	companyRoutes.GET("/:companyId", companyController.FindCompany)
-		// 	companyRoutes.PUT("/:companyId", companyController.UpdateCompany)
-		// }
-
-		// questions
-		// questionRoutes := prefix.Group("/questions")
-		// {
-		// 	questionRoutes.POST("/create", questionController.CreateQuestionsWithTemplate)
-		// 	questionRoutes.POST("/create/:templateId", questionController.CreateQuestion)
-		// 	questionRoutes.GET("", questionController.FindQuestionTemplates)
-		// 	questionRoutes.PUT("/by-template/:templateId", questionController.UpdateQuestionTemplateName)
-		// 	questionRoutes.PUT("/by-question/:questionId", questionController.UpdateSingleQuestion)
-		// 	questionRoutes.DELETE("/by-template/:templateId", questionController.DeleteQuestionTemplate)
-		// 	questionRoutes.DELETE("/by-question/:questionId", questionController.DeleteQuestionById)
-		// 	questionRoutes.GET("/by-template/:templateId", questionController.FindDetailQuestionTemplate)
-		// 	questionRoutes.GET("/by-question/:questionId", questionController.FindDetailQuestion)
-		// 	questionRoutes.GET("/table/:templateId", questionController.FindAllQuestionsByTemplateId)
-		// }
-
-		// lookup
-		// masterLookupRoutes := prefix.Group("/master-lookup")
-		// {
-		// 	masterLookupRoutes.GET("", masterLookupController.FindLookups)
-		// }
-
-		// projects
-		// projectRoutes := prefix.Group("/projects")
-		// {
-		// projectRoutes.GET("/logs/:project_id", projectController.FindLogByProject)
-		// projectRoutes.GET("/stats", projectController.StatProject)
-		// projectRoutes.PUT("/create-structure-for-project", projectController.CreateStructureForProject)
-		// projectRoutes.GET("/logs-by-user/:user_id", projectController.FindLogByUser)
-		// projectRoutes.GET("/statistic/:project_id", projectController.FindProjectStatistics)
-		// projectRoutes.PUT("/info/:project_id", projectController.UpdateProjectInfo)
-		// projectRoutes.GET("/info-structure", projectController.DetailProjectCompanyStructure)
-		// projectRoutes.POST("", projectController.CreateProject)
-		// projectRoutes.GET("", projectController.FindProject)
-		// projectRoutes.GET("/:project_id", projectController.FindDetailProject)
-		// projectRoutes.DELETE("/:project_id", projectController.DeleteProject)
-		// projectRoutes.DELETE("/delete-structure", projectController.DeleteStructureByIdAndProject)
-		// projectRoutes.GET("/questions", projectController.FindQuestionaireByStructure)
-		// projectRoutes.POST("/questions", projectController.SetProjectQuestion)
-		// projectRoutes.POST("/assign-users", projectController.SetProjectAssignUsers)
-		// projectRoutes.DELETE("/assigned-user/:user_id", projectController.DeleteAssignedUser)
-		// projectRoutes.GET("/assigned-user/:user_id", projectController.FindDetailAssignedUser)
-		// projectRoutes.PUT("/assigned-user/:user_id", projectController.UpdateDetailAssignUser)
-		// projectRoutes.GET("/users-not-assigned", projectController.FindUsersNotAssigned)
-		// projectRoutes.GET("/users-assigned", projectController.FindUsersAssigned)
-		// projectRoutes.GET("/users-assigned-paginated", projectController.FindUsersAssignedPaginated)
-		// projectRoutes.POST("/question/answer", projectController.AnswerQuestion)
-		// projectRoutes.GET("/question/answer/:question_id", projectController.FindAnswerQuestion)
-		// projectRoutes.GET("/by-company", projectController.FindProjectByCompany)
-		// projectRoutes.GET("/structure/by-project", projectController.FindProjectStructureByProject)
-		// projectRoutes.PUT("/update-pic", projectController.EditDetailProjectCompanyStructure)
-		// }
-
-		// reportRoutes := prefix.Group("/report")
-		// {
-		// 	reportRoutes.GET("/questioner", reportController.ReportQuestionaire)
-		// 	reportRoutes.POST("/questioner", reportController.DispatchQuestionerReport)
-		// 	reportRoutes.GET("/status", reportController.GetAllJobQueue)
-		// }
-
-		// assigned task
-		// assignedTaskRoutes := prefix.Group("/assigned-tasks")
-		// {
-		// 	assignedTaskRoutes.GET("", assignedTaskController.FindAllAssignedTasks)
-		// }
-
-		// invetory
-		// inventoryRoutes := prefix.Group("/inventories")
-		// {
-		// 	inventoryRoutes.GET("/select/:id", inventoryController.FindOneSelectInventory)
-		// 	inventoryRoutes.PUT("/select/update", inventoryController.UpdateDataSelectInventory)
-		// 	inventoryRoutes.POST("/select/create", inventoryController.CreateDataSelectInventory)
-		// 	inventoryRoutes.GET("/select", inventoryController.FindSelectInventory)
-		// 	inventoryRoutes.GET("", inventoryController.FindAll)
-		// 	inventoryRoutes.GET("/document", inventoryController.FindAllDocument)
-		// 	inventoryRoutes.GET("/:inventory_id", inventoryController.FindById)
-		// 	inventoryRoutes.POST("", inventoryController.Create)
-		// 	inventoryRoutes.POST("/document", inventoryController.CreateInventoryDocument)
-		// 	inventoryRoutes.PUT("/:inventory_id", inventoryController.Update)
-		// 	inventoryRoutes.DELETE("/:inventory_id", inventoryController.Delete)
-		// }
-
-		// volume
-		// volumeRoutes := prefix.Group("/volumes")
-		// {
-		// 	volumeRoutes.GET("", volumeController.Get)
-		// 	volumeRoutes.POST("/download-attachment", volumeController.DispatchDownloadVolumeAttachment)
-		// 	volumeRoutes.GET("/:volume_id", volumeController.GetById)
-		// 	volumeRoutes.POST("/create", volumeController.Create)
-		// 	volumeRoutes.POST("/update", volumeController.Update)
-		// }
 	}
 }
