@@ -19,7 +19,7 @@ type TokenResult struct {
 
 type UserJWTPayload struct {
 	ID       uint   `json:"id"`
-	FullName string `json:"full_name"`
+	Username string `json:"username"`
 	Email    string `json:"email"`
 	RoleID   int    `json:"roleId"`
 	RoleName string `json:"roleName"`

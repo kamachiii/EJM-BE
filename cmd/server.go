@@ -7,7 +7,6 @@ import (
 	"EJM/internal/server"
 	"EJM/ui"
 	"context"
-	"fmt"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/spf13/cobra"
 	echoSwagger "github.com/swaggo/echo-swagger"
@@ -34,7 +33,7 @@ func initServer(cfg *config.Config) {
 
 	// Start server
 	go func() {
-		if err := r.Start(fmt.Sprintf("%s", cfg.App.Port)); err != nil && err != http.ErrServerClosed {
+		if err := r.Start(cfg.App.Port); err != nil && err != http.ErrServerClosed {
 			r.Echo.Logger.Fatal(err)
 		}
 	}()

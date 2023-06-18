@@ -12,5 +12,4 @@ func ContextDB(DB *gorm.DB) echo.MiddlewareFunc {
 			return next(c)
 		}
 	}
-
 }

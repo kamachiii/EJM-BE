@@ -2,11 +2,7 @@ package middlewares
 
 import (
 	"EJM/config"
-	// "EJM/internal/logs"
-	"EJM/utils"
-	"errors"
 	"fmt"
-	// "github.com/nicksnyder/go-i18n/v2/i18n"
 	"log"
 	"net/http"
 	"time"
@@ -23,28 +19,7 @@ type ResponseError struct {
 
 func HttpErrorHandler(config *config.Config) echo.HTTPErrorHandler {
 	return func(err error, c echo.Context) {
-		report, ok := err.(*echo.HTTPError)
-
-		// requestId := utils.GetRequestId(c)
-
-		var errorApp *utils.BeError
-		if !ok {
-			if errors.As(err, &errorApp) {
-				errorApp.SetLocalizer(c)
-				// report = echo.NewHTTPError(errorApp.GetCode(), errorApp.Error())
-			} else {
-				if config.App.Debug == "false" {
-					// msg, _ := utils.Translate(c, &i18n.Message{
-					// 	ID:    "something.went.wrong",
-					// 	Other: "Oops something went wrong, Contact Developer for the issue",
-					// })
-					// report = echo.NewHTTPError(http.StatusInternalServerError, msg)
-				} else {
-					report = echo.NewHTTPError(http.StatusInternalServerError, err.Error())
-				}
-				// logs.Error(requestId, err.Error())
-			}
-		}
+		report, _ := err.(*echo.HTTPError)
 
 		if castedObject, ok := err.(validator.ValidationErrors); ok {
 			report.Code = http.StatusUnprocessableEntity

@@ -28,6 +28,7 @@ func NewUserController(srv *server.Server) *UserController {
 		registerService: services.NewRegisterService(&services.RegisterService{
 			RegisterRepository: repository.NewRegisterRepository(srv.DB),
 			RoleRepository:     repository.NewRoleRepository(srv.DB),
+			Db:                 db,
 			Config:             srv.Config,
 		}),
 	}
@@ -81,7 +82,7 @@ func (userController *UserController) ToggleActiveNonActive(c echo.Context) erro
 }
 
 // Daftar User Baru
-// @Summary API untuk Daftar User Baru
+// @Summary API untuk Daftar atau Create User Baru
 // @Tags    User
 // @Accept  json
 // @Produce json
@@ -102,33 +103,24 @@ func (userController *UserController) RegisterUser(c echo.Context) error {
 		return err
 	}
 
-	// userRepo := userController.registerService.RegisterRepository
-	// roleRepo := userController.registerService.RoleRepository
+	userRepo := userController.registerService.RegisterRepository
+	roleRepo := userController.registerService.RoleRepository
 
-	file, _ := c.FormFile("file")
-	if file != nil {
-		// fileName, errUpload := utils.UploadSingleFile(file)
-		// if errUpload != nil {
-		// 	return errUpload
-		// }
-		// req.ProfilePict = &fileName
+	roleRepo.Begin(userController.db)
+	userRepo.Begin(userController.db)
+
+	data, err := userController.registerService.RegisterUser(req)
+	if err != nil {
+		roleRepo.Rollback()
+		userRepo.Rollback()
+		return err
 	}
 
-	// roleRepo.Begin(userController.db)
-	// userRepo.Begin(userController.db)
-
-	// data, err := userController.registerService.RegisterUser(req)
-	// if err != nil {
-	// 	roleRepo.Rollback()
-	// 	userRepo.Rollback()
-	// 	return err
-	// }
-
-	// roleRepo.Commit()
-	// userRepo.Commit()
+	roleRepo.Commit()
+	userRepo.Commit()
 
 	res := utils.Response{
-		// Data:       data,
+		Data:       data,
 		Message:    "Berhasil Insert data",
 		StatusCode: 201,
 	}
@@ -210,15 +202,6 @@ func (userController *UserController) UpdateUser(c echo.Context) error {
 
 	// userRepo := userController.registerService.RegisterRepository
 	// roleRepo := userController.registerService.RoleRepository
-
-	file, _ := c.FormFile("file")
-	if file != nil {
-		// fileName, errUpload := utils.UploadSingleFile(file)
-		// if errUpload != nil {
-		// 	return errUpload
-		// }
-		// req.ProfilePict = &fileName
-	}
 
 	// roleRepo.Begin(userController.db)
 	// userRepo.Begin(userController.db)

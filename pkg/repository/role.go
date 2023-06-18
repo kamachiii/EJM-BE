@@ -11,7 +11,7 @@ import (
 )
 
 type RoleRepository interface {
-	// TransactionRepository
+	TransactionRepository
 	CreateRole(role *dto.CreateRole) (models.Role, error)
 	FindRoleById(id uint) (models.Role, error)
 	FindRoles(pagination *models.Paginate, search string, usingActive bool, value string) ([]models.Role, *models.Paginate, error)
@@ -63,18 +63,17 @@ func (roleObject *Role) RolesMenusModel() (tx *gorm.DB) {
 
 // create role
 func (roleObject *Role) CreateRole(role *dto.CreateRole) (models.Role, error) {
-	var objectMenus []interface{}
+	// var objectMenus []interface{}
 
-	for _, action := range role.ObjectActions {
-		objectMenus = append(objectMenus, action)
-	}
+	// for _, action := range role.ObjectActions {
+	// 	objectMenus = append(objectMenus, action)
+	// }
 
 	roleModel := models.Role{
 		Name: role.Name,
 		ActiveModel: models.ActiveModel{
 			IsActive: &role.Active,
 		},
-		ObjectMenus: objectMenus,
 	}
 	err := roleObject.db.Create(&roleModel).Error
 
@@ -123,7 +122,6 @@ func (roleObject *Role) UpdateRole(role *dto.UpdateRole) (models.Role, error) {
 			IsActive: &role.Active,
 		},
 		Name:        role.Name,
-		ObjectMenus: objectMenus,
 	}
 
 	updateUser := roleObject.RoleModel().Where("roles.id = ?", role.ID).Updates(&data)

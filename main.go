@@ -31,7 +31,6 @@ func main() {
 	)
 	rootCmd.AddCommand(cmd.NewServerCommand(cfg))
 	rootCmd.AddCommand(cmd.NewSeeder(cfg))
-	rootCmd.AddCommand(cmd.NewProjectPic(cfg))
 	rootCmd.AddCommand(cmd.NewMigration(cfg))
 	err := rootCmd.Execute()
 	if err != nil {

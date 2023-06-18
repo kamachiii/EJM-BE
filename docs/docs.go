@@ -1904,7 +1904,7 @@ const docTemplate = `{
                 "tags": [
                     "User"
                 ],
-                "summary": "API untuk Daftar User Baru",
+                "summary": "API untuk Daftar atau Create User Baru",
                 "parameters": [
                     {
                         "description": "Daftar User Baru",
@@ -2228,31 +2228,14 @@ const docTemplate = `{
         },
         "dto.CreateNewUser": {
             "type": "object",
-            "required": [
-                "email",
-                "password",
-                "username"
-            ],
             "properties": {
-                "address": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "enable_login_by_link": {
-                    "type": "boolean"
-                },
                 "full_name": {
                     "type": "string"
                 },
+                "name": {
+                    "type": "string"
+                },
                 "password": {
-                    "type": "string"
-                },
-                "phone": {
-                    "type": "string"
-                },
-                "profilePict": {
                     "type": "string"
                 },
                 "roleId": {
@@ -2662,8 +2645,15 @@ const docTemplate = `{
         },
         "models.Role": {
             "type": "object",
+            "required": [
+                "description"
+            ],
             "properties": {
                 "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Main field",
                     "type": "string"
                 },
                 "id": {
@@ -2673,11 +2663,8 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "name": {
+                    "description": "Main field",
                     "type": "string"
-                },
-                "object_menus": {
-                    "type": "array",
-                    "items": {}
                 },
                 "roles_menus": {
                     "type": "array",
@@ -2719,19 +2706,7 @@ const docTemplate = `{
         "models.User": {
             "type": "object",
             "properties": {
-                "address": {
-                    "type": "string"
-                },
                 "created_at": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "enable_login_by_link": {
-                    "type": "boolean"
-                },
-                "full_name": {
                     "type": "string"
                 },
                 "id": {
@@ -2740,17 +2715,11 @@ const docTemplate = `{
                 "is_active": {
                     "type": "boolean"
                 },
-                "phone": {
+                "name": {
                     "type": "string"
                 },
-                "pin": {
+                "password": {
                     "type": "string"
-                },
-                "profile_pict": {
-                    "type": "string"
-                },
-                "role": {
-                    "$ref": "#/definitions/models.Role"
                 },
                 "roleId": {
                     "type": "integer"

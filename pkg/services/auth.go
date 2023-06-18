@@ -22,8 +22,6 @@ type IAuthService interface {
 type AuthService struct {
 	RegisterRepository repository.UserRepository
 	RoleRepository     repository.RoleRepository
-	// ActionRepository   repository.ActionRepository
-	// CasbinRepository   repository.CasbinRepository
 	JWTWhitelist repository.JWTWhitelistRepository
 	Config       *config.Config
 }
@@ -54,7 +52,7 @@ func (authService *AuthService) Session(userId uint, token string) (models.User,
 	}
 
 	if !*user.IsActive {
-		// return models.User{}, utils.ErrTokenInvalid
+		return models.User{}, utils.ErrTokenInvalid
 	}
 
 	return user, nil
@@ -72,23 +70,17 @@ func (authService AuthService) LoginByPin(login *dto.LoginByPin) (LoginResponse,
 	//find username first
 	data, err := loginServiceRepo.FindUserByPin(login.Pin)
 	if err != nil {
-		// return LoginResponse{}, utils.ErrCredentialInvalid
+		return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 
 	if !*data.IsActive {
-		// return LoginResponse{}, utils.ErrCredentialInvalid
-	}
-
-	if !*data.EnableLoginByLink {
-		// return LoginResponse{}, utils.ErrForbiddenLoginByLink
+		return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 
 	// assign jwt payload
 	claims := &utils.UserJWTPayload{
 		ID:       data.ID,
-		FullName: data.FullName,
-		Email:    data.Email,
-		RoleID:   data.RoleID,
+		RoleID:   int(data.RoleId),
 		RoleName: data.Role.Name,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(jwtExpired) * time.Minute)),
@@ -128,23 +120,21 @@ func (authService AuthService) LoginUser(login *dto.Login) (LoginResponse, error
 
 	user, err := loginServiceRepo.FindByUsername(login.Username)
 	if err != nil {
-		// return LoginResponse{}, utils.ErrCredentialInvalid
+		return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 
 	isPasswordMatch := utils.DoPasswordMatch(user.Password, login.Password)
 	if !isPasswordMatch {
-		// return LoginResponse{}, utils.ErrCredentialInvalid
+		return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 
 	if !*user.IsActive {
-		// return LoginResponse{}, utils.ErrCredentialInvalid
+		return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 
 	accessClaims := &utils.UserJWTPayload{
 		ID:       user.ID,
-		FullName: user.FullName,
-		Email:    user.Email,
-		RoleID:   user.RoleID,
+		RoleID:   int(user.RoleId),
 		RoleName: user.Role.Name,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(jwtExpired) * time.Minute)),
@@ -236,9 +226,7 @@ func (authService AuthService) RefreshToken(tokenString string) (LoginResponse, 
 	// assign jwt payload
 	claims := &utils.UserJWTPayload{
 		ID:       data.ID,
-		FullName: data.FullName,
-		Email:    data.Email,
-		RoleID:   data.RoleID,
+		RoleID:   int(data.RoleId),
 		RoleName: data.Role.Name,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(jwtExpired) * time.Minute)),
