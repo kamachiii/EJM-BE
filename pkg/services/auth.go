@@ -7,13 +7,13 @@ import (
 	"EJM/pkg/repository"
 	"EJM/utils"
 	"errors"
-	jwt "github.com/golang-jwt/jwt/v4"
 	"time"
+
+	jwt "github.com/golang-jwt/jwt/v4"
 )
 
 type IAuthService interface {
 	LoginUser(login *dto.Login) (LoginResponse, error)
-	LoginByPin(login *dto.LoginByPin) (LoginResponse, error)
 	RefreshToken(tokenString string) (LoginResponse, error)
 	Session(userId uint, token string) (models.User, error)
 	Logout(tokenString string) error
@@ -22,8 +22,8 @@ type IAuthService interface {
 type AuthService struct {
 	RegisterRepository repository.UserRepository
 	RoleRepository     repository.RoleRepository
-	JWTWhitelist repository.JWTWhitelistRepository
-	Config       *config.Config
+	JWTWhitelist       repository.JWTWhitelistRepository
+	Config             *config.Config
 }
 
 type LoginResponse struct {
@@ -56,58 +56,6 @@ func (authService *AuthService) Session(userId uint, token string) (models.User,
 	}
 
 	return user, nil
-}
-
-func (authService AuthService) LoginByPin(login *dto.LoginByPin) (LoginResponse, error) {
-	key := []byte(authService.Config.Auth.JWTKey)
-	var loginServiceRepo repository.UserRepository
-	loginServiceRepo = authService.RegisterRepository
-	jwtExpired := authService.Config.Auth.JWTExpired
-
-	var jwtRepo repository.JWTWhitelistRepository
-	jwtRepo = authService.JWTWhitelist
-
-	//find username first
-	data, err := loginServiceRepo.FindUserByPin(login.Pin)
-	if err != nil {
-		return LoginResponse{}, utils.ErrCredentialInvalid
-	}
-
-	if !*data.IsActive {
-		return LoginResponse{}, utils.ErrCredentialInvalid
-	}
-
-	// assign jwt payload
-	claims := &utils.UserJWTPayload{
-		ID:       data.ID,
-		RoleID:   int(data.RoleId),
-		RoleName: data.Role.Name,
-		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(jwtExpired) * time.Minute)),
-		},
-	}
-
-	// asign refresh payload
-	refreshClaims := &utils.UserRefreshJWTPayload{
-		ID: data.ID,
-		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(jwtExpired+60) * time.Minute)),
-		},
-	}
-
-	tokens, tokenErr := utils.CreateToken(claims, refreshClaims, key)
-	if tokenErr != nil {
-		return LoginResponse{}, tokenErr
-	}
-
-	if errAddToken := jwtRepo.AddToken(tokens.Token, tokens.RefreshToken); errAddToken != nil {
-		return LoginResponse{}, errAddToken
-	}
-
-	return LoginResponse{
-		Token:        tokens.Token,
-		RefreshToken: tokens.RefreshToken,
-	}, nil
 }
 
 // login user
@@ -182,7 +130,7 @@ func (authService AuthService) parseToken(key []byte, token string) (*jwt.Token,
 
 	if err != nil {
 		if errors.Is(err, jwt.ErrTokenExpired) {
-			// return &jwt.Token{}, utils.ErrTokenInvalid
+			return &jwt.Token{}, utils.ErrTokenInvalid
 		} else {
 			return &jwt.Token{}, err
 		}
@@ -212,7 +160,7 @@ func (authService AuthService) RefreshToken(tokenString string) (LoginResponse, 
 	}
 
 	if !parsedToken.Valid {
-		// return LoginResponse{}, utils.ErrTokenInvalid
+		return LoginResponse{}, utils.ErrTokenInvalid
 	}
 
 	// get data by token user ID

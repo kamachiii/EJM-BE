@@ -3,7 +3,8 @@ package repository
 import (
 	"EJM/dto"
 	"EJM/pkg/models"
-	// "EJM/utils"
+	"EJM/utils"
+
 	"errors"
 	"strings"
 
@@ -92,7 +93,7 @@ func (roleObject *Role) FindRoleByName(name string) error {
 	}
 
 	if err := roleObject.RoleModel().First(&checkrole, "roles.name = ?", name).Error; err == nil {
-		// return utils.ErrRoleAlreadyExists
+		return utils.ErrRoleAlreadyExists
 	}
 
 	return nil

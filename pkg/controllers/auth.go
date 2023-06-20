@@ -6,9 +6,10 @@ import (
 	"EJM/pkg/repository"
 	"EJM/pkg/services"
 	"EJM/utils"
-	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"net/http"
 	"time"
+
+	"github.com/nicksnyder/go-i18n/v2/i18n"
 
 	"github.com/labstack/echo/v4"
 )
@@ -24,8 +25,8 @@ func NewAuthController(srv *server.Server) *AuthController {
 		authService: services.NewAuthService(&services.AuthService{
 			RegisterRepository: repository.NewRegisterRepository(srv.DB),
 			RoleRepository:     repository.NewRoleRepository(srv.DB),
-			JWTWhitelist: repository.JWTWhitelistImplementation(srv.DB),
-			Config:       srv.Config,
+			JWTWhitelist:       repository.JWTWhitelistImplementation(srv.DB),
+			Config:             srv.Config,
 		}),
 	}
 }
@@ -108,58 +109,6 @@ func (authController *AuthController) RefreshToken(c echo.Context) error {
 	return res.ReturnSingleMessage(c)
 }
 
-// Login By Link
-// @Summary Autentikasi User untuk Resource Private Server
-// @Tags    Auth
-// @Accept  json
-// @Produce json
-// @Param   Accept-Language header   string         false "Bahasa" Enums(en,id)
-// @Param   login           body     dto.LoginByPin true  "Login"
-// @Success 201             {object} utils.Response{data=services.LoginResponse}
-// @Failure 400             {object} middlewares.ResponseError
-// @Failure 401             {object} middlewares.ResponseError
-// @Failure 404             {object} middlewares.ResponseError
-// @Failure 500             {object} middlewares.ResponseError
-// @Router  /auth/oauth/login [post]
-func (authController *AuthController) OauthLogin(c echo.Context) error {
-	req := new(dto.LoginByPin)
-
-	if err := c.Bind(req); err != nil {
-		return err
-	}
-	if err := c.Validate(req); err != nil {
-		return err
-	}
-
-	loginService, err := authController.authService.LoginByPin(req)
-	if err != nil {
-		return err
-	}
-
-	res := utils.Response{
-		Data:       loginService,
-		Message:    "Berhasil Login",
-		StatusCode: 200,
-	}
-
-	c.SetCookie(&http.Cookie{
-		Name:    "Token",
-		Value:   loginService.Token,
-		Path:    "/api/v1",
-		Expires: time.Now().Add(time.Duration(authController.server.Config.Auth.JWTExpired) * time.Minute),
-	})
-	c.SetCookie(&http.Cookie{
-		Name:    "RefreshToken",
-		Value:   loginService.RefreshToken,
-		Path:    "/api/v1",
-		Expires: time.Now().Add(time.Duration((authController.server.Config.Auth.JWTExpired)+60) * time.Minute),
-	})
-
-	authController.server.Casbin.LoadPolicy()
-
-	return res.ReturnSingleMessage(c)
-}
-
 // Login
 // @Summary Autentikasi User untuk Resource Private Server
 // @Tags    Auth
@@ -197,12 +146,14 @@ func (authController *AuthController) LoginUser(c echo.Context) error {
 	c.SetCookie(&http.Cookie{
 		Name:    "Token",
 		Value:   loginService.Token,
+		HttpOnly: true,
 		Path:    "/api/v1",
 		Expires: time.Now().Add(time.Duration(authController.server.Config.Auth.JWTExpired) * time.Minute),
 	})
 	c.SetCookie(&http.Cookie{
 		Name:    "RefreshToken",
 		Value:   loginService.RefreshToken,
+		HttpOnly: true,
 		Path:    "/api/v1",
 		Expires: time.Now().Add(time.Duration((authController.server.Config.Auth.JWTExpired)+60) * time.Minute),
 	})

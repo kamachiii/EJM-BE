@@ -15,27 +15,15 @@ func (menuSeeder *MenuSeeder) Execute() error {
 	menuSeeder.DB.Exec("TRUNCATE TABLE menus RESTART IDENTITY CASCADE")
 
 	data := []models.Menu{
-		// Overview 1
+		// Home
 		{
-			Name: "Overview",
-			Path: "/overview",
+
+			Name: "Status Machine",
+			Path: "/status-machine",
 		},
 		{
-			Name: "Dashboard",
-			Path: "/dashboard",
-		},
-		// activity 3
-		{
-			Name: "Activity",
-			Path: "/activity",
-		},
-		{
-			Name: "Projects",
-			Path: "/activity/projects",
-		},
-		{
-			Name: "Tambah Project Baru",
-			Path: "/activity/projects/add",
+			Name: "Status Machine H-0",
+			Path: "/status-machine/stat-H0",
 		},
 		{
 			Name: "Detail Project",

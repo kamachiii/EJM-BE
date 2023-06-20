@@ -553,85 +553,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/auth/oauth/login": {
-            "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Auth"
-                ],
-                "summary": "Autentikasi User untuk Resource Private Server",
-                "parameters": [
-                    {
-                        "enum": [
-                            "en",
-                            "id"
-                        ],
-                        "type": "string",
-                        "description": "Bahasa",
-                        "name": "Accept-Language",
-                        "in": "header"
-                    },
-                    {
-                        "description": "Login",
-                        "name": "login",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.LoginByPin"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/utils.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/services.LoginResponse"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
         "/auth/refresh-token": {
             "post": {
                 "consumes": [
@@ -2228,10 +2149,13 @@ const docTemplate = `{
         },
         "dto.CreateNewUser": {
             "type": "object",
+            "required": [
+                "name",
+                "password",
+                "roleId",
+                "username"
+            ],
             "properties": {
-                "full_name": {
-                    "type": "string"
-                },
                 "name": {
                     "type": "string"
                 },
@@ -2239,7 +2163,8 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "roleId": {
-                    "type": "integer"
+                    "type": "integer",
+                    "minimum": 1
                 },
                 "username": {
                     "type": "string"
@@ -2371,17 +2296,6 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "username": {
-                    "type": "string"
-                }
-            }
-        },
-        "dto.LoginByPin": {
-            "type": "object",
-            "required": [
-                "pin"
-            ],
-            "properties": {
-                "pin": {
                     "type": "string"
                 }
             }
@@ -2716,9 +2630,6 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "name": {
-                    "type": "string"
-                },
-                "password": {
                     "type": "string"
                 },
                 "roleId": {

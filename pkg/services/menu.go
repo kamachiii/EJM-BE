@@ -4,6 +4,7 @@ import (
 	"EJM/dto"
 	"EJM/pkg/models"
 	"EJM/pkg/repository"
+	"EJM/utils"
 	"sync"
 
 	// "EJM/utils"
@@ -30,8 +31,7 @@ func NewMenuService(menuService *MenuService) *MenuService {
 }
 
 func (service *MenuService) FindAll() ([]dto.MenuAPI, error) {
-	var menus repository.MenuRepository
-	menus = service.MenuRepository
+	var menus repository.MenuRepository = service.MenuRepository
 
 	resultMenus, _ := menus.FindAll()
 
@@ -80,8 +80,7 @@ func (service *MenuService) FindAllPaginated(req *dto.BasePagination) ([]dto.Res
 		Page:     req.Page,
 		PageSize: req.PageSize,
 	}
-	var menus repository.MenuRepository
-	menus = service.MenuRepository
+	var menus repository.MenuRepository = service.MenuRepository
 	data, meta, err := menus.FindAllPaginated(&pagination, req.Search, req.Value)
 	if err != nil {
 		return []dto.ResponseMenu{}, meta, err
@@ -90,11 +89,10 @@ func (service *MenuService) FindAllPaginated(req *dto.BasePagination) ([]dto.Res
 }
 
 func (service *MenuService) CreateMenu(request *dto.PayloadCreateMenu) error {
-	var menus repository.MenuRepository
-	menus = service.MenuRepository
+	var menus repository.MenuRepository = service.MenuRepository
 
 	if len(request.Data) < 1 {
-		// return utils.ErrMenuCannotLessThanOne
+		return utils.ErrMenuCannotLessThanOne
 	}
 
 	for _, datum := range request.Data {
@@ -108,22 +106,19 @@ func (service *MenuService) CreateMenu(request *dto.PayloadCreateMenu) error {
 }
 
 func (service *MenuService) DeleteMenuById(request *dto.DeleteMenu) error {
-	var menus repository.MenuRepository
-	menus = service.MenuRepository
+	var menus repository.MenuRepository = service.MenuRepository
 
 	return menus.DeleteById(request.Id)
 }
 
 func (service *MenuService) FindMenuById(req *dto.GetDetailMenu) (models.Menu, error) {
-	var menus repository.MenuRepository
-	menus = service.MenuRepository
+	var menus repository.MenuRepository = service.MenuRepository
 
 	return menus.FindMenuById(req.Id)
 }
 
 func (service *MenuService) UpdateMenu(request *dto.UpdateMenu) error {
-	var menus repository.MenuRepository
-	menus = service.MenuRepository
+	var menus repository.MenuRepository = service.MenuRepository
 
 	if len(request.APIS) > 0 {
 		menus.DeleteAllActionsMenus(request.Id)
@@ -144,11 +139,10 @@ func (service *MenuService) UpdateMenu(request *dto.UpdateMenu) error {
 }
 
 func (service *MenuService) DeleteMenuBulk(request *dto.DeleteMenuBulk) error {
-	var menus repository.MenuRepository
-	menus = service.MenuRepository
+	var menus repository.MenuRepository = service.MenuRepository
 
 	if len(request.Ids) < 1 {
-		// return utils.ErrMenuCannotLessThanOne
+		return utils.ErrMenuCannotLessThanOne
 	}
 
 	for _, id := range request.Ids {

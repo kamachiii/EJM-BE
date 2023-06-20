@@ -11,15 +11,15 @@ import (
 
 type UserRepository interface {
 	TransactionRepository
-	FindUsers(pagination *models.Paginate, search string, value string) ([]models.User, *models.Paginate, error)
-	FindFirst(id uint) (models.User, error)
-	FindById(id uint) (models.User, error)
-	FindByUsername(username string) (models.User, error)
-	FindUserByPin(pin string) (models.User, error)
-	UpdateUser(id uint, user *dto.UpdateUser) error
-	ToggleActive(id uint, payload *bool) error
-	DeleteUser(id uint) error
-	CreateUser(user *dto.CreateNewUser) (models.User, error)
+	FindUsers(pagination *models.Paginate, search string, value string) ([]models.User, *models.Paginate, error) //OK [get all data]
+	FindFirst(id uint) (models.User, error) //OK [get data by id]
+	FindById(id uint) (models.User, error) // [get data by id]
+	FindByUsername(username string) (models.User, error) // [find data by the username]
+	FindUserByPin(pin string) (models.User, error) //not used
+	UpdateUser(id uint, user *dto.UpdateUser) error // [update data by id]
+	ToggleActive(id uint, payload *bool) error // [activating the user]
+	DeleteUser(id uint) error // [delete user]
+	CreateUser(user *dto.CreateNewUser) (models.User, error) //OK [create data]
 }
 
 type User struct {
@@ -73,6 +73,7 @@ func (register *User) FindFirst(id uint) (models.User, error) {
 // create user
 func (register *User) CreateUser(user *dto.CreateNewUser) (models.User, error) {
 	userModel := models.User{
+		Name: user.Name,
 		Username: user.Username,
 		Password: user.Password,
 		RoleId:   user.RoleId,
@@ -206,83 +207,3 @@ func (register *User) FindAllUsers() []models.User {
 
 	return users
 }
-
-// func (register *User) FindUsersNotAssignedByProject(pagination *models.Paginate, search string, projectId uint) ([]models.User, *models.Paginate, error) {
-// 	var users []models.User
-// 	data := register.UserModel().Where("users.id <> ? ", utils.DEFAULT_USER).Count(&pagination.Total)
-
-// 	if search != "" {
-// 		// cari data
-// 		data.Where("lower(users.full_name) like ?", "%"+strings.ToLower(search)+"%").Count(&pagination.Total)
-// 	}
-// 	//pagination
-// 	data.Scopes(pagination.Pagination()).
-// 		Where("not exists (select user_id from project_assigned_users where project_assigned_users.project_id = ? and project_assigned_users.user_id = users.id and deleted_at is null)", projectId).
-// 		Count(&pagination.Total).
-// 		Preload("Role", func(tx *gorm.DB) *gorm.DB {
-// 			return tx.Select("id,is_active,name")
-// 		}).
-// 		Debug().
-// 		Find(&users)
-
-// 	// checking errors
-// 	if err := data.Error; err != nil {
-// 		return []models.User{}, pagination, err
-// 	}
-
-// 	return users, pagination, nil
-// }
-
-// func (register *User) FindUsersAssignedByProject(pagination *models.Paginate, search string, projectId uint) ([]models.User, *models.Paginate, error) {
-// 	var users []models.User
-// 	data := register.UserModel().Where("users.id <> ? ", utils.DEFAULT_USER).Count(&pagination.Total)
-
-// 	if search != "" {
-// 		// cari data
-// 		data.Where("lower(users.full_name) like ?", "%"+strings.ToLower(search)+"%").Count(&pagination.Total)
-// 	}
-// 	//pagination
-// 	data.Scopes(pagination.Pagination()).
-// 		Where("exists (select user_id from project_assigned_users where project_assigned_users.project_id = ? and project_assigned_users.user_id = users.id and deleted_at is null)", projectId).
-// 		Count(&pagination.Total).
-// 		Preload("Role", func(tx *gorm.DB) *gorm.DB {
-// 			return tx.Select("id,is_active,name")
-// 		}).
-// 		Debug().
-// 		Find(&users)
-
-// 	// checking errors
-// 	if err := data.Error; err != nil {
-// 		return []models.User{}, pagination, err
-// 	}
-
-// 	return users, pagination, nil
-// }
-
-// func (register *User) FindUsersNotAssignedByProject2(projectId uint) []models.User {
-// 	var users []models.User
-// 	data := register.UserModel().Where("users.id <> ? ", utils.DEFAULT_USER)
-// 	//pagination
-// 	data.Where("not exists (select user_id from project_assigned_users where project_assigned_users.project_id = ? and project_assigned_users.user_id = users.id and deleted_at is null)", projectId).
-// 		Preload("Role", func(tx *gorm.DB) *gorm.DB {
-// 			return tx.Select("id,is_active,name")
-// 		}).
-// 		Debug().
-// 		Find(&users)
-
-// 	return users
-// }
-
-// func (register *User) FindUsersAssignedByProject2(projectId uint) []models.User {
-// 	var users []models.User
-// 	data := register.UserModel().Where("users.id <> ? ", utils.DEFAULT_USER)
-// 	//pagination
-// 	data.Where("exists (select user_id from project_assigned_users where project_assigned_users.project_id = ? and project_assigned_users.user_id = users.id and deleted_at is null)", projectId).
-// 		Preload("Role", func(tx *gorm.DB) *gorm.DB {
-// 			return tx.Select("id,is_active,name")
-// 		}).
-// 		Debug().
-// 		Find(&users)
-
-// 	return users
-// }

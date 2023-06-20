@@ -51,12 +51,12 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 		AllowOrigins:     []string{"*"},
 		AllowCredentials: true,
 		ExposeHeaders:    []string{"Content-Disposition"},
-		AllowHeaders:     []string{
-			echo.HeaderOrigin, 
-			echo.HeaderAuthorization, 
-			echo.HeaderContentType, 
-			"module", 
-			"Content-Range", 
+		AllowHeaders: []string{
+			echo.HeaderOrigin,
+			echo.HeaderAuthorization,
+			echo.HeaderContentType,
+			"module",
+			"Content-Range",
 			"Accept-Language",
 		},
 	}))
@@ -90,7 +90,6 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 	authRoutes := prefix.Group("/auth")
 	{
 		authRoutes.POST("/login", authController.LoginUser)
-		authRoutes.POST("/oauth/login", authController.OauthLogin)
 		authRoutes.POST("/refresh-token", authController.RefreshToken)
 		authRoutes.POST("/register", userController.RegisterUser)
 		authRoutes.Use(middleware.JWTWithConfig(middleware.JWTConfig{
@@ -121,8 +120,7 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 				return strconv.Itoa(utils.User(c).RoleID), nil
 			},
 			ErrorHandler: func(c echo.Context, internal error, proposedStatus int) error {
-				// return utils.ErrUnauthorizedRole
-				return nil
+				return utils.ErrUnauthorizedRole
 			},
 		}))
 

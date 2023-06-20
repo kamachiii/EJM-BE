@@ -8,13 +8,12 @@ type BasePagination struct {
 	Value       string `json:"value" query:"value"`
 }
 
-// user
+// --------------------User
 type CreateNewUser struct {
-	FullName string `json:"full_name" form:"full_name"`
-	Name     string `gorm:"not null"`
-	Username string `gorm:"unique;not null"`
-	Password string `gorm:"not null"`
-	RoleId   uint   `gorm:"not null;constraint:OnDelete:CASCADE"`
+	Name     string `json:"name" validate:"required"`
+	Username string `json:"username" validate:"required"`
+	Password string `json:"password" validate:"required"`
+	RoleId   uint   `json:"roleId" validate:"required,min=1"`
 }
 
 type LoginByPin struct {
@@ -53,7 +52,7 @@ type PayloadCreateAction struct {
 	Data []CreateAction `json:"data" validate:"required,min=1"`
 }
 
-// menu
+// --------------------Menu
 type CreateMenu struct {
 	Name     string `json:"name" validate:"required"`
 	Path     string `json:"path" validate:"required"`
@@ -67,7 +66,6 @@ type CreateAction struct {
 	Default *bool  `json:"default"`
 }
 
-// menu
 type GetMenu struct {
 	Name     string `json:"name" validate:"required"`
 	ParentId int    `json:"parent_id" validate:"required"`
@@ -113,7 +111,7 @@ type UpdateAction struct {
 	CreateAction
 }
 
-// roles
+// --------------------Roles
 type CreateRole struct {
 	Name          string        `json:"name" validate:"required"`
 	Active        bool          `json:"active"`
@@ -151,7 +149,7 @@ type GetRoles struct {
 	BasePagination
 }
 
-// auth
+// --------------------Auth
 type RefreshToken struct {
 	Token string `json:"refresh_token" validate:"required"`
 }

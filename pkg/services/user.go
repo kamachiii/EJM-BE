@@ -20,12 +20,12 @@ type RegisterService struct {
 }
 
 type IUserService interface {
-	ToggleActive(id uint, payload *bool) error
-	RegisterUser(user *dto.CreateNewUser) (models.User, error)
-	FindUsers(users *dto.GetUsers) ([]models.User, *models.Paginate, error)
-	UpdateUser(id uint, user *dto.UpdateUser) error
-	DeleteUser(id uint) error
-	FindUserById(id uint) (models.User, error)
+	ToggleActive(id uint, payload *bool) error                              // [activating the user]
+	RegisterUser(user *dto.CreateNewUser) (models.User, error)              // [register new user]
+	FindUsers(users *dto.GetUsers) ([]models.User, *models.Paginate, error) //[get all users]
+	UpdateUser(id uint, user *dto.UpdateUser) error                         //[update user by id]
+	DeleteUser(id uint) error                                               // [delete user by id]
+	FindUserById(id uint) (models.User, error)                              // [find user by id]
 }
 
 func NewRegisterService(constructor *RegisterService) *RegisterService {
@@ -33,36 +33,35 @@ func NewRegisterService(constructor *RegisterService) *RegisterService {
 }
 
 func (register *RegisterService) ToggleActive(id uint, payload *bool) error {
-	var registerRepo repository.UserRepository
-	registerRepo = register.RegisterRepository
+	var registerRepo repository.UserRepository = register.RegisterRepository
 
-	registerRepo.Begin(register.Db)
+	// registerRepo.Begin(register.Db)
 
 	_, errFindUser := registerRepo.FindFirst(id)
-	if errFindUser != nil { // kalo user gak ada
 
-		// return utils.ErrUserNotFound
+	// kalo user gak ada
+	if errFindUser != nil {
+		return utils.ErrUserNotFound
 	}
 
 	if err := registerRepo.ToggleActive(id, payload); err != nil {
 		return err
 	}
 
-	defer registerRepo.Rollback() //Kalo ada error di defer wae
+	// defer registerRepo.Rollback() //Kalo ada error di defer wae
 
-	registerRepo.Commit()
+	// registerRepo.Commit()
 	return nil
-
 }
 
 // // register user [tested]
 func (register *RegisterService) RegisterUser(user *dto.CreateNewUser) (models.User, error) {
 	user.Password, _ = utils.HashPassword(user.Password)
 
-	var registerRepo repository.UserRepository
-	var roleRepo repository.RoleRepository
-	registerRepo = register.RegisterRepository
-	roleRepo = register.RoleRepository
+	var (
+		registerRepo repository.UserRepository = register.RegisterRepository
+		roleRepo     repository.RoleRepository = register.RoleRepository
+	)
 
 	// cari role dulu
 	_, rolenotfound := roleRepo.FindRoleById(uint(user.RoleId))
@@ -79,7 +78,7 @@ func (register *RegisterService) RegisterUser(user *dto.CreateNewUser) (models.U
 
 	// err != nil berarti username belum ada
 	if err != nil {
-		createdUser, errCreateUser := registerRepo.CreateUser(user)
+		createdUser, errCreateUser := registerRepo.CreateUser(user) //using services
 		if errCreateUser != nil {
 			return models.User{}, errCreateUser
 		}
@@ -97,8 +96,7 @@ func (register *RegisterService) FindUsers(users *dto.GetUsers) ([]models.User, 
 		PageSize: users.PageSize,
 	}
 
-	var registerRepo repository.UserRepository
-	registerRepo = register.RegisterRepository
+	var registerRepo repository.UserRepository = register.RegisterRepository
 
 	data, meta, err := registerRepo.FindUsers(&pagination, users.Search, users.Value)
 	if err != nil {
@@ -111,10 +109,10 @@ func (register *RegisterService) FindUsers(users *dto.GetUsers) ([]models.User, 
 // update user [tested]
 func (register *RegisterService) UpdateUser(id uint, user *dto.UpdateUser) error {
 	// cari id user
-	var registerRepo repository.UserRepository
-	var roleRepo repository.RoleRepository
-	registerRepo = register.RegisterRepository
-	roleRepo = register.RoleRepository
+	var (
+		registerRepo repository.UserRepository = register.RegisterRepository
+		roleRepo     repository.RoleRepository = register.RoleRepository
+	)
 
 	_, errFindUser := registerRepo.FindFirst(id)
 	if errFindUser != nil { // kalo user gak ada
@@ -134,8 +132,7 @@ func (register *RegisterService) UpdateUser(id uint, user *dto.UpdateUser) error
 
 // delete user [tested]
 func (register *RegisterService) DeleteUser(id uint) error {
-	var registerRepo repository.UserRepository
-	registerRepo = register.RegisterRepository
+	var registerRepo repository.UserRepository = register.RegisterRepository
 
 	// cari id dulu
 	_, err := registerRepo.FindFirst(id)
@@ -149,8 +146,7 @@ func (register *RegisterService) DeleteUser(id uint) error {
 
 // Find User By Id
 func (register *RegisterService) FindUserById(id uint) (models.User, error) {
-	var userRepo repository.UserRepository
-	userRepo = register.RegisterRepository
+	var userRepo repository.UserRepository = register.RegisterRepository
 
 	data, err := userRepo.FindFirst(id)
 
