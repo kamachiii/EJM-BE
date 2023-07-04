@@ -141,9 +141,6 @@ func (roleServices *RoleService) SetAccessRole(accessRole *dto.SetAccessRole) er
 	// var actionRepository repository.ActionRepository
 	// actionRepository = roleServices.ActionRepository
 
-	// var casbinRepository repository.CasbinRepository
-	// casbinRepository = roleServices.CasbinRepository
-
 	// di pecah dari dto
 	for _, access := range accessRole.Actions {
 		menuIds = append(menuIds, access.MenuId)
@@ -230,7 +227,7 @@ func (roleService *RoleService) DeleteAccessRole(roleId uint, menuId uint) error
 	errDeleteAccessRole := roleRepository.DeleteAccessRole(roleId, menuId)
 
 	if errDeleteAccessRole != nil {
-		return errors.New("Delete Access Role Gagal")
+		return errors.New("delete Access Role Gagal")
 	}
 
 	return nil

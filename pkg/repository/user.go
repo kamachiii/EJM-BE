@@ -83,8 +83,8 @@ func (register *User) CreateUser(user *dto.CreateNewUser) (models.User, error) {
 	if err != nil {
 		return userModel, err
 	}
-	return userModel, nil
 
+	return userModel, nil
 }
 
 // find by email

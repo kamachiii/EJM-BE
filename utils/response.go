@@ -2,9 +2,10 @@ package utils
 
 import (
 	"EJM/pkg/models"
+	"reflect"
+
 	"github.com/labstack/echo/v4"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
-	"reflect"
 )
 
 type Response struct {
@@ -13,6 +14,7 @@ type Response struct {
 	Message     interface{}   `json:"message"`
 	StatusCode  int           `json:"statusCode"`
 }
+
 type ResponseTotal struct {
 	Data       interface{} `json:"data"`
 	Total      int         `json:"total"`

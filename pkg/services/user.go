@@ -86,6 +86,7 @@ func (register *RegisterService) RegisterUser(user *dto.CreateNewUser) (models.U
 		return createdUser, nil
 
 	}
+	
 	return data, utils.ErrUsernameExist
 }
 
