@@ -160,6 +160,8 @@ func (userController *UserController) FindUsers(c echo.Context) error {
 		return err
 	}
 
+	//Testing
+
 	res := utils.ResponsePaginate{
 		Key:  "users",
 		Meta: meta,
