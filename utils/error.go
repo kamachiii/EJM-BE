@@ -63,12 +63,26 @@ var (
 			Other: "Role Not Found",
 		},
 	}
-
+	
 	ErrRoleAlreadyExists = &BeError{
 		status: http.StatusNotFound,
 		msg: &i18n.Message{
 			ID:    "role.already.exists",
 			Other: "Role already exists",
+		},
+	}
+	ErrMappingCodeNotExists = &BeError{
+		status: http.StatusNotFound,
+		msg: &i18n.Message{
+			ID:    "mappingCode.not.found",
+			Other: "Mapping Code Not Found",
+		},
+	}
+	ErrDefinitionAlreadyExists = &BeError{
+		status: http.StatusNotFound,
+		msg: &i18n.Message{
+			ID:    "mappingCode.already.exists",
+			Other: "Mapping Code already exists",
 		},
 	}
 	ErrCredentialInvalid = &BeError{

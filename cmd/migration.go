@@ -28,6 +28,7 @@ func initMigration(cfg *config.Config, args []string) {
 			models.Menu{},
 			models.ActionsMenus{},
 			models.Inventory{},
+			models.MappingCode{},
 		}
 		var filtered []interface{}
 		if args[0] != utils.ALL {

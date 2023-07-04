@@ -3,7 +3,6 @@ package models
 type User struct {
 	BaseModel
 	ActiveModel
-	ProfilePict       *string `json:"profile_pict" gorm:"null"`
 	Phone             *string `json:"phone" gorm:"null"`
 	Address           *string `json:"address"`
 	FullName          string  `json:"full_name" form:"full_name" gorm:"not null"`

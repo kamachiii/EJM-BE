@@ -26,6 +26,8 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 	userController := controllers.NewUserController(server)
 	roleController := controllers.NewRoleController(server)
 	authController := controllers.NewAuthController(server)
+	mappingCodeController := controllers.NewMappingCodeController(server)
+
 	// assignedTaskController := controllers.NewAssignedTaskController(server)
 	menuController := controllers.NewMenuController(server)
 	// companyController := controllers.NewCompanyController(server)
@@ -61,12 +63,12 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 		AllowOrigins:     []string{"*"},
 		AllowCredentials: true,
 		ExposeHeaders:    []string{"Content-Disposition"},
-		AllowHeaders:     []string{
-			echo.HeaderOrigin, 
-			echo.HeaderAuthorization, 
-			echo.HeaderContentType, 
-			"module", 
-			"Content-Range", 
+		AllowHeaders: []string{
+			echo.HeaderOrigin,
+			echo.HeaderAuthorization,
+			echo.HeaderContentType,
+			"module",
+			"Content-Range",
 			"Accept-Language",
 		},
 	}))
@@ -97,6 +99,45 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 	/**
 	Public Route
 	*/
+
+			// actions
+			actionRoutes := prefix.Group("/actions")
+			{
+				actionRoutes.GET("/:id", actionController.FindDetailAction)
+				actionRoutes.PUT("/:id", actionController.UpdateAction)
+				actionRoutes.DELETE("/:id", actionController.DeleteAction)
+				actionRoutes.DELETE("/bulk", actionController.DeleteActionBulk)
+				actionRoutes.GET("/paginated", actionController.GetAllPaginated)
+				actionRoutes.GET("/menu/:menu_id", actionController.FindActionByMenu)
+				actionRoutes.POST("/create-bulk", actionController.CreateActionBulk)
+			}
+	
+			// Role
+			roleRoutes := prefix.Group("/roles")
+			{
+				roleRoutes.POST("", roleController.CreateRole)
+				roleRoutes.GET("", roleController.GetRoles)
+				roleRoutes.DELETE("/delete/:roleId", roleController.DeleteRole)
+				roleRoutes.DELETE("/delete-bulk", roleController.DeleteRoleBulk)
+				roleRoutes.PATCH("/:id", roleController.UpdateRole)
+				roleRoutes.GET("/:id", roleController.FindRoleById)
+	
+				roleRoutes.GET("/access-role", roleController.GetAccessRole)
+				roleRoutes.POST("/set-access-role", roleController.SetAccessRole)
+				roleRoutes.DELETE("/delete-access-role", roleController.DeleteAccessRole)
+			}
+		// User
+		userRoutes := prefix.Group("/users")
+		{
+			userRoutes.POST("/register", userController.RegisterUser)
+			userRoutes.GET("", userController.FindUsers)
+			userRoutes.PUT("/status/:id", userController.ToggleActiveNonActive)
+			userRoutes.PUT("/:id", userController.UpdateUser)
+			userRoutes.GET("/:id", userController.FindUserById)
+			userRoutes.DELETE("/:id", userController.DeleteUser)
+			userRoutes.DELETE("", userController.DeleteUserBulk)
+		}
+
 	authRoutes := prefix.Group("/auth")
 	{
 		authRoutes.POST("/login", authController.LoginUser)
@@ -136,16 +177,17 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			},
 		}))
 
-		// User
-		userRoutes := prefix.Group("/users")
+
+
+		//Mapping Code
+		mappingCodeRoutes := prefix.Group("/mappingCodes")
 		{
-			userRoutes.POST("/register", userController.RegisterUser)
-			userRoutes.GET("", userController.FindUsers)
-			userRoutes.PUT("/status/:id", userController.ToggleActiveNonActive)
-			userRoutes.PUT("/:id", userController.UpdateUser)
-			userRoutes.GET("/:id", userController.FindUserById)
-			userRoutes.DELETE("/:id", userController.DeleteUser)
-			userRoutes.DELETE("", userController.DeleteUserBulk)
+			mappingCodeRoutes.GET("", mappingCodeController.FindMappingCodes)
+			mappingCodeRoutes.GET("/:id", mappingCodeController.FindMappingCodeById)
+			mappingCodeRoutes.POST("/create", mappingCodeController.CreateMappingCode)
+			mappingCodeRoutes.PUT("/:id", mappingCodeController.UpdateMappingCode)
+			mappingCodeRoutes.DELETE("/:id", mappingCodeController.DeleteMappingCode)
+			// mappingCodeRoutes.DELETE("", mappingCodeController.DeleteMappingCodeBulk)
 		}
 
 		// Notification
@@ -168,32 +210,7 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			menuRoutes.POST("/create-bulk", menuController.CreateMenuBulk)
 		}
 
-		// actions
-		actionRoutes := prefix.Group("/actions")
-		{
-			actionRoutes.GET("/:id", actionController.FindDetailAction)
-			actionRoutes.PUT("/:id", actionController.UpdateAction)
-			actionRoutes.DELETE("/:id", actionController.DeleteAction)
-			actionRoutes.DELETE("/bulk", actionController.DeleteActionBulk)
-			actionRoutes.GET("/paginated", actionController.GetAllPaginated)
-			actionRoutes.GET("/menu/:menu_id", actionController.FindActionByMenu)
-			actionRoutes.POST("/create-bulk", actionController.CreateActionBulk)
-		}
 
-		// Role
-		roleRoutes := prefix.Group("/roles")
-		{
-			roleRoutes.POST("", roleController.CreateRole)
-			roleRoutes.GET("", roleController.GetRoles)
-			roleRoutes.DELETE("/delete/:roleId", roleController.DeleteRole)
-			roleRoutes.DELETE("/delete-bulk", roleController.DeleteRoleBulk)
-			roleRoutes.PATCH("/:id", roleController.UpdateRole)
-			roleRoutes.GET("/:id", roleController.FindRoleById)
-
-			roleRoutes.GET("/access-role", roleController.GetAccessRole)
-			roleRoutes.POST("/set-access-role", roleController.SetAccessRole)
-			roleRoutes.DELETE("/delete-access-role", roleController.DeleteAccessRole)
-		}
 
 		// company
 		// companyRoutes := prefix.Group("/company")

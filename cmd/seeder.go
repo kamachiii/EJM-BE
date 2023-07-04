@@ -122,6 +122,10 @@ func initSeeder(cfg *config.Config, args []string) {
 			Name: "User Seeder",
 			DB:   dbObject,
 		},
+		&scripts.MappingCodeSeeder{
+			Name: "Mapping Code Seeder",
+			DB:   dbObject,
+		},
 		// &scripts.ActionsMenusSeeder{
 		// 	Name: "Actions menus Seeder",
 		// 	DB:   dbObject,
