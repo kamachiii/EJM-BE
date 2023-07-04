@@ -47,27 +47,19 @@ definitions:
     type: object
   dto.CreateNewUser:
     properties:
-      address:
-        type: string
-      email:
-        type: string
-      enable_login_by_link:
-        type: boolean
-      full_name:
+      name:
         type: string
       password:
         type: string
-      phone:
-        type: string
-      profilePict:
-        type: string
       roleId:
+        minimum: 1
         type: integer
       username:
         type: string
     required:
-    - email
+    - name
     - password
+    - roleId
     - username
     type: object
   dto.CreateRole:
@@ -166,13 +158,6 @@ definitions:
     required:
     - password
     - username
-    type: object
-  dto.LoginByPin:
-    properties:
-      pin:
-        type: string
-    required:
-    - pin
     type: object
   dto.MenuAPI:
     properties:
@@ -347,21 +332,24 @@ definitions:
     properties:
       created_at:
         type: string
+      description:
+        description: Main field
+        type: string
       id:
         type: integer
       is_active:
         type: boolean
       name:
+        description: Main field
         type: string
-      object_menus:
-        items: {}
-        type: array
       roles_menus:
         items:
           $ref: '#/definitions/models.RolesMenus'
         type: array
       updated_at:
         type: string
+    required:
+    - description
     type: object
   models.RolesMenus:
     properties:
@@ -382,26 +370,14 @@ definitions:
     type: object
   models.User:
     properties:
-      address:
-        type: string
       created_at:
-        type: string
-      email:
-        type: string
-      enable_login_by_link:
-        type: boolean
-      full_name:
         type: string
       id:
         type: integer
       is_active:
         type: boolean
-      phone:
+      name:
         type: string
-      pin:
-        type: string
-      role:
-        $ref: '#/definitions/models.Role'
       roleId:
         type: integer
       updated_at:
@@ -747,55 +723,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/dto.Login'
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            allOf:
-            - $ref: '#/definitions/utils.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/services.LoginResponse'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-      summary: Autentikasi User untuk Resource Private Server
-      tags:
-      - Auth
-  /auth/oauth/login:
-    post:
-      consumes:
-      - application/json
-      parameters:
-      - description: Bahasa
-        enum:
-        - en
-        - id
-        in: header
-        name: Accept-Language
-        type: string
-      - description: Login
-        in: body
-        name: login
-        required: true
-        schema:
-          $ref: '#/definitions/dto.LoginByPin'
       produces:
       - application/json
       responses:
@@ -2011,7 +1938,7 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/middlewares.ResponseError'
-      summary: API untuk Daftar User Baru
+      summary: API untuk Daftar atau Create User Baru
       tags:
       - User
   /users/status/{id}:

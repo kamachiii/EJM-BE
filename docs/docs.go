@@ -553,85 +553,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/auth/oauth/login": {
-            "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Auth"
-                ],
-                "summary": "Autentikasi User untuk Resource Private Server",
-                "parameters": [
-                    {
-                        "enum": [
-                            "en",
-                            "id"
-                        ],
-                        "type": "string",
-                        "description": "Bahasa",
-                        "name": "Accept-Language",
-                        "in": "header"
-                    },
-                    {
-                        "description": "Login",
-                        "name": "login",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.LoginByPin"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/utils.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/services.LoginResponse"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
         "/auth/refresh-token": {
             "post": {
                 "consumes": [
@@ -2256,7 +2177,7 @@ const docTemplate = `{
                 "tags": [
                     "User"
                 ],
-                "summary": "API untuk Daftar User Baru",
+                "summary": "API untuk Daftar atau Create User Baru",
                 "parameters": [
                     {
                         "description": "Daftar User Baru",
@@ -2608,34 +2529,21 @@ const docTemplate = `{
         "dto.CreateNewUser": {
             "type": "object",
             "required": [
-                "email",
+                "name",
                 "password",
+                "roleId",
                 "username"
             ],
             "properties": {
-                "address": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "enable_login_by_link": {
-                    "type": "boolean"
-                },
-                "full_name": {
+                "name": {
                     "type": "string"
                 },
                 "password": {
                     "type": "string"
                 },
-                "phone": {
-                    "type": "string"
-                },
-                "profilePict": {
-                    "type": "string"
-                },
                 "roleId": {
-                    "type": "integer"
+                    "type": "integer",
+                    "minimum": 1
                 },
                 "username": {
                     "type": "string"
@@ -2782,17 +2690,6 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "username": {
-                    "type": "string"
-                }
-            }
-        },
-        "dto.LoginByPin": {
-            "type": "object",
-            "required": [
-                "pin"
-            ],
-            "properties": {
-                "pin": {
                     "type": "string"
                 }
             }
@@ -3056,8 +2953,15 @@ const docTemplate = `{
         },
         "models.Role": {
             "type": "object",
+            "required": [
+                "description"
+            ],
             "properties": {
                 "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Main field",
                     "type": "string"
                 },
                 "id": {
@@ -3067,11 +2971,8 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "name": {
+                    "description": "Main field",
                     "type": "string"
-                },
-                "object_menus": {
-                    "type": "array",
-                    "items": {}
                 },
                 "roles_menus": {
                     "type": "array",
@@ -3113,19 +3014,7 @@ const docTemplate = `{
         "models.User": {
             "type": "object",
             "properties": {
-                "address": {
-                    "type": "string"
-                },
                 "created_at": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "enable_login_by_link": {
-                    "type": "boolean"
-                },
-                "full_name": {
                     "type": "string"
                 },
                 "id": {
@@ -3134,14 +3023,8 @@ const docTemplate = `{
                 "is_active": {
                     "type": "boolean"
                 },
-                "phone": {
+                "name": {
                     "type": "string"
-                },
-                "pin": {
-                    "type": "string"
-                },
-                "role": {
-                    "$ref": "#/definitions/models.Role"
                 },
                 "roleId": {
                     "type": "integer"

@@ -110,10 +110,6 @@ func initSeeder(cfg *config.Config, args []string) {
 			Name: "Menu Seeder",
 			DB:   dbObject,
 		},
-		// &scripts.ActionSeeder{
-		// 	Name: "Action Seeder",
-		// 	DB:   dbObject,
-		// },
 		&scripts.RoleSeeder{
 			Name: "Role Seeder",
 			DB:   dbObject,
@@ -126,42 +122,6 @@ func initSeeder(cfg *config.Config, args []string) {
 			Name: "Mapping Code Seeder",
 			DB:   dbObject,
 		},
-		// &scripts.ActionsMenusSeeder{
-		// 	Name: "Actions menus Seeder",
-		// 	DB:   dbObject,
-		// },
-		// &scripts.MasterLookupSeeder{
-		// 	Name: "Master Lookup Seeder",
-		// 	DB:   dbObject,
-		// },
-		// &scripts.AuthenticityLevelSeeder{
-		// 	Name: "Authenticity Level Seeder",
-		// 	DB:   dbObject,
-		// // },
-		// &scripts.DimensionSizeArchievSeeder{
-		// 	Name: "Dimension Size Archiev Seeder",
-		// 	DB:   dbObject,
-		// },
-		// &scripts.DocumentShapeSeeder{
-		// 	Name: "Dimension Shape Archiev Seeder",
-		// 	DB:   dbObject,
-		// },
-		// &scripts.DocumentTypeSeeder{
-		// 	Name: "Dimension Type Archiev Seeder",
-		// 	DB:   dbObject,
-		// },
-		// &scripts.FrequencyOfChangeAdditionSeeder{
-		// 	Name: "Frequenc yOf Change Addition Seeder",
-		// 	DB:   dbObject,
-		// },
-		// &scripts.StorageFacilitiesSeeder{
-		// 	Name: "Storage Facilities Seeder",
-		// 	DB:   dbObject,
-		// },
-		// &scripts.StorageMediaSeeder{
-		// 	Name: "Storage Media Seeder",
-		// 	DB:   dbObject,
-		// },
 	)
 
 	chanResults := InsertData(chanIn, 10)

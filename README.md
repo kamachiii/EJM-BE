@@ -1,4 +1,4 @@
-# EJM Assesment & Monitoring Backend
+# Elektronik journal & Monitoring Backend
 
 ## Cara setup
 

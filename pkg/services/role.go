@@ -22,8 +22,7 @@ func NewRoleService(service *RoleService) *RoleService {
 }
 
 func (role *RoleService) CreateRole(roleDto *dto.CreateRole, userLoginID uint) (models.Role, error) {
-	var roles repository.RoleRepository
-	roles = role.RoleRepository
+	var roles repository.RoleRepository = role.RoleRepository
 
 	// check role exist in database
 	roleIsExist := roles.FindRoleByName(roleDto.Name)
@@ -41,12 +40,11 @@ func (role *RoleService) CreateRole(roleDto *dto.CreateRole, userLoginID uint) (
 }
 
 func (role *RoleService) FindRoleById(id uint) (models.Role, error) {
-	var roles repository.RoleRepository
-	roles = role.RoleRepository
+	var roles repository.RoleRepository = role.RoleRepository
 	data, err := roles.FindRoleById(id)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			// return models.Role{}, utils.ErrRoleNotExists
+			return models.Role{}, utils.ErrRoleNotExists
 		} else {
 			return models.Role{}, err
 		}
@@ -57,14 +55,13 @@ func (role *RoleService) FindRoleById(id uint) (models.Role, error) {
 
 // delete role
 func (role *RoleService) DeleteRole(roleId uint) error {
-	var roleRepo repository.RoleRepository
-	roleRepo = role.RoleRepository
+	var roleRepo repository.RoleRepository = role.RoleRepository
 
 	// var casbinRepository repository.CasbinRepository
 	// casbinRepository = role.CasbinRepository
 
 	if roleId == utils.DEFAULT_ROLE {
-		// return utils.ErrRoleCannotDeleted
+		return utils.ErrRoleCannotDeleted
 	}
 
 	// check if role exist
@@ -72,7 +69,7 @@ func (role *RoleService) DeleteRole(roleId uint) error {
 
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			// return utils.ErrRoleNotExists
+			return utils.ErrRoleNotExists
 		} else {
 			return err
 		}
@@ -99,8 +96,7 @@ func (role *RoleService) FindRoles(getRoles *dto.GetRoles) ([]models.Role, *mode
 		Page:     getRoles.Page,
 		PageSize: getRoles.PageSize,
 	}
-	var roles repository.RoleRepository
-	roles = role.RoleRepository
+	var roles repository.RoleRepository = role.RoleRepository
 	data, meta, err := roles.FindRoles(&pagination, getRoles.Search, getRoles.UsingActive, getRoles.Value)
 	if err != nil {
 		return []models.Role{}, meta, err
@@ -109,14 +105,13 @@ func (role *RoleService) FindRoles(getRoles *dto.GetRoles) ([]models.Role, *mode
 }
 
 func (roleService *RoleService) UpdateRole(role *dto.UpdateRole, userID uint) error {
-	var roleRepo repository.RoleRepository
-	roleRepo = roleService.RoleRepository
+	var roleRepo repository.RoleRepository = roleService.RoleRepository
 
 	_, err := roleRepo.FindRoleById(role.ID)
 
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			// return utils.ErrRoleNotExists
+			return utils.ErrRoleNotExists
 		} else {
 			return err
 		}
@@ -141,14 +136,10 @@ func (roleServices *RoleService) SetAccessRole(accessRole *dto.SetAccessRole) er
 	var menuIds []uint
 	var apiIds []uint
 
-	var roleRepository repository.RoleRepository
-	roleRepository = roleServices.RoleRepository
+	var roleRepository repository.RoleRepository = roleServices.RoleRepository
 
 	// var actionRepository repository.ActionRepository
 	// actionRepository = roleServices.ActionRepository
-
-	// var casbinRepository repository.CasbinRepository
-	// casbinRepository = roleServices.CasbinRepository
 
 	// di pecah dari dto
 	for _, access := range accessRole.Actions {
@@ -163,7 +154,7 @@ func (roleServices *RoleService) SetAccessRole(accessRole *dto.SetAccessRole) er
 	// cari rolenya dulu
 	_, err := roleRepository.FindRoleById(roleId)
 	if err != nil {
-		// return utils.ErrRoleNotExists
+		return utils.ErrRoleNotExists
 	}
 
 	// insert ke roles_menus
@@ -216,8 +207,7 @@ func (roleServices *RoleService) SetAccessRole(accessRole *dto.SetAccessRole) er
 }
 
 func (roleService *RoleService) DeleteAccessRole(roleId uint, menuId uint) error {
-	var roleRepository repository.RoleRepository
-	roleRepository = roleService.RoleRepository
+	var roleRepository repository.RoleRepository = roleService.RoleRepository
 
 	// var casbinRepository repository.CasbinRepository
 	// casbinRepository = roleService.CasbinRepository
@@ -225,7 +215,7 @@ func (roleService *RoleService) DeleteAccessRole(roleId uint, menuId uint) error
 	// cari rolenya dulu
 	_, err := roleRepository.FindRoleById(roleId)
 	if err != nil {
-		// return utils.ErrRoleNotExists
+		return utils.ErrRoleNotExists
 	}
 
 	// delete rule yang ada
@@ -237,15 +227,14 @@ func (roleService *RoleService) DeleteAccessRole(roleId uint, menuId uint) error
 	errDeleteAccessRole := roleRepository.DeleteAccessRole(roleId, menuId)
 
 	if errDeleteAccessRole != nil {
-		return errors.New("Delete Access Role Gagal")
+		return errors.New("delete Access Role Gagal")
 	}
 
 	return nil
 }
 
 func (roleService *RoleService) GetAccessRole(roleId uint) ([]models.RolesMenus, error) {
-	var roleMenuRepo repository.RoleRepository
-	roleMenuRepo = roleService.RoleRepository
+	var roleMenuRepo repository.RoleRepository = roleService.RoleRepository
 
 	data, err := roleMenuRepo.GetAccessRole(roleId)
 

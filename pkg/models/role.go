@@ -3,7 +3,7 @@ package models
 type Role struct {
 	BaseModel
 	ActiveModel
-	Name        string        `json:"name" gorm:"not null"`
-	ObjectMenus JSONB         `json:"object_menus" gorm:"type:jsonb;null"`
+	Name        string        `gorm:"unique"`                                          //Main field
+	Description string        `gorm:"not null" validate:"required" json:"description"` //Main field
 	RolesMenus  []*RolesMenus `json:"roles_menus" gorm:"foreignKey:RoleId"`
 }

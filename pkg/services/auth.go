@@ -7,13 +7,13 @@ import (
 	"EJM/pkg/repository"
 	"EJM/utils"
 	"errors"
-	jwt "github.com/golang-jwt/jwt/v4"
 	"time"
+
+	jwt "github.com/golang-jwt/jwt/v4"
 )
 
 type IAuthService interface {
 	LoginUser(login *dto.Login) (LoginResponse, error)
-	LoginByPin(login *dto.LoginByPin) (LoginResponse, error)
 	RefreshToken(tokenString string) (LoginResponse, error)
 	Session(userId uint, token string) (models.User, error)
 	Logout(tokenString string) error
@@ -22,10 +22,8 @@ type IAuthService interface {
 type AuthService struct {
 	RegisterRepository repository.UserRepository
 	RoleRepository     repository.RoleRepository
-	// ActionRepository   repository.ActionRepository
-	// CasbinRepository   repository.CasbinRepository
-	JWTWhitelist repository.JWTWhitelistRepository
-	Config       *config.Config
+	JWTWhitelist       repository.JWTWhitelistRepository
+	Config             *config.Config
 }
 
 type LoginResponse struct {
@@ -54,68 +52,10 @@ func (authService *AuthService) Session(userId uint, token string) (models.User,
 	}
 
 	if !*user.IsActive {
-		// return models.User{}, utils.ErrTokenInvalid
+		return models.User{}, utils.ErrTokenInvalid
 	}
 
 	return user, nil
-}
-
-func (authService AuthService) LoginByPin(login *dto.LoginByPin) (LoginResponse, error) {
-	key := []byte(authService.Config.Auth.JWTKey)
-	var loginServiceRepo repository.UserRepository
-	loginServiceRepo = authService.RegisterRepository
-	jwtExpired := authService.Config.Auth.JWTExpired
-
-	var jwtRepo repository.JWTWhitelistRepository
-	jwtRepo = authService.JWTWhitelist
-
-	//find username first
-	data, err := loginServiceRepo.FindUserByPin(login.Pin)
-	if err != nil {
-		// return LoginResponse{}, utils.ErrCredentialInvalid
-	}
-
-	if !*data.IsActive {
-		// return LoginResponse{}, utils.ErrCredentialInvalid
-	}
-
-	if !*data.EnableLoginByLink {
-		// return LoginResponse{}, utils.ErrForbiddenLoginByLink
-	}
-
-	// assign jwt payload
-	claims := &utils.UserJWTPayload{
-		ID:       data.ID,
-		FullName: data.FullName,
-		Email:    data.Email,
-		RoleID:   data.RoleID,
-		RoleName: data.Role.Name,
-		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(jwtExpired) * time.Minute)),
-		},
-	}
-
-	// asign refresh payload
-	refreshClaims := &utils.UserRefreshJWTPayload{
-		ID: data.ID,
-		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(jwtExpired+60) * time.Minute)),
-		},
-	}
-
-	tokens, tokenErr := utils.CreateToken(claims, refreshClaims, key)
-	if tokenErr != nil {
-		return LoginResponse{}, tokenErr
-	}
-
-	if errAddToken := jwtRepo.AddToken(tokens.Token, tokens.RefreshToken); errAddToken != nil {
-		return LoginResponse{}, errAddToken
-	}
-
-	return LoginResponse{
-		Token:        tokens.Token,
-		RefreshToken: tokens.RefreshToken,
-	}, nil
 }
 
 // login user
@@ -128,23 +68,21 @@ func (authService AuthService) LoginUser(login *dto.Login) (LoginResponse, error
 
 	user, err := loginServiceRepo.FindByUsername(login.Username)
 	if err != nil {
-		// return LoginResponse{}, utils.ErrCredentialInvalid
+		return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 
 	isPasswordMatch := utils.DoPasswordMatch(user.Password, login.Password)
 	if !isPasswordMatch {
-		// return LoginResponse{}, utils.ErrCredentialInvalid
+		return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 
 	if !*user.IsActive {
-		// return LoginResponse{}, utils.ErrCredentialInvalid
+		return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 
 	accessClaims := &utils.UserJWTPayload{
 		ID:       user.ID,
-		FullName: user.FullName,
-		Email:    user.Email,
-		RoleID:   user.RoleID,
+		RoleID:   int(user.RoleId),
 		RoleName: user.Role.Name,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(jwtExpired) * time.Minute)),
@@ -192,7 +130,7 @@ func (authService AuthService) parseToken(key []byte, token string) (*jwt.Token,
 
 	if err != nil {
 		if errors.Is(err, jwt.ErrTokenExpired) {
-			// return &jwt.Token{}, utils.ErrTokenInvalid
+			return &jwt.Token{}, utils.ErrTokenInvalid
 		} else {
 			return &jwt.Token{}, err
 		}
@@ -222,7 +160,7 @@ func (authService AuthService) RefreshToken(tokenString string) (LoginResponse, 
 	}
 
 	if !parsedToken.Valid {
-		// return LoginResponse{}, utils.ErrTokenInvalid
+		return LoginResponse{}, utils.ErrTokenInvalid
 	}
 
 	// get data by token user ID
@@ -236,9 +174,7 @@ func (authService AuthService) RefreshToken(tokenString string) (LoginResponse, 
 	// assign jwt payload
 	claims := &utils.UserJWTPayload{
 		ID:       data.ID,
-		FullName: data.FullName,
-		Email:    data.Email,
-		RoleID:   data.RoleID,
+		RoleID:   int(data.RoleId),
 		RoleName: data.Role.Name,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(jwtExpired) * time.Minute)),

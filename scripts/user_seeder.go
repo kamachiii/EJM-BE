@@ -15,11 +15,16 @@ func (userSeeder *UserSeeder) Execute() error {
 	pw, _ := utils.HashPassword("123")
 	data := []models.User{
 		{
-			FullName: "Superadmin",
-			Username: "tiul",
-			Email:    "admin@gmail.com",
+			Name: "Haru",
+			Username: "Kazumoto",
 			Password: pw,
-			RoleID:   1,
+			RoleId:   1,
+		},
+		{
+			Name: "Joe",
+			Username: "JoeMama",
+			Password: pw,
+			RoleId: 1,
 		},
 	}
 

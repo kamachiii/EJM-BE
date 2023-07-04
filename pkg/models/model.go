@@ -36,3 +36,7 @@ type BaseModel struct {
 type ActiveModel struct {
 	IsActive *bool `json:"is_active" gorm:"not null;default:true"`
 }
+
+type StatusModel struct {
+	Status *bool `json:"status" gorm:"not null;default:true"`
+}

@@ -15,7 +15,7 @@ import (
 func initMigration(cfg *config.Config, args []string) {
 	start := time.Now()
 	dbObject := db.DBInitialize(cfg)
-	log.Println("Mulai Migrasi")
+	log.Println("Start migration...")
 	isDone := make(chan bool)
 	isError := make(chan bool)
 	go func() {
@@ -27,7 +27,6 @@ func initMigration(cfg *config.Config, args []string) {
 			models.JWTWhitelist{},
 			models.Menu{},
 			models.ActionsMenus{},
-			models.Inventory{},
 			models.MappingCode{},
 		}
 		var filtered []interface{}
@@ -55,12 +54,11 @@ func initMigration(cfg *config.Config, args []string) {
 
 	select {
 	case <-isDone:
-		log.Println("Selesai juga")
+		log.Println("Migration is done!")
 	case <-isError:
-		log.Println("Ada Error")
+		log.Println("Migration failed!")
 	}
-	log.Println("It takes", time.Since(start).Seconds())
-
+	log.Printf("It takes %f ms",time.Since(start).Seconds())
 }
 
 func NewMigration(cfg *config.Config) *cobra.Command {

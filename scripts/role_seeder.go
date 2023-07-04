@@ -14,13 +14,12 @@ type RoleSeeder struct {
 func (roleSeeder *RoleSeeder) Execute() error {
 	data := []models.Role{
 		{
-			Name: "Superadmin",
+			Name: "Admin",
+			Description: "Admin ej monitoring",
 		},
 		{
-			Name: "Assessor",
-		},
-		{
-			Name: "Ajudikator",
+			Name: "Itsec",
+			Description: "It Security ej monitoring",
 		},
 	}
 

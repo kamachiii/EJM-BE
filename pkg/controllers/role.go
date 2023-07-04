@@ -7,11 +7,12 @@ import (
 	"EJM/pkg/repository"
 	"EJM/pkg/services"
 	"EJM/utils"
+	"net/http"
+	"strconv"
+
 	"github.com/labstack/echo/v4"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"gorm.io/gorm"
-	"net/http"
-	"strconv"
 )
 
 type RoleController struct {
@@ -302,7 +303,10 @@ func (roleController *RoleController) GetRoles(c echo.Context) error {
 	}
 
 	// service
-	var roleService IRoleService
+	var (
+		roleService IRoleService
+	)
+
 	roleService = roleController.roleService
 	data, total, err := roleService.FindRoles(dtos)
 	if err != nil {
