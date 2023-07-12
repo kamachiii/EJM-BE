@@ -9,6 +9,4 @@ type MappingCode struct {
 	Status     bool `json:"status" form:"status" validate:"required"`
 	Priority   int `json:"priority" form:"priority" validate:"required"`
 	IsActive   bool `json:"is_active" form:"is_active" validate:"required"`
-
-
 }

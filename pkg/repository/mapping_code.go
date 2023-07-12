@@ -3,6 +3,7 @@ package repository
 import (
 	"EJM/dto"
 	"EJM/pkg/models"
+
 	// "EJM/utils"
 	// "errors"
 	"strings"
@@ -11,7 +12,7 @@ import (
 )
 
 type MappingCodeRepository interface {
-	// TransactionRepository
+	TransactionRepository
 	FindMappingCodes(pagination *models.Paginate, search string, value string) ([]models.MappingCode, *models.Paginate, error)
 	FindMappingCodeById(id uint) (models.MappingCode, error)
 	FindMappingCodeByDefinition(definition string) error
@@ -55,7 +56,7 @@ func (mappingCodeObject *MappingCode) MappingCodeModel() (tx *gorm.DB) {
 func (mappingCodeObject *MappingCode) FindMappingCodes(pagination *models.Paginate, search, value string) ([]models.MappingCode, *models.Paginate, error) {
 	var mappingCodes []models.MappingCode
 	data := mappingCodeObject.MappingCodeModel().
-			Count(&pagination.Total)
+		Count(&pagination.Total)
 
 	if search != "" {
 		data.Where("lower(mappingCodes.code) like ? ", "%"+strings.ToLower(search)+"%").Count(&pagination.Total)
@@ -67,7 +68,7 @@ func (mappingCodeObject *MappingCode) FindMappingCodes(pagination *models.Pagina
 
 	// cari data
 	data.Scopes(pagination.Pagination()).Debug().
-	Find(&mappingCodes)
+		Find(&mappingCodes)
 
 	// checking errors
 	if err := data.Error; err != nil {
@@ -105,41 +106,31 @@ func (mappingCodeObject *MappingCode) FindMappingCodeByDefinition(definition str
 
 // create mapping code
 func (mappingCode *MappingCode) CreateMappingCode(mapping_code *dto.CreateNewMappingCode) (models.MappingCode, error) {
-	// otp, _ := utils.GenerateOTP(12)
 	mappingCodeModel := models.MappingCode{
-		Code:             mapping_code.Code,
-		Definition:           mapping_code.Definition,
-		Status:          mapping_code.Status,
-		Priority:          mapping_code.Priority,
-		IsActive:       mapping_code.IsActive,
+		Code:       mapping_code.Code,
+		Definition: mapping_code.Definition,
+		Status:     mapping_code.Status,
+		Priority:   mapping_code.Priority,
+		IsActive:   mapping_code.IsActive,
 	}
+
 	err := mappingCode.db.Debug().Create(&mappingCodeModel).Error
 
 	if err != nil {
 		return mappingCodeModel, err
 	}
+
 	return mappingCodeModel, nil
 }
 
-
-
 // update mapping code
 func (mappingCodeObject *MappingCode) UpdateMappingCode(id uint, mappingCode *dto.UpdateMappingCode) error {
-	// cariPin, _ := mappingCodeObject.FindById(id)
-	// otp, _ := utils.GenerateOTP(12)
-	// var pin *string
-	// if cariPin.Pin == nil {
-	// 	// pin = &otp
-	// } else {
-	// 	pin = cariPin.Pin
-	// }
-
 	update := mappingCodeObject.MappingCodeModel().Where("mappingCodes.id = ?", id).Updates(models.MappingCode{
-		Code:        mappingCode.Code,
-		Definition:           mappingCode.Definition,
-		Status:          mappingCode.Status,
-		Priority:          mappingCode.Priority,
-		IsActive:       mappingCode.IsActive,
+		Code:       mappingCode.Code,
+		Definition: mappingCode.Definition,
+		Status:     mappingCode.Status,
+		Priority:   mappingCode.Priority,
+		IsActive:   mappingCode.IsActive,
 	})
 
 	if err := update.Error; err != nil {
@@ -160,8 +151,6 @@ func (mappingCodeObject *MappingCode) DeleteMappingCode(id uint) error {
 	return nil
 }
 
-
-
 // Find By Name
 // func (mappingCodeObject *MappingCode) FindByCode(code string) (models.MappingCode, error) {
 // 	findMappingCode := models.MappingCode{
@@ -173,11 +162,3 @@ func (mappingCodeObject *MappingCode) DeleteMappingCode(id uint) error {
 
 // 	return findMappingCode, nil
 // }
-
-
-
-
-
-
-
-
