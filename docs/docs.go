@@ -2472,6 +2472,17 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "dto.ActiveEnum": {
+            "type": "string",
+            "enum": [
+                "active",
+                "inActive"
+            ],
+            "x-enum-varnames": [
+                "Active",
+                "InActive"
+            ]
+        },
         "dto.CreateAction": {
             "type": "object",
             "required": [
@@ -2517,6 +2528,7 @@ const docTemplate = `{
             "required": [
                 "code",
                 "definition",
+                "isActive",
                 "priority",
                 "status"
             ],
@@ -2527,23 +2539,30 @@ const docTemplate = `{
                 "definition": {
                     "type": "string"
                 },
+                "isActive": {
+                    "$ref": "#/definitions/dto.ActiveEnum"
+                },
                 "priority": {
                     "type": "integer"
                 },
                 "status": {
-                    "type": "string"
+                    "$ref": "#/definitions/dto.StatusEnum"
                 }
             }
         },
         "dto.CreateNewUser": {
             "type": "object",
             "required": [
+                "isActive",
                 "name",
                 "password",
                 "roleId",
                 "username"
             ],
             "properties": {
+                "isActive": {
+                    "$ref": "#/definitions/dto.ActiveEnum"
+                },
                 "name": {
                     "type": "string"
                 },
@@ -2799,6 +2818,17 @@ const docTemplate = `{
                 }
             }
         },
+        "dto.StatusEnum": {
+            "type": "string",
+            "enum": [
+                "success",
+                "fail"
+            ],
+            "x-enum-varnames": [
+                "Success",
+                "Fail"
+            ]
+        },
         "dto.ToggleActive": {
             "type": "object",
             "properties": {
@@ -2914,6 +2944,17 @@ const docTemplate = `{
                 }
             }
         },
+        "models.ActiveEnum": {
+            "type": "string",
+            "enum": [
+                "active",
+                "inActive"
+            ],
+            "x-enum-varnames": [
+                "Active",
+                "InActive"
+            ]
+        },
         "models.Menu": {
             "type": "object",
             "properties": {
@@ -2963,7 +3004,8 @@ const docTemplate = `{
         "models.Role": {
             "type": "object",
             "required": [
-                "description"
+                "description",
+                "isActive"
             ],
             "properties": {
                 "created_at": {
@@ -2976,8 +3018,8 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "is_active": {
-                    "type": "boolean"
+                "isActive": {
+                    "$ref": "#/definitions/models.ActiveEnum"
                 },
                 "name": {
                     "description": "Main field",
@@ -3022,6 +3064,9 @@ const docTemplate = `{
         },
         "models.User": {
             "type": "object",
+            "required": [
+                "isActive"
+            ],
             "properties": {
                 "created_at": {
                     "type": "string"
@@ -3029,10 +3074,11 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "is_active": {
-                    "type": "boolean"
+                "isActive": {
+                    "$ref": "#/definitions/models.ActiveEnum"
                 },
                 "name": {
+                    "description": "ActiveModel",
                     "type": "string"
                 },
                 "roleId": {

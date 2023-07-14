@@ -51,7 +51,7 @@ func (authService *AuthService) Session(userId uint, token string) (models.User,
 		return models.User{}, err
 	}
 
-	if !*user.IsActive {
+	if user.IsActive == models.InActive {
 		return models.User{}, utils.ErrTokenInvalid
 	}
 
@@ -76,7 +76,7 @@ func (authService AuthService) LoginUser(login *dto.Login) (LoginResponse, error
 		return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 
-	if !*user.IsActive {
+	if user.IsActive == models.InActive {
 		return LoginResponse{}, utils.ErrCredentialInvalid
 	}
 

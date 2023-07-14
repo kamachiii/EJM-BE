@@ -45,6 +45,7 @@ require (
 	github.com/dustin/go-humanize v1.0.0 // indirect
 	github.com/glebarez/go-sqlite v1.20.0 // indirect
 	github.com/glebarez/sqlite v1.6.0 // indirect
+	github.com/go-gormigrate/gormigrate/v2 v2.1.0
 	github.com/go-openapi/jsonpointer v0.19.6 // indirect
 	github.com/go-openapi/jsonreference v0.20.2 // indirect
 	github.com/go-openapi/spec v0.20.9 // indirect

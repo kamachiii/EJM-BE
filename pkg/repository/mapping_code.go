@@ -7,14 +7,14 @@ import (
 	"errors"
 
 	// "errors"
-	"strings"
+	// "strings"
 
 	"gorm.io/gorm"
 )
 
 type MappingCodeRepository interface {
 	// TransactionRepository
-	FindMappingCodes(pagination *models.Paginate, search string, usingActive bool, value string) ([]models.MappingCode, *models.Paginate, error)
+	FindMappingCodes(pagination *models.Paginate, usingActive bool, value string) ([]models.MappingCode, *models.Paginate, error)
 	FindMappingCodeById(id uint) (models.MappingCode, error)
 	FindMappingCodeByDefinition(definition string) error
 	CreateMappingCode(mappingCode *dto.CreateNewMappingCode) (models.MappingCode, error)
@@ -54,17 +54,17 @@ func (mappingCodeObject *MappingCode) MappingCodeModel() (tx *gorm.DB) {
 }
 
 // find all mapping codes paginated
-func (mappingCodeObject *MappingCode) FindMappingCodes(pagination *models.Paginate, search string, usingActive bool, value string) ([]models.MappingCode, *models.Paginate, error) {
+func (mappingCodeObject *MappingCode) FindMappingCodes(pagination *models.Paginate, usingActive bool, value string) ([]models.MappingCode, *models.Paginate, error) {
 	var mappingCodes []models.MappingCode
 	data := mappingCodeObject.MappingCodeModel().
 		Count(&pagination.Total)
 
-	if search != "" {
-		data.Where("lower(mappingCodes.code) like ? ", "%"+strings.ToLower(search)+"%").Count(&pagination.Total)
-	}
+	// if search != "" {
+	// 	data.Where("lower(mappingCodes.code) like ? ", "%"+strings.ToLower(search)+"%").Count(&pagination.Total)
+	// }
 
 	if usingActive {
-		data.Where("roles.is_active", true).Count(&pagination.Total)
+		data.Where("mappingCodes.is_active", true).Count(&pagination.Total)
 	}
 
 	if value != "" {
@@ -122,9 +122,9 @@ func (mappingCode *MappingCode) CreateMappingCode(mapping_code *dto.CreateNewMap
 	mappingCodeModel := models.MappingCode{
 		Code:       mapping_code.Code,
 		Definition: mapping_code.Definition,
-		Status:     mapping_code.Status,
+		Status:     models.StatusEnum(mapping_code.Status),
 		Priority:   mapping_code.Priority,
-		// IsActive:       mapping_code.IsActive,
+		Active:   models.ActiveEnum(mapping_code.Active),
 	}
 
 	err := mappingCode.db.Debug().Create(&mappingCodeModel).Error
@@ -141,9 +141,9 @@ func (mappingCodeObject *MappingCode) UpdateMappingCode(id uint, mappingCode *dt
 	update := mappingCodeObject.MappingCodeModel().Where("mappingCodes.id = ?", id).Updates(models.MappingCode{
 		Code:       mappingCode.Code,
 		Definition: mappingCode.Definition,
-		Status:     mappingCode.Status,
+		Status:     models.StatusEnum(mappingCode.Status),
 		Priority:   mappingCode.Priority,
-		// IsActive:       mappingCode.IsActive,
+		Active:   models.ActiveEnum(mappingCode.Active),
 	})
 
 	if err := update.Error; err != nil {

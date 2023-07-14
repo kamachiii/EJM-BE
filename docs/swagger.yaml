@@ -1,4 +1,12 @@
 definitions:
+  dto.ActiveEnum:
+    enum:
+    - active
+    - inActive
+    type: string
+    x-enum-varnames:
+    - Active
+    - InActive
   dto.CreateAction:
     properties:
       default:
@@ -32,18 +40,23 @@ definitions:
         type: string
       definition:
         type: string
+      isActive:
+        $ref: '#/definitions/dto.ActiveEnum'
       priority:
         type: integer
       status:
-        type: string
+        $ref: '#/definitions/dto.StatusEnum'
     required:
     - code
     - definition
+    - isActive
     - priority
     - status
     type: object
   dto.CreateNewUser:
     properties:
+      isActive:
+        $ref: '#/definitions/dto.ActiveEnum'
       name:
         type: string
       password:
@@ -54,6 +67,7 @@ definitions:
       username:
         type: string
     required:
+    - isActive
     - name
     - password
     - roleId
@@ -219,6 +233,14 @@ definitions:
     - actions
     - roleId
     type: object
+  dto.StatusEnum:
+    enum:
+    - success
+    - fail
+    type: string
+    x-enum-varnames:
+    - Success
+    - Fail
   dto.ToggleActive:
     properties:
       payload:
@@ -295,6 +317,14 @@ definitions:
       updated_at:
         type: string
     type: object
+  models.ActiveEnum:
+    enum:
+    - active
+    - inActive
+    type: string
+    x-enum-varnames:
+    - Active
+    - InActive
   models.Menu:
     properties:
       actions_menus:
@@ -334,8 +364,8 @@ definitions:
         type: string
       id:
         type: integer
-      is_active:
-        type: boolean
+      isActive:
+        $ref: '#/definitions/models.ActiveEnum'
       name:
         description: Main field
         type: string
@@ -347,6 +377,7 @@ definitions:
         type: string
     required:
     - description
+    - isActive
     type: object
   models.RolesMenus:
     properties:
@@ -371,9 +402,10 @@ definitions:
         type: string
       id:
         type: integer
-      is_active:
-        type: boolean
+      isActive:
+        $ref: '#/definitions/models.ActiveEnum'
       name:
+        description: ActiveModel
         type: string
       roleId:
         type: integer
@@ -381,6 +413,8 @@ definitions:
         type: string
       username:
         type: string
+    required:
+    - isActive
     type: object
   services.LoginResponse:
     properties:

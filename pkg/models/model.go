@@ -33,10 +33,16 @@ type BaseModel struct {
 	DeletedAt gorm.DeletedAt `json:"-" swaggerignore:"true"`
 }
 
-type ActiveModel struct {
-	IsActive *bool `json:"is_active" gorm:"not null;default:"`
-}
+type StatusEnum string
 
-type StatusModel struct {
-	Status *bool `json:"status" gorm:"not null;default:true"`
-}
+const (
+	Success StatusEnum = "success"
+	Fail    StatusEnum = "fail"
+)
+
+type ActiveEnum string
+
+const (
+	Active ActiveEnum = "active"
+	InActive    ActiveEnum = "inActive"
+)

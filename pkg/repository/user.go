@@ -179,9 +179,7 @@ func (register *User) UpdateUser(id uint, user *dto.UpdateUser) error {
 }
 
 func (register *User) ToggleActive(id uint, payload *bool) error {
-	update := register.UserModel().Where("users.id = ?", id).Updates(models.User{
-		ActiveModel: models.ActiveModel{IsActive: payload},
-	})
+	update := register.UserModel().Where("users.id = ?", id).Updates(models.User{})
 
 	if err := update.Error; err != nil {
 		return err
