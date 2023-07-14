@@ -18,14 +18,14 @@ func (mappingCodeSeeder *MappingCodeSeeder) Execute() error {
 			Definition: "TRANSAKSI BERHASIL",
 			Status: true,
 			Priority: 100,
-			IsActive: true,
+			// IsActive: true,
 		},
 		{
 			Code: "HOST TX TIMEOUT",
 			Definition: "TRANSAKSI TIMEOUT",
 			Status: false,
 			Priority: 200,
-			IsActive: true,
+			// IsActive: true,
 		},
 	}
 

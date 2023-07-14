@@ -58,7 +58,7 @@ type CreateNewMappingCode struct {
 	Definition string `json:"definition" form:"definition" validate:"required"`
 	Status     bool `json:"status" validate:"required"`
 	Priority   int `json:"priority" form:"priority" validate:"required"`
-	IsActive   bool `json:"isActive" form:"isActive" validate:"required"`
+	// IsActive   bool `json:"isActive" form:"isActive" validate:"required"`
 }
 
 type GetMappingCodes struct {

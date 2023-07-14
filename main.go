@@ -24,6 +24,7 @@ func main() {
 	docs.SwaggerInfo.BasePath = fmt.Sprintf("/api/v%s", cfg.App.Version)
 	docs.SwaggerInfo.Host = fmt.Sprintf("%s:%s", cfg.App.Host, cfg.App.Port)
 
+	
 	rootCmd.SetHelpCommand(
 		&cobra.Command{
 			Hidden: true,

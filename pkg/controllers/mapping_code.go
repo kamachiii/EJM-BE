@@ -6,9 +6,11 @@ import (
 	"EJM/pkg/repository"
 	"EJM/pkg/services"
 	"EJM/utils"
+	"errors"
+	"net/http"
 	"strconv"
 
-	"github.com/nicksnyder/go-i18n/v2/i18n"
+	// "github.com/nicksnyder/go-i18n/v2/i18n"
 	"gorm.io/gorm"
 
 	"github.com/labstack/echo/v4"
@@ -30,11 +32,9 @@ func NewMappingCodeController(srv *server.Server) *MappingCodeController {
 		})}
 }
 
-
-
 // Daftar Mapping Code Baru
 // @Summary API untuk Membuat Mapping Code Baru
-// @Tags    Mapping Code
+// @Tags    Mapping Codes
 // @Accept  json
 // @Produce json
 // @Param   mappingcode body     dto.CreateNewMappingCode true "Daftar Mapping Code Baru"
@@ -43,30 +43,25 @@ func NewMappingCodeController(srv *server.Server) *MappingCodeController {
 // @Failure 401  {object} middlewares.ResponseError
 // @Failure 404  {object} middlewares.ResponseError
 // @Failure 500  {object} middlewares.ResponseError
-// @Router  /mappingCode/create [post]
+// @Router  /mappingCodes/create [post]
 func (mappingCodeController *MappingCodeController) CreateMappingCode(c echo.Context) error {
 	req := new(dto.CreateNewMappingCode)
-
 	if err := c.Bind(req); err != nil {
-		return err
+		return echo.NewHTTPError(http.StatusBadRequest, "Gagal melakukan binding data")
 	}
+
 	if err := c.Validate(req); err != nil {
-		return err
+		return echo.NewHTTPError(http.StatusBadRequest, "Validasi gagal")
 	}
-	// mappingCodeRepo := mappingCodeController.mappingCodeService.MappingCodeRepository
-	// mappingCodeRepo.Begin(mappingCodeController.server.DB)
 
-	var mappingCodeService services.IMappingCodeService
-	mappingCodeService = mappingCodeController.mappingCodeService
-
-
-	data, err := mappingCodeService.CreateMappingCode(req)
+	data, err := mappingCodeController.mappingCodeService.CreateMappingCode(req)
 	if err != nil {
-		// mappingCodeRepo.Rollback()
+		if err.Error() == "Definition already exists" {
+			// Definition sudah ada, kirimkan error
+			return echo.NewHTTPError(http.StatusBadRequest, "Definition already exists")
+		}
 		return err
 	}
-
-	// mappingCodeRepo.Commit()
 
 	res := utils.Response{
 		Data:       data,
@@ -79,7 +74,7 @@ func (mappingCodeController *MappingCodeController) CreateMappingCode(c echo.Con
 
 // Ambil Daftar Mapping Code
 // @Summary API untuk Ambil semua daftar mapping code
-// @Tags    Mapping Code
+// @Tags    Mapping Codes
 // @Accept  json
 // @Produce json
 // @Param   page      query    string true  "Halaman"
@@ -122,7 +117,7 @@ func (mappingCodeController *MappingCodeController) FindMappingCodes(c echo.Cont
 
 // Update Mapping Code
 // @Summary API untuk Update Data Mapping Code
-// @Tags    Mapping Code
+// @Tags    Mapping Codes
 // @Accept  json
 // @Produce json
 // @Param   id   path     int               true "Code ID"
@@ -132,7 +127,7 @@ func (mappingCodeController *MappingCodeController) FindMappingCodes(c echo.Cont
 // @Failure 401  {object} middlewares.ResponseError
 // @Failure 404  {object} middlewares.ResponseError
 // @Failure 500  {object} middlewares.ResponseError
-// @Router  /mappingCode/{id} [put]
+// @Router  /mappingCodes/{id} [put]
 func (mappingCodeController *MappingCodeController) UpdateMappingCode(c echo.Context) error {
 	req := new(dto.UpdateMappingCode)
 	id, errConvert := strconv.Atoi(c.Param("id"))
@@ -148,15 +143,21 @@ func (mappingCodeController *MappingCodeController) UpdateMappingCode(c echo.Con
 		return err
 	}
 
-	file, _ := c.FormFile("file")
-	if file != nil {
-		// fileName, errUpload := utils.UploadSingleFile(file)
-		// if errUpload != nil {
-		// 	return errUpload
-		// }
-		// req.ProfilePict = &fileName
+	// Cek apakah ID tersedia dalam database
+	_, errFind := mappingCodeController.mappingCodeService.FindMappingCodeById(uint(id))
+	if errFind != nil {
+		if errors.Is(errFind, utils.ErrMappingCodeNotFound) {
+			res := utils.Response{
+				Data:       nil,
+				Message:    "Data Not Found",
+				StatusCode: 404,
+			}
+		
+			return res.ReturnSingleMessage(c)
+		}
+		return errFind
 	}
-
+	
 	err := mappingCodeController.mappingCodeService.UpdateMappingCode(uint(id), req)
 	if err != nil {
 		return err
@@ -173,7 +174,7 @@ func (mappingCodeController *MappingCodeController) UpdateMappingCode(c echo.Con
 
 // Delete Mapping Code
 // @Summary API untuk Delete Mapping Code
-// @Tags    Mapping Code
+// @Tags    Mapping Codes
 // @Accept  json
 // @Produce json
 // @Param   id  path     int true "Code ID"
@@ -182,28 +183,33 @@ func (mappingCodeController *MappingCodeController) UpdateMappingCode(c echo.Con
 // @Failure 401 {object} middlewares.ResponseError
 // @Failure 404 {object} middlewares.ResponseError
 // @Failure 500 {object} middlewares.ResponseError
-// @Router  /mappingCode/{id} [delete]
+// @Router  /mappingCodes/{id} [delete]
 func (mappingCodeController *MappingCodeController) DeleteMappingCode(c echo.Context) error {
-	id, _ := strconv.Atoi(c.Param("id"))
+	id, err := strconv.Atoi(c.Param("id"))
 
 	// mappingCodeRepo := mappingCodeController.mappingCodeService.RegisterRepository
 
 	// mappingCodeRepo.Begin(mappingCodeController.db)
 
-	err := mappingCodeController.mappingCodeService.DeleteMappingCode(uint(id))
+	err = mappingCodeController.mappingCodeService.DeleteMappingCode(uint(id))
 	if err != nil {
-		// mappingCodeRepo.Rollback()
+		if errors.Is(err, utils.ErrMappingCodeNotFound) {
+			res := utils.Response{
+				Data:       nil,
+				Message:    "Data Not Found",
+				StatusCode: 404,
+			}
+		
+			return res.ReturnSingleMessage(c)
+		}
 		return err
 	}
 
 	// mappingCodeRepo.Commit()
 
 	res := utils.Response{
-		Data: nil,
-		Translating: &i18n.Message{
-			ID:    "mappingCode.success.delete",
-			Other: "Success Delete Mapping Code",
-		},
+		Data:       nil,
+		Message:    "Berhasil Hapus Data",
 		StatusCode: 201,
 	}
 
@@ -212,7 +218,7 @@ func (mappingCodeController *MappingCodeController) DeleteMappingCode(c echo.Con
 
 // Delete Mapping Code Bulk
 // @Summary API untuk Delete Mapping Code Bulk
-// @Tags    Mapping Code
+// @Tags    Mapping Codes
 // @Accept  json
 // @Produce json
 // @Param   mapping_code_ids body     dto.DeleteMappingCodeBulk true "Delete Mapping Code Bulk"
@@ -221,7 +227,7 @@ func (mappingCodeController *MappingCodeController) DeleteMappingCode(c echo.Con
 // @Failure 401      {object} middlewares.ResponseError
 // @Failure 404      {object} middlewares.ResponseError
 // @Failure 500      {object} middlewares.ResponseError
-// @Router  /mappingCode [delete]
+// @Router  /mappingCodes [delete]
 func (mappingCodeController *MappingCodeController) DeleteMappingCodeBulk(c echo.Context) error {
 	req := new(dto.DeleteMappingCodeBulk)
 	if err := c.Bind(req); err != nil {
@@ -238,37 +244,43 @@ func (mappingCodeController *MappingCodeController) DeleteMappingCodeBulk(c echo
 	for _, id := range req.Ids {
 		err := mappingCodeController.mappingCodeService.DeleteMappingCode(uint(id))
 		if err != nil {
-			// mappingCodeRepo.Rollback()
-			return err
+			if errors.Is(err, utils.ErrMappingCodeNotFound) {
+				res := utils.Response{
+					Data:       nil,
+					Message:    "Data Not Found",
+					StatusCode: 404,
+				}
+			
+				return res.ReturnSingleMessage(c)
+			}
+				return err
 		}
 	}
 
 	// mappingCodeRepo.Commit()
 
 	res := utils.Response{
-		Data: nil,
-		Translating: &i18n.Message{
-			ID:    "mappingCode.success.delete",
-			Other: "Success Delete Mapping Code",
-		},
+		Data:       nil,
+		Message:    "Berhasil Hapus Data",
 		StatusCode: 201,
 	}
 
 	return res.ReturnSingleMessage(c)
 }
 
-// Find Mapping Code By ID
+// Find Mapping Code Berdasarkan ID
 // @Summary API untuk Find Mapping Code By ID
 // @Tags    Mapping Code
 // @Accept  json
 // @Produce json
-// @Param   id  path     int true "Mapping Code ID"
+// @Param   id  path     string true "Code ID"
 // @Success 201 {object} utils.Response
 // @Failure 400 {object} middlewares.ResponseError
 // @Failure 401 {object} middlewares.ResponseError
 // @Failure 404 {object} middlewares.ResponseError
 // @Failure 500 {object} middlewares.ResponseError
-// @Router  /mappingCode/{id} [GET]
+// @Router  /mappingCodes/{id} [GET]
+
 func (mappingCodeController *MappingCodeController) FindMappingCodeById(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 
@@ -276,12 +288,19 @@ func (mappingCodeController *MappingCodeController) FindMappingCodeById(c echo.C
 		return err
 	}
 
-	data, errFindMappingCode := mappingCodeController.mappingCodeService.FindMappingCodeById(uint(id))
-
-	if errFindMappingCode != nil {
-		return errFindMappingCode
+	data, err := mappingCodeController.mappingCodeService.FindMappingCodeById(uint(id))
+	if err != nil {
+		if errors.Is(err, utils.ErrMappingCodeNotFound) {
+			res := utils.Response{
+				Data:       nil,
+				Message:    "Data Not Found",
+				StatusCode: 404,
+			}
+		
+			return res.ReturnSingleMessage(c)
+		}
+		return err
 	}
-
 	res := utils.Response{
 		Data:       data,
 		Message:    "Berhasil Get Data Mapping Code",
@@ -290,4 +309,3 @@ func (mappingCodeController *MappingCodeController) FindMappingCodeById(c echo.C
 
 	return res.ReturnSingleMessage(c)
 }
-
