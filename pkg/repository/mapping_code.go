@@ -126,26 +126,19 @@ func (mappingCode *MappingCode) CreateMappingCode(mapping_code *dto.CreateNewMap
 		Priority:   mapping_code.Priority,
 		// IsActive:       mapping_code.IsActive,
 	}
+
 	err := mappingCode.db.Debug().Create(&mappingCodeModel).Error
 
 	if err != nil {
 		return mappingCodeModel, err
 	}
+
 	return mappingCodeModel, nil
 }
 
 // update mapping code
 func (mappingCodeObject *MappingCode) UpdateMappingCode(id uint, mappingCode *dto.UpdateMappingCode) error {
-	// cariPin, _ := mappingCodeObject.FindById(id)
-	// otp, _ := utils.GenerateOTP(12)
-	// var pin *string
-	// if cariPin.Pin == nil {
-	// 	// pin = &otp
-	// } else {
-	// 	pin = cariPin.Pin
-	// }
-
-	update := mappingCodeObject.MappingCodeModel().Where("id = ?", id).Updates(models.MappingCode{
+	update := mappingCodeObject.MappingCodeModel().Where("mappingCodes.id = ?", id).Updates(models.MappingCode{
 		Code:       mappingCode.Code,
 		Definition: mappingCode.Definition,
 		Status:     mappingCode.Status,

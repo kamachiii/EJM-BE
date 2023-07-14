@@ -236,10 +236,7 @@ func (roleController *RoleController) CreateRole(c echo.Context) error {
 	}
 
 	userLoginID := utils.User(c).ID
-	// roleRepoDB := roleController.roleService.RoleRepository
-	// casbinRepoDB := roleController.roleService.CasbinRepository
-	// casbinRepoDB.Begin(roleController.db)
-	// roleRepoDB.Begin(roleController.db)
+	roleRepoDB := roleController.roleService.RoleRepository
 
 	// service
 	var roleService IRoleService
@@ -247,8 +244,7 @@ func (roleController *RoleController) CreateRole(c echo.Context) error {
 
 	data, err := roleService.CreateRole(request, userLoginID)
 	if err != nil {
-		// roleRepoDB.Rollback()
-		// casbinRepoDB.Rollback()
+		roleRepoDB.Rollback()
 		return err
 	}
 
@@ -257,13 +253,11 @@ func (roleController *RoleController) CreateRole(c echo.Context) error {
 		Actions: request.Actions,
 	})
 	if errAkses != nil {
-		// roleRepoDB.Rollback()
-		// casbinRepoDB.Rollback()
+		roleRepoDB.Rollback()
 		return errAkses
 	}
 
-	// roleRepoDB.Commit()
-	// casbinRepoDB.Commit()
+	roleRepoDB.Commit()
 
 	res := utils.Response{
 		Data: data,
