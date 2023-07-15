@@ -2526,21 +2526,21 @@ const docTemplate = `{
         "dto.CreateNewMappingCode": {
             "type": "object",
             "required": [
+                "active",
                 "code",
                 "definition",
-                "isActive",
                 "priority",
                 "status"
             ],
             "properties": {
+                "active": {
+                    "$ref": "#/definitions/dto.ActiveEnum"
+                },
                 "code": {
                     "type": "string"
                 },
                 "definition": {
                     "type": "string"
-                },
-                "isActive": {
-                    "$ref": "#/definitions/dto.ActiveEnum"
                 },
                 "priority": {
                     "type": "integer"
@@ -2553,14 +2553,14 @@ const docTemplate = `{
         "dto.CreateNewUser": {
             "type": "object",
             "required": [
-                "isActive",
+                "active",
                 "name",
                 "password",
                 "roleId",
                 "username"
             ],
             "properties": {
-                "isActive": {
+                "active": {
                     "$ref": "#/definitions/dto.ActiveEnum"
                 },
                 "name": {
@@ -2591,9 +2591,6 @@ const docTemplate = `{
                     "items": {
                         "$ref": "#/definitions/dto.MenusAction"
                     }
-                },
-                "active": {
-                    "type": "boolean"
                 },
                 "name": {
                     "type": "string"
@@ -3004,8 +3001,7 @@ const docTemplate = `{
         "models.Role": {
             "type": "object",
             "required": [
-                "description",
-                "isActive"
+                "description"
             ],
             "properties": {
                 "created_at": {
@@ -3017,9 +3013,6 @@ const docTemplate = `{
                 },
                 "id": {
                     "type": "integer"
-                },
-                "isActive": {
-                    "$ref": "#/definitions/models.ActiveEnum"
                 },
                 "name": {
                     "description": "Main field",
@@ -3065,17 +3058,17 @@ const docTemplate = `{
         "models.User": {
             "type": "object",
             "required": [
-                "isActive"
+                "active"
             ],
             "properties": {
+                "active": {
+                    "$ref": "#/definitions/models.ActiveEnum"
+                },
                 "created_at": {
                     "type": "string"
                 },
                 "id": {
                     "type": "integer"
-                },
-                "isActive": {
-                    "$ref": "#/definitions/models.ActiveEnum"
                 },
                 "name": {
                     "description": "ActiveModel",

@@ -18,14 +18,14 @@ func (userSeeder *UserSeeder) Execute() error {
 			Name: "Haru",
 			Username: "Kazumoto",
 			Password: pw,
-			IsActive: "active",
+			Active: "active",
 			RoleId:   1,
 		},
 		{
 			Name: "Joe",
 			Username: "JoeMama",
 			Password: pw,
-			IsActive: "active",
+			Active: "active",
 			RoleId: 1,
 		},
 	}

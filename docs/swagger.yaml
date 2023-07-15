@@ -36,26 +36,26 @@ definitions:
     type: object
   dto.CreateNewMappingCode:
     properties:
+      active:
+        $ref: '#/definitions/dto.ActiveEnum'
       code:
         type: string
       definition:
         type: string
-      isActive:
-        $ref: '#/definitions/dto.ActiveEnum'
       priority:
         type: integer
       status:
         $ref: '#/definitions/dto.StatusEnum'
     required:
+    - active
     - code
     - definition
-    - isActive
     - priority
     - status
     type: object
   dto.CreateNewUser:
     properties:
-      isActive:
+      active:
         $ref: '#/definitions/dto.ActiveEnum'
       name:
         type: string
@@ -67,7 +67,7 @@ definitions:
       username:
         type: string
     required:
-    - isActive
+    - active
     - name
     - password
     - roleId
@@ -79,8 +79,6 @@ definitions:
         items:
           $ref: '#/definitions/dto.MenusAction'
         type: array
-      active:
-        type: boolean
       name:
         type: string
       object_actions:
@@ -364,8 +362,6 @@ definitions:
         type: string
       id:
         type: integer
-      isActive:
-        $ref: '#/definitions/models.ActiveEnum'
       name:
         description: Main field
         type: string
@@ -377,7 +373,6 @@ definitions:
         type: string
     required:
     - description
-    - isActive
     type: object
   models.RolesMenus:
     properties:
@@ -398,12 +393,12 @@ definitions:
     type: object
   models.User:
     properties:
+      active:
+        $ref: '#/definitions/models.ActiveEnum'
       created_at:
         type: string
       id:
         type: integer
-      isActive:
-        $ref: '#/definitions/models.ActiveEnum'
       name:
         description: ActiveModel
         type: string
@@ -414,7 +409,7 @@ definitions:
       username:
         type: string
     required:
-    - isActive
+    - active
     type: object
   services.LoginResponse:
     properties:

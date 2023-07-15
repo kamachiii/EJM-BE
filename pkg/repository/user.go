@@ -77,6 +77,7 @@ func (register *User) CreateUser(user *dto.CreateNewUser) (models.User, error) {
 		Username: user.Username,
 		Password: user.Password,
 		RoleId:   user.RoleId,
+		Active: models.ActiveEnum(user.Active),
 	}
 	err := register.Db.Debug().Create(&userModel).Preload("Role").Error
 
