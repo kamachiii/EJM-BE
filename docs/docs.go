@@ -16,6 +16,74 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/accessroles": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Role"
+                ],
+                "summary": "API untuk Ambil daftar Role",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Halaman",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Jumlah Data Per halaman",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Mencari Data",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ResponsePaginate"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
         "/actions/bulk": {
             "delete": {
                 "consumes": [
@@ -632,7 +700,73 @@ const docTemplate = `{
                 }
             }
         },
-        "/mappingCode": {
+        "/mappingCodes": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Mapping Codes"
+                ],
+                "summary": "API untuk Ambil semua daftar mapping code",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Halaman",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Jumlah Data Per halaman",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Mencari Data",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ResponsePaginate"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            },
             "delete": {
                 "consumes": [
                     "application/json"
@@ -641,7 +775,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Mapping Code"
+                    "Mapping Codes"
                 ],
                 "summary": "API untuk Delete Mapping Code Bulk",
                 "parameters": [
@@ -689,7 +823,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/mappingCode/create": {
+        "/mappingCodes/create": {
             "post": {
                 "consumes": [
                     "application/json"
@@ -698,7 +832,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Mapping Code"
+                    "Mapping Codes"
                 ],
                 "summary": "API untuk Membuat Mapping Code Baru",
                 "parameters": [
@@ -746,60 +880,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/mappingCode/{id}": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Mapping Code"
-                ],
-                "summary": "API untuk Find Mapping Code By ID",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Mapping Code ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/utils.Response"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    }
-                }
-            },
+        "/mappingCodes/{id}": {
             "put": {
                 "consumes": [
                     "application/json"
@@ -808,7 +889,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Mapping Code"
+                    "Mapping Codes"
                 ],
                 "summary": "API untuk Update Data Mapping Code",
                 "parameters": [
@@ -870,7 +951,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Mapping Code"
+                    "Mapping Codes"
                 ],
                 "summary": "API untuk Delete Mapping Code",
                 "parameters": [
@@ -887,74 +968,6 @@ const docTemplate = `{
                         "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/utils.Response"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
-        "/mappingCodes": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Mapping Code"
-                ],
-                "summary": "API untuk Ambil semua daftar mapping code",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Halaman",
-                        "name": "page",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "Jumlah Data Per halaman",
-                        "name": "page_size",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "Mencari Data",
-                        "name": "search",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/utils.ResponsePaginate"
                         }
                     },
                     "400": {
@@ -2459,6 +2472,17 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "dto.ActiveEnum": {
+            "type": "string",
+            "enum": [
+                "active",
+                "inActive"
+            ],
+            "x-enum-varnames": [
+                "Active",
+                "InActive"
+            ]
+        },
         "dto.CreateAction": {
             "type": "object",
             "required": [
@@ -2516,25 +2540,29 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "isActive": {
-                    "type": "boolean"
+                    "$ref": "#/definitions/dto.ActiveEnum"
                 },
                 "priority": {
                     "type": "integer"
                 },
                 "status": {
-                    "type": "boolean"
+                    "$ref": "#/definitions/dto.StatusEnum"
                 }
             }
         },
         "dto.CreateNewUser": {
             "type": "object",
             "required": [
+                "isActive",
                 "name",
                 "password",
                 "roleId",
                 "username"
             ],
             "properties": {
+                "isActive": {
+                    "$ref": "#/definitions/dto.ActiveEnum"
+                },
                 "name": {
                     "type": "string"
                 },
@@ -2790,6 +2818,17 @@ const docTemplate = `{
                 }
             }
         },
+        "dto.StatusEnum": {
+            "type": "string",
+            "enum": [
+                "success",
+                "fail"
+            ],
+            "x-enum-varnames": [
+                "Success",
+                "Fail"
+            ]
+        },
         "dto.ToggleActive": {
             "type": "object",
             "properties": {
@@ -2905,6 +2944,17 @@ const docTemplate = `{
                 }
             }
         },
+        "models.ActiveEnum": {
+            "type": "string",
+            "enum": [
+                "active",
+                "inActive"
+            ],
+            "x-enum-varnames": [
+                "Active",
+                "InActive"
+            ]
+        },
         "models.Menu": {
             "type": "object",
             "properties": {
@@ -2954,7 +3004,8 @@ const docTemplate = `{
         "models.Role": {
             "type": "object",
             "required": [
-                "description"
+                "description",
+                "isActive"
             ],
             "properties": {
                 "created_at": {
@@ -2967,8 +3018,8 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "is_active": {
-                    "type": "boolean"
+                "isActive": {
+                    "$ref": "#/definitions/models.ActiveEnum"
                 },
                 "name": {
                     "description": "Main field",
@@ -3013,6 +3064,9 @@ const docTemplate = `{
         },
         "models.User": {
             "type": "object",
+            "required": [
+                "isActive"
+            ],
             "properties": {
                 "created_at": {
                     "type": "string"
@@ -3020,10 +3074,11 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "is_active": {
-                    "type": "boolean"
+                "isActive": {
+                    "$ref": "#/definitions/models.ActiveEnum"
                 },
                 "name": {
+                    "description": "ActiveModel",
                     "type": "string"
                 },
                 "roleId": {

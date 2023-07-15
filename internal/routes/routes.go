@@ -29,7 +29,6 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 	actionController := controllers.NewActionController(server)
 	mappingCodeController := controllers.NewMappingCodeController(server)
 
-
 	// middleware
 	server.Echo.Validator = &middlewares.CustomValidator{
 		Validator: validator.New(),
@@ -172,23 +171,21 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			roleRoutes.PATCH("/:id", roleController.UpdateRole)
 			roleRoutes.GET("/:id", roleController.FindRoleById)
 
-			roleRoutes.GET("/access-role", roleController.GetAccessRole)
+			roleRoutes.GET("/accessroles", roleController.GetAccessRole)
 			roleRoutes.POST("/set-access-role", roleController.SetAccessRole)
 			roleRoutes.DELETE("/delete-access-role", roleController.DeleteAccessRole)
 		}
 
-				//Mapping Code
-				mappingCodeRoutes := prefix.Group("/mappingCodes")
-				{
-					mappingCodeRoutes.GET("", mappingCodeController.FindMappingCodes)
-					mappingCodeRoutes.GET("/:id", mappingCodeController.FindMappingCodeById)
-					mappingCodeRoutes.POST("/create", mappingCodeController.CreateMappingCode)
-					mappingCodeRoutes.PUT("/:id", mappingCodeController.UpdateMappingCode)
-					mappingCodeRoutes.DELETE("/:id", mappingCodeController.DeleteMappingCode)
-					// mappingCodeRoutes.DELETE("", mappingCodeController.DeleteMappingCodeBulk)
-				}
-		
-		
+		//Mapping Code
+		mappingCodeRoutes := prefix.Group("/mappingCodes")
+		{
+			mappingCodeRoutes.GET("", mappingCodeController.FindMappingCodes)
+			mappingCodeRoutes.GET("/:id", mappingCodeController.FindMappingCodeById)
+			mappingCodeRoutes.POST("/create", mappingCodeController.CreateMappingCode)
+			mappingCodeRoutes.PUT("/:id", mappingCodeController.UpdateMappingCode)
+			mappingCodeRoutes.DELETE("/:id", mappingCodeController.DeleteMappingCode)
+			mappingCodeRoutes.DELETE("", mappingCodeController.DeleteMappingCodeBulk)
+		}
+
 	}
 }
-
