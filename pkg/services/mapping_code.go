@@ -28,7 +28,7 @@ type IMappingCodeService interface {
 	FindMappingCodes(mappingCodes *dto.GetMappingCodes) ([]models.MappingCode, *models.Paginate, error)
 	FindMappingCodeById(id uint) (models.MappingCode, error)
 	// FindMappingCodeByDefinition(definition string) error
-	CreateMappingCode(mappingCode *dto.CreateNewMappingCode) (models.MappingCode, error)
+	CreateMappingCode(mappingCode *dto.CreateMappingkeywordlist) (models.MappingCode, error)
 	UpdateMappingCode(id uint, mappingCode *dto.UpdateMappingCode) error
 	DeleteMappingCode(id uint) error
 }
@@ -79,7 +79,7 @@ func (mappingCode *MappingCodeService) FindMappingCodes(mappingCodes *dto.GetMap
 }
 
 // update user [tested]
-func (mappingCode *MappingCodeService) UpdateMappingCode(id uint, mapping_code *dto.UpdateMappingCode) error {
+func ( mappingCode *MappingCodeService) UpdateMappingCode(id uint, mapping_code *dto.UpdateMappingCode) error {
 	var mappingCodeRepo repository.MappingCodeRepository
 	mappingCodeRepo = mappingCode.MappingCodeRepository
 

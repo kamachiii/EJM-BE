@@ -52,6 +52,24 @@ type PayloadCreateAction struct {
 	Data []CreateAction `json:"data" validate:"required,min=1"`
 }
 
+// mapping keyword list
+type CreateMappingkeywordlist struct {
+	Keyword string `json:"MappingKeywordList" form:"Name" validate:"required"`
+}
+
+type GetMappingkeywordlist struct {
+	BasePagination
+}
+
+type UpdateMappingkeywordlist struct {
+	ID uint `params:"id" validate:"required"`
+	CreateMappingkeywordlist
+}
+
+type DeleteMappingkeywordlist struct {
+	Ids []uint `json:"ids" validate:"required,min=1"`
+}
+
 // mapping code
 type CreateNewMappingCode struct {
 	Code       string `json:"code" form:"code" validate:"required"`
