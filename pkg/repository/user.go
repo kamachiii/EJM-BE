@@ -164,11 +164,12 @@ func (register *User) FindUsers(pagination *models.Paginate, search string, valu
 // update user
 func (register *User) UpdateUser(id uint, user *dto.UpdateUser) error {
 
-	update := register.UserModel().Where("users.id = ?", id).Updates(
+	update := register.UserModel().Where("id = ?", id).Updates(
 		models.User{
 			Username: user.Username,
 			Password: user.Password,
 			RoleId:   user.RoleId,
+			Name: user.Name,
 		},
 	)
 

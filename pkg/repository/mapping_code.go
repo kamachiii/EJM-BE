@@ -138,7 +138,7 @@ func (mappingCode *MappingCode) CreateMappingCode(mapping_code *dto.CreateNewMap
 
 // update mapping code
 func (mappingCodeObject *MappingCode) UpdateMappingCode(id uint, mappingCode *dto.UpdateMappingCode) error {
-	update := mappingCodeObject.MappingCodeModel().Where("mappingCodes.id = ?", id).Updates(models.MappingCode{
+	update := mappingCodeObject.MappingCodeModel().Where("id = ?", id).Updates(models.MappingCode{
 		Code:       mappingCode.Code,
 		Definition: mappingCode.Definition,
 		Status:     models.StatusEnum(mappingCode.Status),
