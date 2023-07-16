@@ -231,3 +231,7 @@ type UpdateJenisTransaksi struct {
 	ID uint `params:"id" validate:"required"`
 	CreateNewJenisTransaksi
 }
+
+type GetJenisTransaksi struct {
+	BasePagination
+}

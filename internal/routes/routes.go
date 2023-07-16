@@ -28,6 +28,7 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 	menuController := controllers.NewMenuController(server)
 	actionController := controllers.NewActionController(server)
 	mappingCodeController := controllers.NewMappingCodeController(server)
+	jenisTransaksiController := controllers.NewMJenisTransaksiController(server)
 
 	// middleware
 	server.Echo.Validator = &middlewares.CustomValidator{
@@ -185,6 +186,17 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			mappingCodeRoutes.PUT("/:id", mappingCodeController.UpdateMappingCode)
 			mappingCodeRoutes.DELETE("/:id", mappingCodeController.DeleteMappingCode)
 			mappingCodeRoutes.DELETE("", mappingCodeController.DeleteMappingCodeBulk)
+		}
+
+		//Mapping Code
+		jenisTransaksiRoutes := prefix.Group("/jenisTransaksi")
+		{
+			jenisTransaksiRoutes.GET("", jenisTransaksiController.FindJenisTransaksi)
+			jenisTransaksiRoutes.GET("/:id", jenisTransaksiController.FindJenisTransaksiById)
+			jenisTransaksiRoutes.POST("/create", jenisTransaksiController.CreateJenisTransaksi)
+			jenisTransaksiRoutes.PUT("/:id", jenisTransaksiController.UpdateJenisTransaksi)
+			jenisTransaksiRoutes.DELETE("/:id", jenisTransaksiController.DeleteJenisTransaksi)
+			// jenisTransaksiRoutes.DELETE("", jenisTransaksiController.DeleteMappingCodeBulk)
 		}
 
 	}
