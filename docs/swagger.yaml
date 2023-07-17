@@ -7,6 +7,13 @@ definitions:
     x-enum-varnames:
     - Active
     - InActive
+  dto.ChangePassword:
+    properties:
+      newPassword:
+        type: string
+    required:
+    - newPassword
+    type: object
   dto.CreateAction:
     properties:
       default:
@@ -21,6 +28,13 @@ definitions:
     - method
     - name
     - path
+    type: object
+  dto.CreateMappingkeywordlist:
+    properties:
+      MappingKeywordList:
+        type: string
+    required:
+    - MappingKeywordList
     type: object
   dto.CreateMenu:
     properties:
@@ -1271,6 +1285,159 @@ paths:
       summary: API untuk Membuat Mapping Code Baru
       tags:
       - Mapping Codes
+  /mappingKeywordList:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Halaman
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: Jumlah Data Per halaman
+        in: query
+        name: page_size
+        required: true
+        type: string
+      - description: Mencari Data
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponsePaginate'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Ambil semua daftar mapping keyword list
+      tags:
+      - Keyword List
+  /mappingKeywordList/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Keyword List ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Delete Mapping Keywprd List
+      tags:
+      - Keyword List
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Keyword List By ID
+      tags:
+      - Keyword List
+  /mappingKeywordList/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Daftar Mapping Keyword List Baru
+        in: body
+        name: mappingkeywordlist
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateMappingkeywordlist'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Membuat Mapping Keyword List Baru
+      tags:
+      - Keyword List
   /menus:
     get:
       consumes:
@@ -2139,6 +2306,48 @@ paths:
           schema:
             $ref: '#/definitions/middlewares.ResponseError'
       summary: API untuk Update Data User
+      tags:
+      - User
+  /users/changePw/{id}:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update password
+        in: body
+        name: newPassword
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ChangePassword'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk change password
       tags:
       - User
   /users/register:

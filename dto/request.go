@@ -40,6 +40,10 @@ type UpdateUser struct {
 	CreateNewUser
 }
 
+type ChangePassword struct {
+	NewPassword string `json:"newPassword" validate:"required"`
+}
+
 type ToggleActive struct {
 	ID      uint  `param:"id" validate:"required" swaggerignore:"true"`
 	Payload *bool `json:"payload"`

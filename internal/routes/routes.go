@@ -20,8 +20,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func InitializeRoute(server *server.Server, cfg *config.Config) 
-{
+func InitializeRoute(server *server.Server, cfg *config.Config) {
 	// controller
 	userController := controllers.NewUserController(server)
 	roleController := controllers.NewRoleController(server)
@@ -29,7 +28,8 @@ func InitializeRoute(server *server.Server, cfg *config.Config)
 	menuController := controllers.NewMenuController(server)
 	actionController := controllers.NewActionController(server)
 	mappingCodeController := controllers.NewMappingCodeController(server)
-	mappingKeywordListController := controllers.NewMappingKeywordListcontroller(server)
+	mappingKeywordListController := controllers.NewMappingKeywordListController(server)
+	jenisTransaksiController := controllers.NewMJenisTransaksiController(server)
 
 	// middleware
 	server.Echo.Validator = &middlewares.CustomValidator{
@@ -134,6 +134,7 @@ func InitializeRoute(server *server.Server, cfg *config.Config)
 			userRoutes.GET("", userController.FindUsers)
 			userRoutes.PUT("/status/:id", userController.ToggleActiveNonActive)
 			userRoutes.PUT("/:id", userController.UpdateUser)
+			userRoutes.PUT("/changePw/:id", userController.ChangePassword)
 			userRoutes.GET("/:id", userController.FindUserById)
 			userRoutes.DELETE("/:id", userController.DeleteUser)
 			userRoutes.DELETE("", userController.DeleteUserBulk)
@@ -199,6 +200,7 @@ func InitializeRoute(server *server.Server, cfg *config.Config)
 			mappingKeywordListRoutes.PUT("/:id", mappingKeywordListController.UpdateMappingkeywordlist)
 			mappingKeywordListRoutes.DELETE("/:id", mappingKeywordListController.DeleteMappingkeywordlist)
 		}
+
 		//Mapping Code
 		jenisTransaksiRoutes := prefix.Group("/jenisTransaksi")
 		{

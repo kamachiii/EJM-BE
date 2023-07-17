@@ -29,6 +29,7 @@ func initMigration(cfg *config.Config, args []string) {
 			models.ActionsMenus{},
 			models.MappingCode{},
 			models.MJenisTransaksi{},
+			models.MappingKeywordList{},
 			
 		}
 		var filtered []interface{}
