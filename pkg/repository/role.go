@@ -72,9 +72,7 @@ func (roleObject *Role) CreateRole(role *dto.CreateRole) (models.Role, error) {
 
 	roleModel := models.Role{
 		Name: role.Name,
-		ActiveModel: models.ActiveModel{
-			IsActive: &role.Active,
-		},
+		
 	}
 	err := roleObject.db.Create(&roleModel).Error
 
@@ -119,9 +117,7 @@ func (roleObject *Role) UpdateRole(role *dto.UpdateRole) (models.Role, error) {
 	}
 
 	data := models.Role{
-		ActiveModel: models.ActiveModel{
-			IsActive: &role.Active,
-		},
+		
 		Name:        role.Name,
 	}
 

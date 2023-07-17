@@ -28,6 +28,11 @@ func initMigration(cfg *config.Config, args []string) {
 			models.Menu{},
 			models.ActionsMenus{},
 			models.MappingCode{},
+			models.MappingBinCard{},
+			models.MappingKeywordList{},
+			models.MJenisTransaksi{},
+			models.MappingKeywordList{},
+
 		}
 		var filtered []interface{}
 		if args[0] != utils.ALL {
@@ -58,7 +63,7 @@ func initMigration(cfg *config.Config, args []string) {
 	case <-isError:
 		log.Println("Migration failed!")
 	}
-	log.Printf("It takes %f ms",time.Since(start).Seconds())
+	log.Printf("It takes %f ms", time.Since(start).Seconds())
 }
 
 func NewMigration(cfg *config.Config) *cobra.Command {
@@ -70,3 +75,45 @@ func NewMigration(cfg *config.Config) *cobra.Command {
 		},
 	}
 }
+
+// func init() {
+// 	Migrations = append(Migrations, &gormigrate.Migration{
+// 		ID: "20230714000001",
+// 		Migrate: func(tx *gorm.DB) error {
+// 			// GORM raw SQL to create the enum type
+// 			rawSQL := "CREATE TYPE status_enum AS ENUM ('success', 'fail');"
+// 			if err := tx.Exec(rawSQL).Error; err != nil {
+// 				return err
+// 			}
+
+// 			// GORM raw SQL to add the column with the enum type
+// 			rawSQL = "ALTER TABLE mapping_codes ADD COLUMN status status_enum;"
+// 			if err := tx.Exec(rawSQL).Error; err != nil {
+// 				return err
+// 			}
+
+// 			return nil
+// 		},
+// 		Rollback: func(tx *gorm.DB) error {
+// 			// GORM raw SQL to drop the column
+// 			rawSQL := "ALTER TABLE mapping_codes DROP COLUMN status;"
+// 			if err := tx.Exec(rawSQL).Error; err != nil {
+// 				return err
+// 			}
+
+// 			// GORM raw SQL to drop the enum type
+// 			rawSQL = "DROP TYPE status_enum;"
+// 			if err := tx.Exec(rawSQL).Error; err != nil {
+// 				return err
+// 			}
+
+// 			return nil
+// 		},
+// 	})
+// }
+
+// var Migrations = []*gormigrate.Migration{
+// 	// Definisi migrasi-migrasi lainnya (jika ada)
+// 	// ...
+// }
+

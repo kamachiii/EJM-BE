@@ -93,11 +93,11 @@ func (mappingBinCardObject *MappingBinCard) FindMappingBinCardById(id uint) (mod
 }
 
 // find by definition
-func (mappingBinCardObject *MappingBinCard) FindMappingBinCardByDefinition(definition string) error {
+func (mappingBinCardObject *MappingBinCard) FindMappingBinCardByBin(bin string) error {
 	mappingBinCard := models.MappingBinCard{}
 
 	if err := mappingBinCardObject.MappingBinCardModel().
-		First(&mappingBinCard, "definition = ?", definition).Error; err != nil {
+		First(&mappingBinCard, "bin = ?", bin).Error; err != nil {
 		return err
 	}
 

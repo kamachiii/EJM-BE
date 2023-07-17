@@ -16,36 +16,36 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type MappingCodeController struct {
+type MappingBinCardController struct {
 	db                 *gorm.DB
 	server             server.IServerInterface
-	mappingCodeService *services.MappingCodeService
+	mappingBinCardService *services.MappingBinCardService
 }
 
-func NewMappingCodeController(srv *server.Server) *MappingCodeController {
+func NewMappingBinCardController(srv *server.Server) *MappingBinCardController {
 	db := srv.DB
-	return &MappingCodeController{
+	return &MappingBinCardController{
 		server: srv,
 		db:     db,
-		mappingCodeService: services.NewMappingCodeService(&services.MappingCodeService{
-			MappingCodeRepository: repository.NewMappingCodeRepository(srv.DB),
+		mappingBinCardService: services.NewMappingBinCardService(&services.MappingBinCardService{
+			MappingBinCardRepository: repository.NewMappingBinCardRepository(srv.DB),
 		})}
 }
 
-// Daftar Mapping Code Baru
-// @Summary API untuk Membuat Mapping Code Baru
-// @Tags    Mapping Codes
+// Daftar Mapping BinCard Baru
+// @Summary API untuk Membuat Mapping BinCard Baru
+// @Tags    Mapping BinCards
 // @Accept  json
 // @Produce json
-// @Param   mappingcode body     dto.CreateNewMappingCode true "Daftar Mapping Code Baru"
+// @Param   mappingBinCard body     dto.CreateNewMappingBinCard true "Daftar Mapping BinCard Baru"
 // @Success 201  {object} utils.Response
 // @Failure 400  {object} middlewares.ResponseError
 // @Failure 401  {object} middlewares.ResponseError
 // @Failure 404  {object} middlewares.ResponseError
 // @Failure 500  {object} middlewares.ResponseError
-// @Router  /mappingCodes/create [post]
-func (mappingCodeController *MappingCodeController) CreateMappingCode(c echo.Context) error {
-	req := new(dto.CreateNewMappingCode)
+// @Router  /mappingBinCards/create [post]
+func (mappingBinCardController *MappingBinCardController) CreateMappingBinCard(c echo.Context) error {
+	req := new(dto.CreateNewMappingBinCard)
 	if err := c.Bind(req); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, "Gagal melakukan binding data")
 	}
@@ -54,7 +54,7 @@ func (mappingCodeController *MappingCodeController) CreateMappingCode(c echo.Con
 		return echo.NewHTTPError(http.StatusBadRequest, "Validasi gagal")
 	}
 
-	data, err := mappingCodeController.mappingCodeService.CreateMappingCode(req)
+	data, err := mappingBinCardController.mappingBinCardService.CreateMappingBinCard(req)
 	if err != nil {
 		if errors.Is(err, utils.ErrDefinitionAlreadyExists) {
 			res := utils.Response{
@@ -77,9 +77,9 @@ func (mappingCodeController *MappingCodeController) CreateMappingCode(c echo.Con
 	return res.ReturnSingleMessage(c)
 }
 
-// Ambil Daftar Mapping Code
-// @Summary API untuk Ambil semua daftar mapping code
-// @Tags    Mapping Codes
+// Ambil Daftar Mapping BinCard
+// @Summary API untuk Ambil semua daftar mapping BinCard
+// @Tags    Mapping BinCards
 // @Accept  json
 // @Produce json
 // @Param   page      query    string true  "Halaman"
@@ -90,9 +90,9 @@ func (mappingCodeController *MappingCodeController) CreateMappingCode(c echo.Con
 // @Failure 401       {object} middlewares.ResponseError
 // @Failure 404       {object} middlewares.ResponseError
 // @Failure 500       {object} middlewares.ResponseError
-// @Router  /mappingCodes [get]
-func (mappingCodeController *MappingCodeController) FindMappingCodes(c echo.Context) error {
-	req := new(dto.GetMappingCodes)
+// @Router  /mappingBinCards [get]
+func (mappingBinCardController *MappingBinCardController) FindMappingBinCards(c echo.Context) error {
+	req := new(dto.GetMappingBinCards)
 
 	if err := c.Bind(req); err != nil {
 		return err
@@ -101,17 +101,17 @@ func (mappingCodeController *MappingCodeController) FindMappingCodes(c echo.Cont
 		return err
 	}
 
-	data, meta, err := mappingCodeController.mappingCodeService.FindMappingCodes(req)
+	data, meta, err := mappingBinCardController.mappingBinCardService.FindMappingBinCards(req)
 	if err != nil {
 		return err
 	}
 
 	res := utils.ResponsePaginate{
-		Key:  "mapping_codes",
+		Key:  "mapping_bin_cards",
 		Meta: meta,
 		Response: utils.Response{
 			Data:       data,
-			Message:    "Sukses mengambil data mapping codes",
+			Message:    "Sukses mengambil data mapping BinCards",
 			StatusCode: 200,
 		},
 	}
@@ -120,21 +120,21 @@ func (mappingCodeController *MappingCodeController) FindMappingCodes(c echo.Cont
 
 }
 
-// Update Mapping Code
-// @Summary API untuk Update Data Mapping Code
-// @Tags    Mapping Codes
+// Update Mapping BinCard
+// @Summary API untuk Update Data Mapping BinCard
+// @Tags    Mapping BinCards
 // @Accept  json
 // @Produce json
-// @Param   id   path     int               true "Code ID"
-// @Param   mappingCode body     dto.CreateNewMappingCode true "Update Mapping Code Baru"
+// @Param   id   path     int               true "BinCard ID"
+// @Param   mappingBinCard body     dto.CreateNewMappingBinCard true "Update Mapping BinCard Baru"
 // @Success 201  {object} utils.Response
 // @Failure 400  {object} middlewares.ResponseError
 // @Failure 401  {object} middlewares.ResponseError
 // @Failure 404  {object} middlewares.ResponseError
 // @Failure 500  {object} middlewares.ResponseError
-// @Router  /mappingCodes/{id} [put]
-func (mappingCodeController *MappingCodeController) UpdateMappingCode(c echo.Context) error {
-	req := new(dto.UpdateMappingCode)
+// @Router  /mappingBinCards/{id} [put]
+func (mappingBinCardController *MappingBinCardController) UpdateMappingBinCard(c echo.Context) error {
+	req := new(dto.UpdateMappingBinCard)
 	id, errConvert := strconv.Atoi(c.Param("id"))
 	if errConvert != nil {
 		return errConvert
@@ -149,21 +149,21 @@ func (mappingCodeController *MappingCodeController) UpdateMappingCode(c echo.Con
 	}
 
 	// Cek apakah ID tersedia dalam database
-	_, errFind := mappingCodeController.mappingCodeService.FindMappingCodeById(uint(id))
+	_, errFind := mappingBinCardController.mappingBinCardService.FindMappingBinCardById(uint(id))
 	if errFind != nil {
-		if errors.Is(errFind, utils.ErrMappingCodeNotFound) {
+		if errors.Is(errFind, utils.ErrMappingBinCardNotFound) {
 			res := utils.Response{
 				Data:       nil,
 				Message:    "Data Not Found",
 				StatusCode: 404,
 			}
-		
+
 			return res.ReturnSingleMessage(c)
 		}
 		return errFind
 	}
-	
-	err := mappingCodeController.mappingCodeService.UpdateMappingCode(uint(id), req)
+
+	err := mappingBinCardController.mappingBinCardService.UpdateMappingBinCard(uint(id), req)
 	if err != nil {
 		return err
 	}
@@ -177,40 +177,40 @@ func (mappingCodeController *MappingCodeController) UpdateMappingCode(c echo.Con
 	return res.ReturnSingleMessage(c)
 }
 
-// Delete Mapping Code
-// @Summary API untuk Delete Mapping Code
-// @Tags    Mapping Codes
+// Delete Mapping BinCard
+// @Summary API untuk Delete Mapping BinCard
+// @Tags    Mapping BinCards
 // @Accept  json
 // @Produce json
-// @Param   id  path     int true "Code ID"
+// @Param   id  path     int true "BinCard ID"
 // @Success 201 {object} utils.Response
 // @Failure 400 {object} middlewares.ResponseError
 // @Failure 401 {object} middlewares.ResponseError
 // @Failure 404 {object} middlewares.ResponseError
 // @Failure 500 {object} middlewares.ResponseError
-// @Router  /mappingCodes/{id} [delete]
-func (mappingCodeController *MappingCodeController) DeleteMappingCode(c echo.Context) error {
+// @Router  /mappingBinCards/{id} [delete]
+func (mappingBinCardController *MappingBinCardController) DeleteMappingBinCard(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 
-	// mappingCodeRepo := mappingCodeController.mappingCodeService.RegisterRepository
+	// mappingBinCardRepo := mappingBinCardController.mappingBinCardService.RegisterRepository
 
-	// mappingCodeRepo.Begin(mappingCodeController.db)
+	// mappingBinCardRepo.Begin(mappingBinCardController.db)
 
-	err = mappingCodeController.mappingCodeService.DeleteMappingCode(uint(id))
+	err = mappingBinCardController.mappingBinCardService.DeleteMappingBinCard(uint(id))
 	if err != nil {
-		if errors.Is(err, utils.ErrMappingCodeNotFound) {
+		if errors.Is(err, utils.ErrMappingBinCardNotFound) {
 			res := utils.Response{
 				Data:       nil,
 				Message:    "Data Not Found",
 				StatusCode: 404,
 			}
-		
+
 			return res.ReturnSingleMessage(c)
 		}
 		return err
 	}
 
-	// mappingCodeRepo.Commit()
+	// mappingBinCardRepo.Commit()
 
 	res := utils.Response{
 		Data:       nil,
@@ -221,20 +221,20 @@ func (mappingCodeController *MappingCodeController) DeleteMappingCode(c echo.Con
 	return res.ReturnSingleMessage(c)
 }
 
-// Delete Mapping Code Bulk
-// @Summary API untuk Delete Mapping Code Bulk
-// @Tags    Mapping Codes
+// Delete Mapping BinCard Bulk
+// @Summary API untuk Delete Mapping BinCard Bulk
+// @Tags    Mapping BinCards
 // @Accept  json
 // @Produce json
-// @Param   mapping_code_ids body     dto.DeleteMappingCodeBulk true "Delete Mapping Code Bulk"
+// @Param   mapping_BinCard_ids body     dto.DeleteMappingBinCardBulk true "Delete Mapping BinCard Bulk"
 // @Success 201      {object} utils.Response
 // @Failure 400      {object} middlewares.ResponseError
 // @Failure 401      {object} middlewares.ResponseError
 // @Failure 404      {object} middlewares.ResponseError
 // @Failure 500      {object} middlewares.ResponseError
-// @Router  /mappingCodes [delete]
-func (mappingCodeController *MappingCodeController) DeleteMappingCodeBulk(c echo.Context) error {
-	req := new(dto.DeleteMappingCodeBulk)
+// @Router  /mappingBinCards [delete]
+func (mappingBinCardController *MappingBinCardController) DeleteMappingBinCardBulk(c echo.Context) error {
+	req := new(dto.DeleteMappingBinCardBulk)
 	if err := c.Bind(req); err != nil {
 		return err
 	}
@@ -242,27 +242,27 @@ func (mappingCodeController *MappingCodeController) DeleteMappingCodeBulk(c echo
 		return err
 	}
 
-	// mappingCodeRepo := mappingCodeController.mappingCodeService.RegisterRepository
+	// mappingBinCardRepo := mappingBinCardController.mappingBinCardService.RegisterRepository
 
-	// mappingCodeRepo.Begin(mappingCodeController.db)
+	// mappingBinCardRepo.Begin(mappingBinCardController.db)
 
 	for _, id := range req.Ids {
-		err := mappingCodeController.mappingCodeService.DeleteMappingCode(uint(id))
+		err := mappingBinCardController.mappingBinCardService.DeleteMappingBinCard(uint(id))
 		if err != nil {
-			if errors.Is(err, utils.ErrMappingCodeNotFound) {
+			if errors.Is(err, utils.ErrMappingBinCardNotFound) {
 				res := utils.Response{
 					Data:       nil,
 					Message:    "Data Not Found",
 					StatusCode: 404,
 				}
-			
+
 				return res.ReturnSingleMessage(c)
 			}
 				return err
 		}
 	}
 
-	// mappingCodeRepo.Commit()
+	// mappingBinCardRepo.Commit()
 
 	res := utils.Response{
 		Data:       nil,
@@ -273,42 +273,42 @@ func (mappingCodeController *MappingCodeController) DeleteMappingCodeBulk(c echo
 	return res.ReturnSingleMessage(c)
 }
 
-// Find Mapping Code Berdasarkan ID
-// @Summary API untuk Find Mapping Code By ID
-// @Tags    Mapping Code
+// Find Mapping BinCard Berdasarkan ID
+// @Summary API untuk Find Mapping BinCard By ID
+// @Tags    Mapping BinCard
 // @Accept  json
 // @Produce json
-// @Param   id  path     string true "Code ID"
+// @Param   id  path     string true "BinCard ID"
 // @Success 201 {object} utils.Response
 // @Failure 400 {object} middlewares.ResponseError
 // @Failure 401 {object} middlewares.ResponseError
 // @Failure 404 {object} middlewares.ResponseError
 // @Failure 500 {object} middlewares.ResponseError
-// @Router  /mappingCodes/{id} [GET]
+// @Router  /mappingBinCards/{id} [GET]
 
-func (mappingCodeController *MappingCodeController) FindMappingCodeById(c echo.Context) error {
+func (mappingBinCardController *MappingBinCardController) FindMappingBinCardById(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
 		return err
 	}
 
-	data, err := mappingCodeController.mappingCodeService.FindMappingCodeById(uint(id))
+	data, err := mappingBinCardController.mappingBinCardService.FindMappingBinCardById(uint(id))
 	if err != nil {
-		if errors.Is(err, utils.ErrMappingCodeNotFound) {
+		if errors.Is(err, utils.ErrMappingBinCardNotFound) {
 			res := utils.Response{
 				Data:       nil,
 				Message:    "Data Not Found",
 				StatusCode: 404,
 			}
-		
+
 			return res.ReturnSingleMessage(c)
 		}
 		return err
 	}
 	res := utils.Response{
 		Data:       data,
-		Message:    "Berhasil Get Data Mapping Code",
+		Message:    "Berhasil Get Data Mapping BinCard",
 		StatusCode: 200,
 	}
 

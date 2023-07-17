@@ -101,7 +101,7 @@ func (userController *UserController) RegisterUser(c echo.Context) error {
 	if err := c.Bind(req); err != nil {
 		return err
 	}
-	
+
 	if err := c.Validate(req); err != nil {
 		return err
 	}
@@ -224,6 +224,50 @@ func (userController *UserController) UpdateUser(c echo.Context) error {
 	res := utils.Response{
 		Data:       nil,
 		Message:    "Berhasil Update data",
+		StatusCode: 201,
+	}
+
+	return res.ReturnSingleMessage(c)
+}
+
+// Change Password
+// @Summary API untuk change password
+// @Tags    User
+// @Accept  json
+// @Produce json
+// @Param   id   path     int               true "User ID"
+// @Param   newPassword body     dto.ChangePassword     true "Update password"
+// @Success 201  {object} utils.Response
+// @Failure 400  {object} middlewares.ResponseError
+// @Failure 401  {object} middlewares.ResponseError
+// @Failure 404  {object} middlewares.ResponseError
+// @Failure 500  {object} middlewares.ResponseError
+// @Router  /users/changePw/{id} [put]
+func (userController *UserController) ChangePassword(c echo.Context) error {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return err
+	}
+
+	req := new(dto.ChangePassword)
+	if err := c.Bind(req); err != nil {
+		return err
+	}
+
+	// userRepo := userController.registerService.RegisterRepository
+	// userRepo.Begin(userController.db)
+
+	err = userController.registerService.ChangePassword(uint(id), req.NewPassword)
+	if err != nil {
+		// userRepo.Rollback()
+		return err
+	}
+
+	// userRepo.Commit()
+
+	res := utils.Response{
+		Data:       nil,
+		Message:    "Password berhasil diubah",
 		StatusCode: 201,
 	}
 

@@ -469,7 +469,7 @@ func (roleController *RoleController) UpdateAccessRole(c echo.Context) error {
 // @Failure 401       {object} middlewares.ResponseError
 // @Failure 404       {object} middlewares.ResponseError
 // @Failure 500       {object} middlewares.ResponseError
-// @Router  /roles [get]
+// @Router  /accessroles [get]
 func (roleController *RoleController) GetAccessRole(c echo.Context) error {
 	id, err := strconv.Atoi(c.QueryParam("roleId"))
 

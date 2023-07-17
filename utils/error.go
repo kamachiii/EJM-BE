@@ -41,6 +41,37 @@ var (
 		},
 	}
 
+	ErrMappingCodeNotFound = &BeError{
+		status: http.StatusNotFound,
+		msg: &i18n.Message{
+			ID:    "user.not.found",
+			Other: "User Not Found",
+		},
+	}
+
+	ErrMappingBinCardNotFound = &BeError{
+		status: http.StatusNotFound,
+		msg: &i18n.Message{
+			ID:    "user.not.found",
+			Other: "User Not Found",
+		},
+	}
+
+	ErrMappingKeywordListNotFound = &BeError{
+		status: http.StatusNotFound,
+		msg: &i18n.Message{
+			ID:    "user.not.found",
+			Other: "User Not Found",
+		},
+	}
+
+	ErrJenisTransaksiNotFound = &BeError{
+		status: http.StatusNotFound,
+		msg: &i18n.Message{
+			ID:    "JenisTransaksi.not.found",
+			Other: "JenisTransaksi Not Found",
+		},
+	}
 	ErrLookupNotFound = &BeError{
 		status: http.StatusNotFound,
 		msg: &i18n.Message{
@@ -63,7 +94,7 @@ var (
 			Other: "Role Not Found",
 		},
 	}
-	
+
 	ErrRoleAlreadyExists = &BeError{
 		status: http.StatusNotFound,
 		msg: &i18n.Message{
@@ -78,11 +109,25 @@ var (
 			Other: "Mapping Code Not Found",
 		},
 	}
+	ErrMappingBinCardNotExists = &BeError{
+		status: http.StatusNotFound,
+		msg: &i18n.Message{
+			ID:    "mappingBinCard.not.found",
+			Other: "Mapping Bin Card Not Found",
+		},
+	}
 	ErrDefinitionAlreadyExists = &BeError{
 		status: http.StatusNotFound,
 		msg: &i18n.Message{
 			ID:    "mappingCode.already.exists",
 			Other: "Mapping Code already exists",
+		},
+	}
+	ErrTransactionTypeAlreadyExists = &BeError{
+		status: http.StatusNotFound,
+		msg: &i18n.Message{
+			ID:    "TransactionType.already.exists",
+			Other: "Transaction type already exists",
 		},
 	}
 	ErrCredentialInvalid = &BeError{

@@ -16,6 +16,74 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/accessroles": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Role"
+                ],
+                "summary": "API untuk Ambil daftar Role",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Halaman",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Jumlah Data Per halaman",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Mencari Data",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ResponsePaginate"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
         "/actions/bulk": {
             "delete": {
                 "consumes": [
@@ -632,7 +700,247 @@ const docTemplate = `{
                 }
             }
         },
-        "/mappingCode": {
+        "/jenisTransaksi": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jenis Transaksi"
+                ],
+                "summary": "API untuk Ambil semua daftar Jenis Transaksi",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Halaman",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Jumlah Data Per halaman",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Mencari Data",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ResponsePaginate"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/jenisTransaksi/create": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jenis Transaksi"
+                ],
+                "summary": "API untuk Membuat Jenis Transaksi Baru",
+                "parameters": [
+                    {
+                        "description": "Daftar Jenis Transaksi Baru",
+                        "name": "jenisTransaksi",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CreateNewJenisTransaksi"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/jenisTransaksi/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jenis Transaksi"
+                ],
+                "summary": "API untuk Find Jenis Transaksi By ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jenis Transaksi"
+                ],
+                "summary": "API untuk Update Data Jenis Transaksi",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Jenis Transaksi Baru",
+                        "name": "jenisTransaksi",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CreateNewJenisTransaksi"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            },
             "delete": {
                 "consumes": [
                     "application/json"
@@ -641,7 +949,128 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Mapping Code"
+                    "Jenis Transaksi"
+                ],
+                "summary": "API untuk Delete Jenis Transaksi",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/mappingCodes": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Mapping Codes"
+                ],
+                "summary": "API untuk Ambil semua daftar mapping code",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Halaman",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Jumlah Data Per halaman",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Mencari Data",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ResponsePaginate"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Mapping Codes"
                 ],
                 "summary": "API untuk Delete Mapping Code Bulk",
                 "parameters": [
@@ -689,7 +1118,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/mappingCode/create": {
+        "/mappingCodes/create": {
             "post": {
                 "consumes": [
                     "application/json"
@@ -698,7 +1127,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Mapping Code"
+                    "Mapping Codes"
                 ],
                 "summary": "API untuk Membuat Mapping Code Baru",
                 "parameters": [
@@ -746,60 +1175,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/mappingCode/{id}": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Mapping Code"
-                ],
-                "summary": "API untuk Find Mapping Code By ID",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Mapping Code ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/utils.Response"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    }
-                }
-            },
+        "/mappingCodes/{id}": {
             "put": {
                 "consumes": [
                     "application/json"
@@ -808,7 +1184,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Mapping Code"
+                    "Mapping Codes"
                 ],
                 "summary": "API untuk Update Data Mapping Code",
                 "parameters": [
@@ -870,7 +1246,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Mapping Code"
+                    "Mapping Codes"
                 ],
                 "summary": "API untuk Delete Mapping Code",
                 "parameters": [
@@ -916,7 +1292,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/mappingCodes": {
+        "/mappingKeywordList": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -925,9 +1301,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Mapping Code"
+                    "Keyword List"
                 ],
-                "summary": "API untuk Ambil semua daftar mapping code",
+                "summary": "API untuk Ambil semua daftar mapping keyword list",
                 "parameters": [
                     {
                         "type": "string",
@@ -955,6 +1331,171 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/utils.ResponsePaginate"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/mappingKeywordList/create": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Keyword List"
+                ],
+                "summary": "API untuk Membuat Mapping Keyword List Baru",
+                "parameters": [
+                    {
+                        "description": "Daftar Mapping Keyword List Baru",
+                        "name": "mappingkeywordlist",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CreateMappingkeywordlist"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/mappingKeywordList/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Keyword List"
+                ],
+                "summary": "API untuk Keyword List By ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Keyword List"
+                ],
+                "summary": "API untuk Delete Mapping Keywprd List",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Keyword List ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
                         }
                     },
                     "400": {
@@ -2166,6 +2707,70 @@ const docTemplate = `{
                 }
             }
         },
+        "/users/changePw/{id}": {
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "API untuk change password",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update password",
+                        "name": "newPassword",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.ChangePassword"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
         "/users/register": {
             "post": {
                 "consumes": [
@@ -2459,6 +3064,28 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "dto.ActiveEnum": {
+            "type": "string",
+            "enum": [
+                "active",
+                "inActive"
+            ],
+            "x-enum-varnames": [
+                "Active",
+                "InActive"
+            ]
+        },
+        "dto.ChangePassword": {
+            "type": "object",
+            "required": [
+                "newPassword"
+            ],
+            "properties": {
+                "newPassword": {
+                    "type": "string"
+                }
+            }
+        },
         "dto.CreateAction": {
             "type": "object",
             "required": [
@@ -2481,6 +3108,17 @@ const docTemplate = `{
                 }
             }
         },
+        "dto.CreateMappingkeywordlist": {
+            "type": "object",
+            "required": [
+                "MappingKeywordList"
+            ],
+            "properties": {
+                "MappingKeywordList": {
+                    "type": "string"
+                }
+            }
+        },
         "dto.CreateMenu": {
             "type": "object",
             "required": [
@@ -2499,42 +3137,61 @@ const docTemplate = `{
                 }
             }
         },
+        "dto.CreateNewJenisTransaksi": {
+            "type": "object",
+            "required": [
+                "transactionGroup",
+                "transactionType"
+            ],
+            "properties": {
+                "transactionGroup": {
+                    "type": "string"
+                },
+                "transactionType": {
+                    "type": "string"
+                }
+            }
+        },
         "dto.CreateNewMappingCode": {
             "type": "object",
             "required": [
+                "active",
                 "code",
                 "definition",
-                "isActive",
                 "priority",
                 "status"
             ],
             "properties": {
+                "active": {
+                    "$ref": "#/definitions/dto.ActiveEnum"
+                },
                 "code": {
                     "type": "string"
                 },
                 "definition": {
                     "type": "string"
                 },
-                "isActive": {
-                    "type": "boolean"
-                },
                 "priority": {
                     "type": "integer"
                 },
                 "status": {
-                    "type": "boolean"
+                    "$ref": "#/definitions/dto.StatusEnum"
                 }
             }
         },
         "dto.CreateNewUser": {
             "type": "object",
             "required": [
+                "active",
                 "name",
                 "password",
                 "roleId",
                 "username"
             ],
             "properties": {
+                "active": {
+                    "$ref": "#/definitions/dto.ActiveEnum"
+                },
                 "name": {
                     "type": "string"
                 },
@@ -2563,9 +3220,6 @@ const docTemplate = `{
                     "items": {
                         "$ref": "#/definitions/dto.MenusAction"
                     }
-                },
-                "active": {
-                    "type": "boolean"
                 },
                 "name": {
                     "type": "string"
@@ -2790,6 +3444,17 @@ const docTemplate = `{
                 }
             }
         },
+        "dto.StatusEnum": {
+            "type": "string",
+            "enum": [
+                "success",
+                "fail"
+            ],
+            "x-enum-varnames": [
+                "Success",
+                "Fail"
+            ]
+        },
         "dto.ToggleActive": {
             "type": "object",
             "properties": {
@@ -2905,6 +3570,17 @@ const docTemplate = `{
                 }
             }
         },
+        "models.ActiveEnum": {
+            "type": "string",
+            "enum": [
+                "active",
+                "inActive"
+            ],
+            "x-enum-varnames": [
+                "Active",
+                "InActive"
+            ]
+        },
         "models.Menu": {
             "type": "object",
             "properties": {
@@ -2967,9 +3643,6 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "is_active": {
-                    "type": "boolean"
-                },
                 "name": {
                     "description": "Main field",
                     "type": "string"
@@ -3014,16 +3687,17 @@ const docTemplate = `{
         "models.User": {
             "type": "object",
             "properties": {
+                "active": {
+                    "$ref": "#/definitions/models.ActiveEnum"
+                },
                 "created_at": {
                     "type": "string"
                 },
                 "id": {
                     "type": "integer"
                 },
-                "is_active": {
-                    "type": "boolean"
-                },
                 "name": {
+                    "description": "ActiveModel",
                     "type": "string"
                 },
                 "roleId": {

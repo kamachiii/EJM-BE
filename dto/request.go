@@ -1,5 +1,7 @@
 package dto
 
+import "EJM/pkg/models"
+
 type BasePagination struct {
 	Page        string `json:"page" query:"page" validate:"required"`
 	PageSize    string `json:"page_size" query:"page_size" validate:"required"`
@@ -8,12 +10,21 @@ type BasePagination struct {
 	Value       string `json:"value" query:"value"`
 }
 
+type BasePaginationNew struct {
+	Page        string            `json:"page" query:"page" validate:"required"`
+	PageSize    string            `json:"page_size" query:"page_size" validate:"required"`
+	Search      string            `json:"search" query:"search"`
+	Active models.ActiveEnum `json:"active" query:"active" form:"active"`
+	Value       string            `json:"value" query:"value"`
+}
+
 // --------------------User
 type CreateNewUser struct {
 	Name     string `json:"name" validate:"required"`
 	Username string `json:"username" validate:"required"`
 	Password string `json:"password" validate:"required"`
 	RoleId   uint   `json:"roleId" validate:"required,min=1"`
+	Active     ActiveEnum `json:"active" form:"active" validate:"required"`
 }
 
 type LoginByPin struct {
@@ -27,6 +38,10 @@ type DeleteUserBulk struct {
 type UpdateUser struct {
 	ID uint `params:"id" validate:"required"`
 	CreateNewUser
+}
+
+type ChangePassword struct {
+	NewPassword string `json:"newPassword" validate:"required"`
 }
 
 type ToggleActive struct {
@@ -52,18 +67,49 @@ type PayloadCreateAction struct {
 	Data []CreateAction `json:"data" validate:"required,min=1"`
 }
 
+// mapping keyword list
+type CreateMappingkeywordlist struct {
+	Keyword string `json:"MappingKeywordList" form:"Name" validate:"required"`
+}
+
+type GetMappingkeywordlist struct {
+	BasePagination
+}
+
+type UpdateMappingkeywordlist struct {
+	ID uint `params:"id" validate:"required"`
+	CreateMappingkeywordlist
+}
+
+type DeleteMappingkeywordlist struct {
+	Ids []uint `json:"ids" validate:"required,min=1"`
+}
+
 // mapping code
 type CreateNewMappingCode struct {
-	Code       string `json:"code" form:"code" validate:"required"`
-	Definition string `json:"definition" form:"definition" validate:"required"`
-	Status     bool `json:"status" validate:"required"`
-	Priority   int `json:"priority" form:"priority" validate:"required"`
-	IsActive   bool `json:"isActive" form:"isActive" validate:"required"`
+	Code       string     `json:"code" form:"code" validate:"required"`
+	Definition string     `json:"definition" form:"definition" validate:"required"`
+	Status     StatusEnum `json:"status" validate:"required"`
+	Priority   int        `json:"priority" form:"priority" validate:"required"`
+	Active     ActiveEnum `json:"active" form:"active" validate:"required"`
 }
+type StatusEnum string
+
+const (
+	Success StatusEnum = "success"
+	Fail    StatusEnum = "fail"
+)
 
 type GetMappingCodes struct {
 	BasePagination
 }
+
+type ActiveEnum string
+
+const (
+	Active   ActiveEnum = "active"
+	InActive ActiveEnum = "inActive"
+)
 
 type DeleteMappingCodeBulk struct {
 	Ids []uint `json:"ids" validate:"required,min=1"`
@@ -73,6 +119,7 @@ type UpdateMappingCode struct {
 	ID uint `params:"id" validate:"required"`
 	CreateNewMappingCode
 }
+
 // menu
 type CreateMenu struct {
 	Name     string `json:"name" validate:"required"`
@@ -135,11 +182,12 @@ type UpdateAction struct {
 // mapping bin card
 type CreateNewMappingBinCard struct {
 	Bank string `json:"bank" form:"bank" validate:"required"`
-	Bin   int `json:"bin" form:"bin" validate:"required"`
+	Bin   string `json:"bin" form:"bin" validate:"required"`
 }
 
 type GetMappingBinCards struct {
 	BasePagination
+	Bin string `json:"bin" form:"bin"`
 }
 
 type DeleteMappingBinCardBulk struct {
@@ -148,13 +196,12 @@ type DeleteMappingBinCardBulk struct {
 
 type UpdateMappingBinCard struct {
 	ID uint `params:"id" validate:"required"`
-	CreateNewMappingCode
+	CreateNewMappingBinCard
 }
 
 // --------------------Roles
 type CreateRole struct {
 	Name          string        `json:"name" validate:"required"`
-	Active        bool          `json:"active"`
 	Actions       []MenusAction `json:"actions" validate:"required"`
 	ObjectActions []struct {
 		ID       int    `json:"id" validate:"required"`
@@ -214,4 +261,19 @@ type ObjectStructures struct {
 	Code     *string `json:"structureCode"`
 	ParentID string  `json:"parentId"`
 	ID       string  `json:"id" validate:"required"`
+}
+
+//Jenis Transaksi
+type CreateNewJenisTransaksi struct {
+	TransactionType string `json:"transactionType" form:"transactionType" validate:"required"`
+	TransactionGroup string `json:"transactionGroup" form:"transactionGroup" validate:"required"`
+}
+
+type UpdateJenisTransaksi struct {
+	ID uint `params:"id" validate:"required"`
+	CreateNewJenisTransaksi
+}
+
+type GetJenisTransaksi struct {
+	BasePagination
 }

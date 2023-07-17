@@ -17,6 +17,7 @@ type UserRepository interface {
 	FindByUsername(username string) (models.User, error) // [find data by the username]
 	FindUserByPin(pin string) (models.User, error) //not used
 	UpdateUser(id uint, user *dto.UpdateUser) error // [update data by id]
+	ChangePassword(id uint, newPassword string) error
 	ToggleActive(id uint, payload *bool) error // [activating the user]
 	DeleteUser(id uint) error // [delete user]
 	CreateUser(user *dto.CreateNewUser) (models.User, error) //OK [create data]
@@ -77,6 +78,7 @@ func (register *User) CreateUser(user *dto.CreateNewUser) (models.User, error) {
 		Username: user.Username,
 		Password: user.Password,
 		RoleId:   user.RoleId,
+		Active: models.ActiveEnum(user.Active),
 	}
 	err := register.Db.Debug().Create(&userModel).Preload("Role").Error
 
@@ -168,6 +170,8 @@ func (register *User) UpdateUser(id uint, user *dto.UpdateUser) error {
 			Username: user.Username,
 			Password: user.Password,
 			RoleId:   user.RoleId,
+			Name: user.Name,
+			Active:   models.ActiveEnum(user.Active),
 		},
 	)
 
@@ -179,9 +183,7 @@ func (register *User) UpdateUser(id uint, user *dto.UpdateUser) error {
 }
 
 func (register *User) ToggleActive(id uint, payload *bool) error {
-	update := register.UserModel().Where("users.id = ?", id).Updates(models.User{
-		ActiveModel: models.ActiveModel{IsActive: payload},
-	})
+	update := register.UserModel().Where("users.id = ?", id).Updates(models.User{})
 
 	if err := update.Error; err != nil {
 		return err
@@ -189,6 +191,18 @@ func (register *User) ToggleActive(id uint, payload *bool) error {
 
 	return nil
 }
+
+// change password
+func (register *User) ChangePassword(id uint, newPassword string) error {
+	hashed, _ := utils.HashPassword(newPassword)
+	update := register.UserModel().Where("users.id = ?", id).Update("password", hashed)
+	if update.Error != nil {
+		return update.Error
+	}
+	return nil
+}
+
+
 
 // delete user
 func (register *User) DeleteUser(id uint) error {

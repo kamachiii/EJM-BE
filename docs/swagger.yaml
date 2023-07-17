@@ -1,4 +1,19 @@
 definitions:
+  dto.ActiveEnum:
+    enum:
+    - active
+    - inActive
+    type: string
+    x-enum-varnames:
+    - Active
+    - InActive
+  dto.ChangePassword:
+    properties:
+      newPassword:
+        type: string
+    required:
+    - newPassword
+    type: object
   dto.CreateAction:
     properties:
       default:
@@ -14,6 +29,13 @@ definitions:
     - name
     - path
     type: object
+  dto.CreateMappingkeywordlist:
+    properties:
+      MappingKeywordList:
+        type: string
+    required:
+    - MappingKeywordList
+    type: object
   dto.CreateMenu:
     properties:
       name:
@@ -26,27 +48,39 @@ definitions:
     - name
     - path
     type: object
+  dto.CreateNewJenisTransaksi:
+    properties:
+      transactionGroup:
+        type: string
+      transactionType:
+        type: string
+    required:
+    - transactionGroup
+    - transactionType
+    type: object
   dto.CreateNewMappingCode:
     properties:
+      active:
+        $ref: '#/definitions/dto.ActiveEnum'
       code:
         type: string
       definition:
         type: string
-      isActive:
-        type: boolean
       priority:
         type: integer
       status:
-        type: boolean
+        $ref: '#/definitions/dto.StatusEnum'
     required:
+    - active
     - code
     - definition
-    - isActive
     - priority
     - status
     type: object
   dto.CreateNewUser:
     properties:
+      active:
+        $ref: '#/definitions/dto.ActiveEnum'
       name:
         type: string
       password:
@@ -57,6 +91,7 @@ definitions:
       username:
         type: string
     required:
+    - active
     - name
     - password
     - roleId
@@ -68,8 +103,6 @@ definitions:
         items:
           $ref: '#/definitions/dto.MenusAction'
         type: array
-      active:
-        type: boolean
       name:
         type: string
       object_actions:
@@ -222,6 +255,14 @@ definitions:
     - actions
     - roleId
     type: object
+  dto.StatusEnum:
+    enum:
+    - success
+    - fail
+    type: string
+    x-enum-varnames:
+    - Success
+    - Fail
   dto.ToggleActive:
     properties:
       payload:
@@ -298,6 +339,14 @@ definitions:
       updated_at:
         type: string
     type: object
+  models.ActiveEnum:
+    enum:
+    - active
+    - inActive
+    type: string
+    x-enum-varnames:
+    - Active
+    - InActive
   models.Menu:
     properties:
       actions_menus:
@@ -337,8 +386,6 @@ definitions:
         type: string
       id:
         type: integer
-      is_active:
-        type: boolean
       name:
         description: Main field
         type: string
@@ -370,13 +417,14 @@ definitions:
     type: object
   models.User:
     properties:
+      active:
+        $ref: '#/definitions/models.ActiveEnum'
       created_at:
         type: string
       id:
         type: integer
-      is_active:
-        type: boolean
       name:
+        description: ActiveModel
         type: string
       roleId:
         type: integer
@@ -416,6 +464,51 @@ info:
   title: Elektronik Journal Centralized by Mandiri
   version: "1.0"
 paths:
+  /accessroles:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Halaman
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: Jumlah Data Per halaman
+        in: query
+        name: page_size
+        required: true
+        type: string
+      - description: Mencari Data
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponsePaginate'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Ambil daftar Role
+      tags:
+      - Role
   /actions/{id}:
     delete:
       consumes:
@@ -803,7 +896,201 @@ paths:
       summary: Refresh JWT Token Yang Expired
       tags:
       - Auth
-  /mappingCode:
+  /jenisTransaksi:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Halaman
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: Jumlah Data Per halaman
+        in: query
+        name: page_size
+        required: true
+        type: string
+      - description: Mencari Data
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponsePaginate'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Ambil semua daftar Jenis Transaksi
+      tags:
+      - Jenis Transaksi
+  /jenisTransaksi/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Delete Jenis Transaksi
+      tags:
+      - Jenis Transaksi
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Find Jenis Transaksi By ID
+      tags:
+      - Jenis Transaksi
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update Jenis Transaksi Baru
+        in: body
+        name: jenisTransaksi
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateNewJenisTransaksi'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Update Data Jenis Transaksi
+      tags:
+      - Jenis Transaksi
+  /jenisTransaksi/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Daftar Jenis Transaksi Baru
+        in: body
+        name: jenisTransaksi
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateNewJenisTransaksi'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Membuat Jenis Transaksi Baru
+      tags:
+      - Jenis Transaksi
+  /mappingCodes:
     delete:
       consumes:
       - application/json
@@ -839,157 +1126,7 @@ paths:
             $ref: '#/definitions/middlewares.ResponseError'
       summary: API untuk Delete Mapping Code Bulk
       tags:
-      - Mapping Code
-  /mappingCode/{id}:
-    delete:
-      consumes:
-      - application/json
-      parameters:
-      - description: Code ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/utils.Response'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-      summary: API untuk Delete Mapping Code
-      tags:
-      - Mapping Code
-    get:
-      consumes:
-      - application/json
-      parameters:
-      - description: Mapping Code ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/utils.Response'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-      summary: API untuk Find Mapping Code By ID
-      tags:
-      - Mapping Code
-    put:
-      consumes:
-      - application/json
-      parameters:
-      - description: Code ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Update Mapping Code Baru
-        in: body
-        name: mappingCode
-        required: true
-        schema:
-          $ref: '#/definitions/dto.CreateNewMappingCode'
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/utils.Response'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-      summary: API untuk Update Data Mapping Code
-      tags:
-      - Mapping Code
-  /mappingCode/create:
-    post:
-      consumes:
-      - application/json
-      parameters:
-      - description: Daftar Mapping Code Baru
-        in: body
-        name: mappingcode
-        required: true
-        schema:
-          $ref: '#/definitions/dto.CreateNewMappingCode'
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/utils.Response'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-      summary: API untuk Membuat Mapping Code Baru
-      tags:
-      - Mapping Code
-  /mappingCodes:
+      - Mapping Codes
     get:
       consumes:
       - application/json
@@ -1033,7 +1170,274 @@ paths:
             $ref: '#/definitions/middlewares.ResponseError'
       summary: API untuk Ambil semua daftar mapping code
       tags:
-      - Mapping Code
+      - Mapping Codes
+  /mappingCodes/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Code ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Delete Mapping Code
+      tags:
+      - Mapping Codes
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Code ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update Mapping Code Baru
+        in: body
+        name: mappingCode
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateNewMappingCode'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Update Data Mapping Code
+      tags:
+      - Mapping Codes
+  /mappingCodes/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Daftar Mapping Code Baru
+        in: body
+        name: mappingcode
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateNewMappingCode'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Membuat Mapping Code Baru
+      tags:
+      - Mapping Codes
+  /mappingKeywordList:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Halaman
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: Jumlah Data Per halaman
+        in: query
+        name: page_size
+        required: true
+        type: string
+      - description: Mencari Data
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponsePaginate'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Ambil semua daftar mapping keyword list
+      tags:
+      - Keyword List
+  /mappingKeywordList/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Keyword List ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Delete Mapping Keywprd List
+      tags:
+      - Keyword List
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Keyword List By ID
+      tags:
+      - Keyword List
+  /mappingKeywordList/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Daftar Mapping Keyword List Baru
+        in: body
+        name: mappingkeywordlist
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateMappingkeywordlist'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Membuat Mapping Keyword List Baru
+      tags:
+      - Keyword List
   /menus:
     get:
       consumes:
@@ -1902,6 +2306,48 @@ paths:
           schema:
             $ref: '#/definitions/middlewares.ResponseError'
       summary: API untuk Update Data User
+      tags:
+      - User
+  /users/changePw/{id}:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update password
+        in: body
+        name: newPassword
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ChangePassword'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk change password
       tags:
       - User
   /users/register:
