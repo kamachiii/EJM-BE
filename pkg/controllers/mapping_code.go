@@ -53,20 +53,20 @@ func (mappingCodeController *MappingCodeController) CreateMappingCode(c echo.Con
 	if err := c.Validate(req); err != nil {
 		return err
 	}
-	// mappingCodeRepo := mappingCodeController.mappingCodeService.MappingCodeRepository
-	// mappingCodeRepo.Begin(mappingCodeController.server.DB)
+	mappingCodeRepo := mappingCodeController.mappingCodeService.MappingCodeRepository
+	mappingCodeRepo.Begin(mappingCodeController.db)
 
-	var mappingCodeService services.IMappingCodeService
-	mappingCodeService = mappingCodeController.mappingCodeService
+	// var mappingCodeService services.IMappingCodeService
+	// mappingCodeService = mappingCodeController.mappingCodeService
 
 
-	data, err := mappingCodeService.CreateMappingCode(req)
+	data, err := mappingCodeController.mappingCodeService.CreateMappingCode(req)
 	if err != nil {
-		// mappingCodeRepo.Rollback()
+		mappingCodeRepo.Rollback()
 		return err
 	}
 
-	// mappingCodeRepo.Commit()
+	mappingCodeRepo.Commit()
 
 	res := utils.Response{
 		Data:       data,

@@ -132,6 +132,25 @@ type UpdateAction struct {
 	CreateAction
 }
 
+// mapping bin card
+type CreateNewMappingBinCard struct {
+	Bank string `json:"bank" form:"bank" validate:"required"`
+	Bin   int `json:"bin" form:"bin" validate:"required"`
+}
+
+type GetMappingBinCards struct {
+	BasePagination
+}
+
+type DeleteMappingBinCardBulk struct {
+	Ids []uint `json:"ids" validate:"required,min=1"`
+}
+
+type UpdateMappingBinCard struct {
+	ID uint `params:"id" validate:"required"`
+	CreateNewMappingCode
+}
+
 // --------------------Roles
 type CreateRole struct {
 	Name          string        `json:"name" validate:"required"`
