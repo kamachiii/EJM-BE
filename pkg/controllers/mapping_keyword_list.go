@@ -134,11 +134,14 @@ func (mappingKeyowrdListController *MappingKeyowrdListController) UpdateMappingk
 		id, errConvert := strconv.Atoi(c.Param("id"))
 		if errConvert != nil {
 			return errConvert
-		}	
-
+		}	 
 		req.ID = uint(id)
 
 		if err := c.Bind(req); err != nil{
+			return err
+		}
+
+		if err := c.Validate(req); err != nil {
 			return err
 		}
 

@@ -62,6 +62,7 @@ func (mappingKeywordList *MappingKeywordListService) UpdateMappingkeywordlist(id
 	mappingKeywordListRepo = mappingKeywordList.MappingKeywordListRepository
 
 	_, err := mappingKeywordListRepo.FindMappingkeywordlistById(mapping_keyword_list.ID)
+
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 
@@ -70,12 +71,12 @@ func (mappingKeywordList *MappingKeywordListService) UpdateMappingkeywordlist(id
 		}
 	}
 
-	_, errFindUser := mappingKeywordListRepo.FindMappingkeywordlistById(id)
-	if errFindUser != nil {
+	_, errFindMappingKeywordList := mappingKeywordListRepo.FindMappingkeywordlistById(id)
+	if errFindMappingKeywordList != nil {
 		// return utils.ErrUserNotFound
 	}
 
-	return mappingKeywordList.UpdateMappingkeywordlist(id, mapping_keyword_list)
+	return mappingKeywordListRepo.UpdateMappingkeywordlist(id, mapping_keyword_list)
 }
 
 // delete mapping keyword list

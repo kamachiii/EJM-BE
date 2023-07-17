@@ -38,6 +38,12 @@ func (mappingKeywordListObject *MappingKeywordList) Rollback() {
 		mappingKeywordListObject.db = mappingKeywordListObject.db2
 } 
 
+func (mappingKeywordListObject *MappingKeywordList) Commit() {
+	mappingKeywordListObject.db.Commit()
+
+	mappingKeywordListObject.db = mappingKeywordListObject.db2
+}
+
 func (mappingKeywordListObject *MappingKeywordList) MappingKeywordListModel() (tx *gorm.DB) {
 	return mappingKeywordListObject.db.Model(&models.MappingKeywordList{})
 }
@@ -109,7 +115,7 @@ func (mappingKeywordList *MappingKeywordList) CreateMappingKeywordList(mapping_k
 
 // update mapping keyword list
 func (mappingKeywordListObject *MappingKeywordList) UpdateMappingkeywordlist(id uint, mappingKeywordList *dto.UpdateMappingkeywordlist) error {
-	update := mappingKeywordListObject.MappingKeywordListModel().Where("mappingKeywordList.id = ?", id).Updates(models.MappingKeywordList{
+	update := mappingKeywordListObject.MappingKeywordListModel().Where("id = ?", id).Updates(models.MappingKeywordList{
 		MappingKeywordList: mappingKeywordList.Keyword,
 	})
 
@@ -122,7 +128,7 @@ func (mappingKeywordListObject *MappingKeywordList) UpdateMappingkeywordlist(id 
 
 // delete mapping keyword list
 func (mappingKeywordListObject *MappingKeywordList) DeleteMappingkeywordlist(id uint) error {
-	deleteMappingKeywordList := mappingKeywordListObject.MappingKeywordListModel().Where("mappingKeywordList.id = ?", id).Delete(&models.MappingKeywordList{})
+	deleteMappingKeywordList := mappingKeywordListObject.MappingKeywordListModel().Where("id = ?", id).Delete(&models.MappingKeywordList{})
 
 	if err := deleteMappingKeywordList.Error; err != nil {
 		return err

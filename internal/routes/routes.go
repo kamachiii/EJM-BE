@@ -20,8 +20,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func InitializeRoute(server *server.Server, cfg *config.Config) 
-{
+func InitializeRoute(server *server.Server, cfg *config.Config) {
 	// controller
 	userController := controllers.NewUserController(server)
 	roleController := controllers.NewRoleController(server)
@@ -30,6 +29,7 @@ func InitializeRoute(server *server.Server, cfg *config.Config)
 	actionController := controllers.NewActionController(server)
 	mappingCodeController := controllers.NewMappingCodeController(server)
 	mappingKeywordListController := controllers.NewMappingKeywordListcontroller(server)
+	jenisTransaksiController := controllers.NewMJenisTransaksiController(server)
 
 	// middleware
 	server.Echo.Validator = &middlewares.CustomValidator{
@@ -212,4 +212,5 @@ func InitializeRoute(server *server.Server, cfg *config.Config)
 		}
 
 	}
+
 }
