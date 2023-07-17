@@ -24,7 +24,7 @@ type CreateNewUser struct {
 	Username string `json:"username" validate:"required"`
 	Password string `json:"password" validate:"required"`
 	RoleId   uint   `json:"roleId" validate:"required,min=1"`
-	Active     ActiveEnum `json:"isActive" form:"isActive" validate:"required"`
+	Active     ActiveEnum `json:"active" form:"active" validate:"required"`
 }
 
 type LoginByPin struct {
@@ -87,7 +87,7 @@ type CreateNewMappingCode struct {
 	Definition string     `json:"definition" form:"definition" validate:"required"`
 	Status     StatusEnum `json:"status" validate:"required"`
 	Priority   int        `json:"priority" form:"priority" validate:"required"`
-	Active     ActiveEnum `json:"isActive" form:"isActive" validate:"required"`
+	Active     ActiveEnum `json:"active" form:"active" validate:"required"`
 }
 type StatusEnum string
 
@@ -178,7 +178,6 @@ type UpdateAction struct {
 // --------------------Roles
 type CreateRole struct {
 	Name          string        `json:"name" validate:"required"`
-	Active        bool          `json:"active"`
 	Actions       []MenusAction `json:"actions" validate:"required"`
 	ObjectActions []struct {
 		ID       int    `json:"id" validate:"required"`
@@ -238,4 +237,19 @@ type ObjectStructures struct {
 	Code     *string `json:"structureCode"`
 	ParentID string  `json:"parentId"`
 	ID       string  `json:"id" validate:"required"`
+}
+
+//Jenis Transaksi
+type CreateNewJenisTransaksi struct {
+	TransactionType string `json:"transactionType" form:"transactionType" validate:"required"`
+	TransactionGroup string `json:"transactionGroup" form:"transactionGroup" validate:"required"`
+}
+
+type UpdateJenisTransaksi struct {
+	ID uint `params:"id" validate:"required"`
+	CreateNewJenisTransaksi
+}
+
+type GetJenisTransaksi struct {
+	BasePagination
 }

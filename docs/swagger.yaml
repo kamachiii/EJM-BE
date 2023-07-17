@@ -34,28 +34,38 @@ definitions:
     - name
     - path
     type: object
+  dto.CreateNewJenisTransaksi:
+    properties:
+      transactionGroup:
+        type: string
+      transactionType:
+        type: string
+    required:
+    - transactionGroup
+    - transactionType
+    type: object
   dto.CreateNewMappingCode:
     properties:
+      active:
+        $ref: '#/definitions/dto.ActiveEnum'
       code:
         type: string
       definition:
         type: string
-      isActive:
-        $ref: '#/definitions/dto.ActiveEnum'
       priority:
         type: integer
       status:
         $ref: '#/definitions/dto.StatusEnum'
     required:
+    - active
     - code
     - definition
-    - isActive
     - priority
     - status
     type: object
   dto.CreateNewUser:
     properties:
-      isActive:
+      active:
         $ref: '#/definitions/dto.ActiveEnum'
       name:
         type: string
@@ -67,7 +77,7 @@ definitions:
       username:
         type: string
     required:
-    - isActive
+    - active
     - name
     - password
     - roleId
@@ -79,8 +89,6 @@ definitions:
         items:
           $ref: '#/definitions/dto.MenusAction'
         type: array
-      active:
-        type: boolean
       name:
         type: string
       object_actions:
@@ -364,8 +372,6 @@ definitions:
         type: string
       id:
         type: integer
-      isActive:
-        $ref: '#/definitions/models.ActiveEnum'
       name:
         description: Main field
         type: string
@@ -377,7 +383,6 @@ definitions:
         type: string
     required:
     - description
-    - isActive
     type: object
   models.RolesMenus:
     properties:
@@ -398,12 +403,12 @@ definitions:
     type: object
   models.User:
     properties:
+      active:
+        $ref: '#/definitions/models.ActiveEnum'
       created_at:
         type: string
       id:
         type: integer
-      isActive:
-        $ref: '#/definitions/models.ActiveEnum'
       name:
         description: ActiveModel
         type: string
@@ -413,8 +418,6 @@ definitions:
         type: string
       username:
         type: string
-    required:
-    - isActive
     type: object
   services.LoginResponse:
     properties:
@@ -879,6 +882,200 @@ paths:
       summary: Refresh JWT Token Yang Expired
       tags:
       - Auth
+  /jenisTransaksi:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Halaman
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: Jumlah Data Per halaman
+        in: query
+        name: page_size
+        required: true
+        type: string
+      - description: Mencari Data
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponsePaginate'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Ambil semua daftar Jenis Transaksi
+      tags:
+      - Jenis Transaksi
+  /jenisTransaksi/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Delete Jenis Transaksi
+      tags:
+      - Jenis Transaksi
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Find Jenis Transaksi By ID
+      tags:
+      - Jenis Transaksi
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update Jenis Transaksi Baru
+        in: body
+        name: jenisTransaksi
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateNewJenisTransaksi'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Update Data Jenis Transaksi
+      tags:
+      - Jenis Transaksi
+  /jenisTransaksi/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Daftar Jenis Transaksi Baru
+        in: body
+        name: jenisTransaksi
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateNewJenisTransaksi'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Membuat Jenis Transaksi Baru
+      tags:
+      - Jenis Transaksi
   /mappingCodes:
     delete:
       consumes:

@@ -57,6 +57,13 @@ var (
 		},
 	}
 
+	ErrJenisTransaksiNotFound = &BeError{
+		status: http.StatusNotFound,
+		msg: &i18n.Message{
+			ID:    "JenisTransaksi.not.found",
+			Other: "JenisTransaksi Not Found",
+		},
+	}
 	ErrLookupNotFound = &BeError{
 		status: http.StatusNotFound,
 		msg: &i18n.Message{
@@ -99,6 +106,13 @@ var (
 		msg: &i18n.Message{
 			ID:    "mappingCode.already.exists",
 			Other: "Mapping Code already exists",
+		},
+	}
+	ErrTransactionTypeAlreadyExists = &BeError{
+		status: http.StatusNotFound,
+		msg: &i18n.Message{
+			ID:    "TransactionType.already.exists",
+			Other: "Transaction type already exists",
 		},
 	}
 	ErrCredentialInvalid = &BeError{

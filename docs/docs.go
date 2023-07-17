@@ -700,6 +700,301 @@ const docTemplate = `{
                 }
             }
         },
+        "/jenisTransaksi": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jenis Transaksi"
+                ],
+                "summary": "API untuk Ambil semua daftar Jenis Transaksi",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Halaman",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Jumlah Data Per halaman",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Mencari Data",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ResponsePaginate"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/jenisTransaksi/create": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jenis Transaksi"
+                ],
+                "summary": "API untuk Membuat Jenis Transaksi Baru",
+                "parameters": [
+                    {
+                        "description": "Daftar Jenis Transaksi Baru",
+                        "name": "jenisTransaksi",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CreateNewJenisTransaksi"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/jenisTransaksi/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jenis Transaksi"
+                ],
+                "summary": "API untuk Find Jenis Transaksi By ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jenis Transaksi"
+                ],
+                "summary": "API untuk Update Data Jenis Transaksi",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Jenis Transaksi Baru",
+                        "name": "jenisTransaksi",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CreateNewJenisTransaksi"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jenis Transaksi"
+                ],
+                "summary": "API untuk Delete Jenis Transaksi",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
         "/mappingCodes": {
             "get": {
                 "consumes": [
@@ -2523,24 +2818,39 @@ const docTemplate = `{
                 }
             }
         },
+        "dto.CreateNewJenisTransaksi": {
+            "type": "object",
+            "required": [
+                "transactionGroup",
+                "transactionType"
+            ],
+            "properties": {
+                "transactionGroup": {
+                    "type": "string"
+                },
+                "transactionType": {
+                    "type": "string"
+                }
+            }
+        },
         "dto.CreateNewMappingCode": {
             "type": "object",
             "required": [
+                "active",
                 "code",
                 "definition",
-                "isActive",
                 "priority",
                 "status"
             ],
             "properties": {
+                "active": {
+                    "$ref": "#/definitions/dto.ActiveEnum"
+                },
                 "code": {
                     "type": "string"
                 },
                 "definition": {
                     "type": "string"
-                },
-                "isActive": {
-                    "$ref": "#/definitions/dto.ActiveEnum"
                 },
                 "priority": {
                     "type": "integer"
@@ -2553,14 +2863,14 @@ const docTemplate = `{
         "dto.CreateNewUser": {
             "type": "object",
             "required": [
-                "isActive",
+                "active",
                 "name",
                 "password",
                 "roleId",
                 "username"
             ],
             "properties": {
-                "isActive": {
+                "active": {
                     "$ref": "#/definitions/dto.ActiveEnum"
                 },
                 "name": {
@@ -2591,9 +2901,6 @@ const docTemplate = `{
                     "items": {
                         "$ref": "#/definitions/dto.MenusAction"
                     }
-                },
-                "active": {
-                    "type": "boolean"
                 },
                 "name": {
                     "type": "string"
@@ -3004,8 +3311,7 @@ const docTemplate = `{
         "models.Role": {
             "type": "object",
             "required": [
-                "description",
-                "isActive"
+                "description"
             ],
             "properties": {
                 "created_at": {
@@ -3017,9 +3323,6 @@ const docTemplate = `{
                 },
                 "id": {
                     "type": "integer"
-                },
-                "isActive": {
-                    "$ref": "#/definitions/models.ActiveEnum"
                 },
                 "name": {
                     "description": "Main field",
@@ -3064,18 +3367,15 @@ const docTemplate = `{
         },
         "models.User": {
             "type": "object",
-            "required": [
-                "isActive"
-            ],
             "properties": {
+                "active": {
+                    "$ref": "#/definitions/models.ActiveEnum"
+                },
                 "created_at": {
                     "type": "string"
                 },
                 "id": {
                     "type": "integer"
-                },
-                "isActive": {
-                    "$ref": "#/definitions/models.ActiveEnum"
                 },
                 "name": {
                     "description": "ActiveModel",

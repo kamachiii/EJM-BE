@@ -20,9 +20,9 @@ type MappingCodeService struct {
 	MappingCodeRepository repository.MappingCodeRepository
 }
 
-// func NewMappingCodeService(service *MappingCodeService) *MappingCodeService {
-// 	return service
-// }
+func NewMappingCodeService(service *MappingCodeService) *MappingCodeService {
+	return service
+}
 
 
 
@@ -37,9 +37,7 @@ type MappingCodeService struct {
 // }
 
 
-func NewMappingCodeService(constructor *MappingCodeService) *MappingCodeService {
-	return constructor
-}
+
 
 // 
 
@@ -95,8 +93,8 @@ func ( mappingCode *MappingCodeService) UpdateMappingCode(id uint, mapping_code 
 		}
 	}
 
-	_, errFindUser := mappingCodeRepo.FindMappingCodeById(id)
-	if errFindUser != nil { // kalo user gak ada
+	_, errFindMappingCode := mappingCodeRepo.FindMappingCodeById(id)
+	if errFindMappingCode != nil { // kalo user gak ada
 		// return utils.ErrUserNotFound
 	}
 

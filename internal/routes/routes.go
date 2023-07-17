@@ -20,7 +20,8 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func InitializeRoute(server *server.Server, cfg *config.Config) {
+func InitializeRoute(server *server.Server, cfg *config.Config) 
+{
 	// controller
 	userController := controllers.NewUserController(server)
 	roleController := controllers.NewRoleController(server)
@@ -188,6 +189,7 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			mappingCodeRoutes.DELETE("", mappingCodeController.DeleteMappingCodeBulk)
 		}
 
+
 		// Mapping Keyword List 
 		mappingKeywordListRoutes := prefix.Group("/mappingKeywordList")
 		{
@@ -196,6 +198,17 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			mappingKeywordListRoutes.POST("/create", mappingKeywordListController.CreateMappingKeywordList)
 			mappingKeywordListRoutes.PUT("/:id", mappingKeywordListController.UpdateMappingkeywordlist)
 			mappingKeywordListRoutes.DELETE("/:id", mappingKeywordListController.DeleteMappingkeywordlist)
+		}
+		//Mapping Code
+		jenisTransaksiRoutes := prefix.Group("/jenisTransaksi")
+		{
+			jenisTransaksiRoutes.GET("", jenisTransaksiController.FindJenisTransaksi)
+			jenisTransaksiRoutes.GET("/:id", jenisTransaksiController.FindJenisTransaksiById)
+			jenisTransaksiRoutes.POST("/create", jenisTransaksiController.CreateJenisTransaksi)
+			jenisTransaksiRoutes.PUT("/:id", jenisTransaksiController.UpdateJenisTransaksi)
+			jenisTransaksiRoutes.DELETE("/:id", jenisTransaksiController.DeleteJenisTransaksi)
+			// jenisTransaksiRoutes.DELETE("", jenisTransaksiController.DeleteMappingCodeBulk)
+
 		}
 
 	}

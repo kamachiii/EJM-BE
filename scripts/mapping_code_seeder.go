@@ -16,16 +16,16 @@ func (mappingCodeSeeder *MappingCodeSeeder) Execute() error {
 		{
 			Code: "NOTES TAKEN",
 			Definition: "TRANSAKSI BERHASIL",
-			// Status: true,
+			Status: "success",
 			Priority: 100,
-			// IsActive: true,
+			Active: "active",
 		},
 		{
 			Code: "HOST TX TIMEOUT",
 			Definition: "TRANSAKSI TIMEOUT",
-			// Status: false,
-			Priority: 200,
-			// IsActive: true,
+			Status: "success",
+			Priority: 100,
+			Active: "active",
 		},
 	}
 
