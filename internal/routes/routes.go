@@ -28,7 +28,7 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 	menuController := controllers.NewMenuController(server)
 	actionController := controllers.NewActionController(server)
 	mappingCodeController := controllers.NewMappingCodeController(server)
-	mappingKeywordListController := controllers.NewMappingKeywordListController(server)
+	mappingKeywordListController := controllers.NewMappingKeywordListcontroller(server)
 	jenisTransaksiController := controllers.NewMJenisTransaksiController(server)
 
 	// middleware
@@ -214,4 +214,5 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 		}
 
 	}
+
 }

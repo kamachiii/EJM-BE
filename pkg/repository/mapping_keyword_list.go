@@ -38,6 +38,12 @@ func (mappingKeywordListObject *MappingKeywordList) Rollback() {
 		mappingKeywordListObject.db = mappingKeywordListObject.db2
 } 
 
+func (mappingKeywordListObject *MappingKeywordList) Commit() {
+	mappingKeywordListObject.db.Commit()
+
+	mappingKeywordListObject.db = mappingKeywordListObject.db2
+}
+
 func (mappingKeywordListObject *MappingKeywordList) MappingKeywordListModel() (tx *gorm.DB) {
 	return mappingKeywordListObject.db.Model(&models.MappingKeywordList{})
 }

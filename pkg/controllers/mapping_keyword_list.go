@@ -22,7 +22,7 @@ type MappingKeyowrdListController struct {
 	mappingKeywordListService *services.MappingKeywordListService
 }
 
-func NewMappingKeywordListController(srv *server.Server) *MappingKeyowrdListController {
+func NewMappingKeywordListcontroller(srv *server.Server) *MappingKeyowrdListController {
 	db := srv.DB
 	return &MappingKeyowrdListController{
 		server: srv,
@@ -130,45 +130,48 @@ func (mappingKeyowrdListController *MappingKeyowrdListController) FindMappingkey
 // @Router  /mappingKeywordList/{id} [put]
 
 func (mappingKeyowrdListController *MappingKeyowrdListController) UpdateMappingkeywordlist(c echo.Context) error  {
-		req := new(dto.UpdateMappingkeywordlist)
-		id, errConvert := strconv.Atoi(c.Param("id"))
-		if errConvert != nil {
-			return errConvert
-		}	
+	req := new(dto.UpdateMappingkeywordlist)
+	id, errConvert := strconv.Atoi(c.Param("id"))
+	if errConvert != nil {
+		return errConvert
+	}	 
+	req.ID = uint(id)
 
-		req.ID = uint(id)
+	if err := c.Bind(req); err != nil{
+		return err
+	}
 
-		if err := c.Bind(req); err != nil{
-			return err
-		}
+	if err := c.Validate(req); err != nil {
+		return err
+	}
 
-		// check id available in database?
-		_, errFind := mappingKeyowrdListController.mappingKeywordListService.FindMappingkeywordlistById(uint(id))
-		if errFind != nil {
-			if errors.Is(errFind, utils.ErrMappingKeywordListNotFound) {
-				res := utils.Response{
-					Data: nil,
-					Message: "Data not found",
-					StatusCode: 404,
-				}
-
-				return res.ReturnSingleMessage(c)
+	// check id available in database?
+	_, errFind := mappingKeyowrdListController.mappingKeywordListService.FindMappingkeywordlistById(uint(id))
+	if errFind != nil {
+		if errors.Is(errFind, utils.ErrMappingKeywordListNotFound) {
+			res := utils.Response{
+				Data: nil,
+				Message: "Data not found",
+				StatusCode: 404,
 			}
-			return errFind
-		}
 
-		err := mappingKeyowrdListController.mappingKeywordListService.UpdateMappingkeywordlist(uint(id), req)
-		if err != nil {
-			return err
+			return res.ReturnSingleMessage(c)
 		}
+		return errFind
+	}
 
-		res := utils.Response{
-			Data: nil,
-			Message: "Berhasil update keyword",
-			StatusCode: 201,
-		}
+	err := mappingKeyowrdListController.mappingKeywordListService.UpdateMappingkeywordlist(uint(id), req)
+	if err != nil {
+		return err
+	}
 
-		return res.ReturnSingleMessage(c)
+	res := utils.Response{
+		Data: nil,
+		Message: "Berhasil update keyword",
+		StatusCode: 201,
+	}
+
+	return res.ReturnSingleMessage(c)
 }
 
 // Delete Mapping Keyword List
