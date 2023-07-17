@@ -120,8 +120,8 @@ func (mappingKeyowrdListController *MappingKeyowrdListController) FindMappingkey
 // @Tags    Keyword Lists
 // @Accept  json
 // @Produce json
-// @Param   id   path     int               true "Code ID"
-// @Param   keywordList body     dto.CreateMappingkeywordlist true "Update Keyword List Baru"
+// @Param   id   path     int               true "ID"
+// @Param   mappingkeywordlist body     dto.UpdateMappingkeywordlist true "Update Keyword List Baru"
 // @Success 201  {object} utils.Response
 // @Failure 400  {object} middlewares.ResponseError
 // @Failure 401  {object} middlewares.ResponseError

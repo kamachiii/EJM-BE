@@ -171,6 +171,7 @@ func (register *User) UpdateUser(id uint, user *dto.UpdateUser) error {
 			Password: user.Password,
 			RoleId:   user.RoleId,
 			Name: user.Name,
+			Active:   models.ActiveEnum(user.Active),
 		},
 	)
 
