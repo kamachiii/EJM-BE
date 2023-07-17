@@ -3,13 +3,15 @@ package repository
 import (
 	"EJM/dto"
 	"EJM/pkg/models"
+	"EJM/utils"
+	"errors"
 	"strings"
 
 	"gorm.io/gorm"
 )
 
 type MappingKeywordListRepository interface {
-	CreateMappingkeywordlist(mappingKeywordList *dto.CreateMappingkeywordlist) (models.MappingKeywordList, error)             				   // [register new user]
+	CreateMappingKeywordList(mappingKeywordList *dto.CreateMappingkeywordlist) (models.MappingKeywordList, error)             				   // [register new user]
 	FindMappingkeywordlist(pagination *models.Paginate, search string, value string) ([]models.MappingKeywordList, *models.Paginate, error)
 	FindMappingkeywordlistById(id uint) (models.MappingKeywordList, error) // [delete user by id]
 	UpdateMappingkeywordlist(id uint, user *dto.UpdateMappingkeywordlist) error                         						  //[update user by id]
@@ -21,7 +23,7 @@ type MappingKeywordList struct {
 	db2 *gorm.DB
 }
 
-func NewMappingKeywordLIstRepository(db *gorm.DB) *MappingKeywordList {
+func NewMappingKeywordListRepository(db *gorm.DB) *MappingKeywordList {
 	return &MappingKeywordList{db: db, db2: db}
 }
 
@@ -75,7 +77,15 @@ func (mappingKeywordListObject *MappingKeywordList) FindMappingkeywordlistById(i
 			ID: id,
 		},
 	}
-	if err := mappingKeywordListObject.MappingKeywordListModel().First(&findId, "id =?", id).Error; err != nil {
+
+	mappingKeywordListModel := mappingKeywordListObject.db.Model(&models.MappingKeywordList{})
+
+	err := mappingKeywordListModel.First(&findId, "id = ?", id).Error
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			// ID not found in the database
+			return models.MappingKeywordList{}, utils.ErrMappingKeywordListNotFound
+		}
 		return models.MappingKeywordList{}, err
 	}
 
@@ -98,7 +108,7 @@ func (mappingKeywordList *MappingKeywordList) CreateMappingKeywordList(mapping_k
 }
 
 // update mapping keyword list
-func (mappingKeywordListObject *MappingKeywordList) UpdateMappingKeywordList(id uint, mappingKeywordList *dto.UpdateMappingkeywordlist) error {
+func (mappingKeywordListObject *MappingKeywordList) UpdateMappingkeywordlist(id uint, mappingKeywordList *dto.UpdateMappingkeywordlist) error {
 	update := mappingKeywordListObject.MappingKeywordListModel().Where("mappingKeywordList.id = ?", id).Updates(models.MappingKeywordList{
 		MappingKeywordList: mappingKeywordList.Keyword,
 	})
@@ -111,7 +121,7 @@ func (mappingKeywordListObject *MappingKeywordList) UpdateMappingKeywordList(id 
 }
 
 // delete mapping keyword list
-func (mappingKeywordListObject *MappingKeywordList) DeleteMappingKeywordList(id uint) error {
+func (mappingKeywordListObject *MappingKeywordList) DeleteMappingkeywordlist(id uint) error {
 	deleteMappingKeywordList := mappingKeywordListObject.MappingKeywordListModel().Where("mappingKeywordList.id = ?", id).Delete(&models.MappingKeywordList{})
 
 	if err := deleteMappingKeywordList.Error; err != nil {

@@ -28,6 +28,7 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 	menuController := controllers.NewMenuController(server)
 	actionController := controllers.NewActionController(server)
 	mappingCodeController := controllers.NewMappingCodeController(server)
+	mappingKeywordListController := controllers.NewMappingKeywordListcontroller(server)
 
 	// middleware
 	server.Echo.Validator = &middlewares.CustomValidator{
@@ -185,6 +186,16 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			mappingCodeRoutes.PUT("/:id", mappingCodeController.UpdateMappingCode)
 			mappingCodeRoutes.DELETE("/:id", mappingCodeController.DeleteMappingCode)
 			mappingCodeRoutes.DELETE("", mappingCodeController.DeleteMappingCodeBulk)
+		}
+
+		// Mapping Keyword List 
+		mappingKeywordListRoutes := prefix.Group("/mappingKeywordList")
+		{
+			mappingKeywordListRoutes.GET("", mappingKeywordListController.FindMappingkeywordlist)
+			mappingKeywordListRoutes.GET("/:id", mappingKeywordListController.FindMappingkeywordlistById)
+			mappingKeywordListRoutes.POST("/create", mappingKeywordListController.CreateMappingKeywordList)
+			mappingKeywordListRoutes.PUT("/:id", mappingKeywordListController.UpdateMappingkeywordlist)
+			mappingKeywordListRoutes.DELETE("/:id", mappingKeywordListController.DeleteMappingkeywordlist)
 		}
 
 	}

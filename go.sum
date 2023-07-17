@@ -57,8 +57,6 @@ github.com/glebarez/go-sqlite v1.20.0/go.mod h1:uTnJoqtwMQjlULmljLT73Cg7HB+2X6ev
 github.com/glebarez/sqlite v1.5.0/go.mod h1:0wzXzTvfVJIN2GqRhCdMbnYd+m+aH5/QV7B30rM6NgY=
 github.com/glebarez/sqlite v1.6.0 h1:ZpvDLv4zBi2cuuQPitRiVz/5Uh6sXa5d8eBu0xNTpAo=
 github.com/glebarez/sqlite v1.6.0/go.mod h1:6D6zPU/HTrFlYmVDKqBJlmQvma90P6r7sRRdkUUZOYk=
-github.com/go-gormigrate/gormigrate/v2 v2.1.0 h1:4/1xr9CjOox714EJWbxkF00lrNmbWJToSZzhykKKcKY=
-github.com/go-gormigrate/gormigrate/v2 v2.1.0/go.mod h1:gpA97koYGyjqaiLDTmLE5W7nyYTmI26AYIf2a/earuo=
 github.com/go-kit/log v0.1.0/go.mod h1:zbhenjAZHb184qTLMA9ZjW7ThYL0H2mk7Q6pNt4vbaY=
 github.com/go-logfmt/logfmt v0.5.0/go.mod h1:wCYkCAKZfumFQihp8CzCvQ3paCTfi41vtzG1KdI/P7A=
 github.com/go-openapi/jsonpointer v0.19.3/go.mod h1:Pl9vOtqEWErmShwVjC8pYs9cog34VGT37dQOVbmoatg=

@@ -4,6 +4,7 @@ import (
 	"EJM/dto"
 	"EJM/pkg/models"
 	"EJM/pkg/repository"
+	"EJM/utils"
 	"errors"
 
 	"gorm.io/gorm"
@@ -28,10 +29,9 @@ func NewMappingKeywordListService(constructor *MappingKeywordListService) *Mappi
 
 //new mapping keyword list
 func (mappingKeywordList *MappingKeywordListService) CreateMappingKeywordList(mappingKeywordListDto *dto.CreateMappingkeywordlist) (models.MappingKeywordList, error){
-	var mappingKeywordLists repository.MappingKeywordListRepository
-	mappingKeywordLists = mappingKeywordList.MappingKeywordListRepository
+	mappingKeywordLists := mappingKeywordList.MappingKeywordListRepository
 
-	data, err := mappingKeywordLists.CreateMappingkeywordlist(mappingKeywordListDto)
+	data, err := mappingKeywordLists.CreateMappingKeywordList(mappingKeywordListDto)
 	if err != nil {
 		return models.MappingKeywordList{}, err
 	}
@@ -46,8 +46,7 @@ func (mappingKeywordList *MappingKeywordListService) FindMappingkeywordlist(mapp
 		PageSize: mappingKeywordLists.PageSize,
 	}
 
-	var mappingKewordListRepo repository.MappingKeywordListRepository
-	mappingKewordListRepo = mappingKeywordList.MappingKeywordListRepository
+	var mappingKewordListRepo repository.MappingKeywordListRepository = mappingKeywordList.MappingKeywordListRepository
 
 	data, meta, err := mappingKewordListRepo.FindMappingkeywordlist(&pagination, mappingKeywordLists.Search, mappingKeywordLists.Value)
 	if err != nil {
@@ -62,7 +61,7 @@ func (mappingKeywordList *MappingKeywordListService) UpdateMappingkeywordlist(id
 	var mappingKeywordListRepo repository.MappingKeywordListRepository
 	mappingKeywordListRepo = mappingKeywordList.MappingKeywordListRepository
 
-	_, err := mappingKeywordListRepo.FindMappingkeywordlistById(id)
+	_, err := mappingKeywordListRepo.FindMappingkeywordlistById(mapping_keyword_list.ID)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 
@@ -87,7 +86,7 @@ func (mappingKeywordList *MappingKeywordListService) DeleteMappingkeywordlist(id
 	// find id
 	_, err := mappingKewordListRepo.FindMappingkeywordlistById(id)
 	if err != nil {
-		// return utils.ErrUserNotFound
+		return utils.ErrUserNotFound
 	}
 
 	//delete
@@ -95,15 +94,19 @@ func (mappingKeywordList *MappingKeywordListService) DeleteMappingkeywordlist(id
 }
 
 // find mapping keyword list by id
-func (mappingKeywordList *MappingKeywordListService) FindMappingCodeById(id uint) (models.MappingKeywordList, error){
+func (mappingKeywordList *MappingKeywordListService) FindMappingkeywordlistById(id uint) (models.MappingKeywordList, error){
 	var mapppingKeywordListRepo repository.MappingKeywordListRepository
 	mapppingKeywordListRepo = mappingKeywordList.MappingKeywordListRepository
 
 	data, err := mapppingKeywordListRepo.FindMappingkeywordlistById(id)
 
 	if err != nil {
-		// return models.User{}, utils.ErrUserNotFound
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			// ID not found in the database
+			return models.MappingKeywordList{}, utils.ErrMappingKeywordListNotFound
+		}
+		return models.MappingKeywordList{}, err
 	}
-
 	return data, nil
+
 }
