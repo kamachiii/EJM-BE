@@ -30,8 +30,7 @@ func initMigration(cfg *config.Config, args []string) {
 			models.MappingCode{},
 			models.MappingKeywordList{},
 			models.MJenisTransaksi{},
-			models.MappingKeywordList{},
-			
+			models.MappingKeywordList{},			
 		}
 		var filtered []interface{}
 		if args[0] != utils.ALL {

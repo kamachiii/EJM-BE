@@ -190,8 +190,7 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			mappingCodeRoutes.DELETE("", mappingCodeController.DeleteMappingCodeBulk)
 		}
 
-
-		// Mapping Keyword List 
+		// Mapping Keyword List
 		mappingKeywordListRoutes := prefix.Group("/mappingKeywordList")
 		{
 			mappingKeywordListRoutes.GET("", mappingKeywordListController.FindMappingkeywordlist)
@@ -201,7 +200,7 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			mappingKeywordListRoutes.DELETE("/:id", mappingKeywordListController.DeleteMappingkeywordlist)
 		}
 
-		//Mapping Code
+		//Jenis Transaksi
 		jenisTransaksiRoutes := prefix.Group("/jenisTransaksi")
 		{
 			jenisTransaksiRoutes.GET("", jenisTransaksiController.FindJenisTransaksi)
@@ -210,7 +209,6 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			jenisTransaksiRoutes.PUT("/:id", jenisTransaksiController.UpdateJenisTransaksi)
 			jenisTransaksiRoutes.DELETE("/:id", jenisTransaksiController.DeleteJenisTransaksi)
 			// jenisTransaksiRoutes.DELETE("", jenisTransaksiController.DeleteMappingCodeBulk)
-
 		}
 
 	}

@@ -103,6 +103,9 @@ definitions:
         items:
           $ref: '#/definitions/dto.MenusAction'
         type: array
+      description:
+        description: Main field
+        type: string
       name:
         type: string
       object_actions:
@@ -129,6 +132,7 @@ definitions:
         type: array
     required:
     - actions
+    - description
     - name
     - object_actions
     type: object

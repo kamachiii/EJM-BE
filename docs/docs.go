@@ -3211,6 +3211,7 @@ const docTemplate = `{
             "type": "object",
             "required": [
                 "actions",
+                "description",
                 "name",
                 "object_actions"
             ],
@@ -3220,6 +3221,10 @@ const docTemplate = `{
                     "items": {
                         "$ref": "#/definitions/dto.MenusAction"
                     }
+                },
+                "description": {
+                    "description": "Main field",
+                    "type": "string"
                 },
                 "name": {
                     "type": "string"

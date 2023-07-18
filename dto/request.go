@@ -182,6 +182,7 @@ type UpdateAction struct {
 // --------------------Roles
 type CreateRole struct {
 	Name          string        `json:"name" validate:"required"`
+	Description string        `validate:"required" json:"description"` //Main field
 	Actions       []MenusAction `json:"actions" validate:"required"`
 	ObjectActions []struct {
 		ID       int    `json:"id" validate:"required"`

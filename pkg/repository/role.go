@@ -72,6 +72,7 @@ func (roleObject *Role) CreateRole(role *dto.CreateRole) (models.Role, error) {
 
 	roleModel := models.Role{
 		Name: role.Name,
+		Description: role.Description,
 		
 	}
 	err := roleObject.db.Create(&roleModel).Error
@@ -168,9 +169,9 @@ func (roleObject *Role) FindRoles(pagination *models.Paginate, search string, us
 		data.Where("roles.is_active", true).Count(&pagination.Total)
 	}
 
-	if value != "" {
-		data.Order("roles.id = " + value + " desc")
-	}
+	// if value != "" {
+	// 	data.Order("roles.id = " + value + " desc")
+	// }
 
 	// cari data
 	data.Scopes(pagination.Pagination()).Debug().Find(&roles)

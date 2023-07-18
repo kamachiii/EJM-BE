@@ -273,12 +273,12 @@ func (mappingCodeController *MappingCodeController) DeleteMappingCodeBulk(c echo
 	return res.ReturnSingleMessage(c)
 }
 
-// Find Mapping Code Berdasarkan ID
-// @Summary API untuk Find Mapping Code By ID
-// @Tags    Mapping Code
+// Find Mapping Code By ID
+// @Summary API untuk Mapping Code By ID
+// @Tags    Mapping Codes
 // @Accept  json
 // @Produce json
-// @Param   id  path     string true "Code ID"
+// @Param   id  path     int true "Code ID"
 // @Success 201 {object} utils.Response
 // @Failure 400 {object} middlewares.ResponseError
 // @Failure 401 {object} middlewares.ResponseError

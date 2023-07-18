@@ -3205,6 +3205,7 @@
             "type": "object",
             "required": [
                 "actions",
+                "description",
                 "name",
                 "object_actions"
             ],
@@ -3214,6 +3215,10 @@
                     "items": {
                         "$ref": "#/definitions/dto.MenusAction"
                     }
+                },
+                "description": {
+                    "description": "Main field",
+                    "type": "string"
                 },
                 "name": {
                     "type": "string"
