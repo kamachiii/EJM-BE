@@ -253,3 +253,23 @@ type UpdateJenisTransaksi struct {
 type GetJenisTransaksi struct {
 	BasePagination
 }
+
+// list op code
+type CreateListOpCode struct {
+	OPCode string `json:"opCode" form:"opCode" gorm:"uniqueIndex" validate:"required"`
+	ModelMesin string `json:"modelMesin" form:"modelMesin" validate:"required"`
+	TipeTransaksi string `json:"tipeTransaksi" form:"tipeTransaksi" gorm:"uniqueIndex" validate:"required"`
+}
+
+type GetListOpCode struct {
+	BasePagination
+}
+
+type DeleteListOpCode struct {
+	ID uint `params:"id" validate:"required"`
+}
+
+type UpdateListOpCode struct {
+	ID uint `params:"id" validate:"required"`
+	CreateListOpCode
+}

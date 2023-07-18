@@ -57,6 +57,14 @@ var (
 		},
 	}
 
+	ErrListOpCodeNotFound = &BeError{
+		status: http.StatusNotFound,
+		msg: &i18n.Message{
+			ID:    "user.not.found",
+			Other: "User Not Found",
+		},
+	}
+
 	ErrJenisTransaksiNotFound = &BeError{
 		status: http.StatusNotFound,
 		msg: &i18n.Message{

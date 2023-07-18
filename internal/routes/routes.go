@@ -30,6 +30,8 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 	mappingCodeController := controllers.NewMappingCodeController(server)
 	mappingKeywordListController := controllers.NewMappingKeywordListcontroller(server)
 	jenisTransaksiController := controllers.NewMJenisTransaksiController(server)
+	listOpCodeController := controllers.NewListOpCodeController(server)
+
 
 	// middleware
 	server.Echo.Validator = &middlewares.CustomValidator{
@@ -211,6 +213,15 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 
 		}
 
+		// list op code
+		listOpCodeRoute := prefix.Group("/listOpCode")
+		{
+			listOpCodeRoute.GET("", listOpCodeController.FindListOpCode)
+			listOpCodeRoute.GET("/:id", listOpCodeController.FindListOpCodeById)
+			listOpCodeRoute.POST("/create", listOpCodeController.CreateListOpCode)
+			listOpCodeRoute.PUT("/:id", listOpCodeController.UpdateListOpCode)
+			listOpCodeRoute.DELETE("/:id", listOpCodeController.DeleteListOpCode)
+		}
 	}
 
 }
