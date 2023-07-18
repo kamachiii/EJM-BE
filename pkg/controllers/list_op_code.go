@@ -72,7 +72,7 @@ func (listOpCodeController *ListOpCodeController) CreateListOpCode(c echo.Contex
 
 // Ambil Daftar List Op Code
 // @Summary API untuk Ambil semua daftar list op code
-// @Tags    List Op codes
+// @Tags    List Op code
 // @Accept  json
 // @Produce json
 // @Param   page      query    string true  "Halaman"
@@ -83,7 +83,7 @@ func (listOpCodeController *ListOpCodeController) CreateListOpCode(c echo.Contex
 // @Failure 401       {object} middlewares.ResponseError
 // @Failure 404       {object} middlewares.ResponseError
 // @Failure 500       {object} middlewares.ResponseError
-// @Router  /listOpCodes [get]
+// @Router  /listOpCode [get]
 func (listOpCodeController *ListOpCodeController) FindListOpCode(c echo.Context) error  {
 	req := new(dto.GetListOpCode)
 
@@ -115,17 +115,17 @@ func (listOpCodeController *ListOpCodeController) FindListOpCode(c echo.Context)
 
 // Update List Op Code
 // @Summary API untuk Update Data List OpCode
-// @Tags    List Op Codes
+// @Tags    List Op Code
 // @Accept  json
 // @Produce json
-// @Param   id   path     int               true "Code ID"
-// @Param   listOpCode body     dto.CreateListOpCodes true "Update List Op Code Baru"
+// @Param   id   path     int               true "ID"
+// @Param   listopcode body     dto.CreateListOpCode true "Update List Op Code Baru"
 // @Success 201  {object} utils.Response
 // @Failure 400  {object} middlewares.ResponseError
 // @Failure 401  {object} middlewares.ResponseError
 // @Failure 404  {object} middlewares.ResponseError
 // @Failure 500  {object} middlewares.ResponseError
-// @Router  /listOpCodes/{id} [put]
+// @Router  /listOpCode/{id} [put]
 func (listOpCodeController *ListOpCodeController) UpdateListOpCode(c echo.Context) error  {
 	req := new(dto.UpdateListOpCode)
 	id, errConvert := strconv.Atoi(c.Param("id"))
@@ -174,10 +174,10 @@ func (listOpCodeController *ListOpCodeController) UpdateListOpCode(c echo.Contex
 
 // Delete List Op Code
 // @Summary API untuk Delete List Op Code
-// @Tags    List Op Codes
+// @Tags    List Op Code
 // @Accept  json
 // @Produce json
-// @Param   id  path     int true "List Op Code ID"
+// @Param   id  path     int true "List Op ID"
 // @Success 201 {object} utils.Response
 // @Failure 400 {object} middlewares.ResponseError
 // @Failure 401 {object} middlewares.ResponseError
@@ -216,7 +216,7 @@ func (listOpCodeController *ListOpCodeController) DeleteListOpCode(c echo.Contex
 // @Tags    List Op Code
 // @Accept  json
 // @Produce json
-// @Param   id  path     string true "List Op Code ID"
+// @Param   id  path     string true "List Op ID"
 // @Success 201 {object} utils.Response
 // @Failure 400 {object} middlewares.ResponseError
 // @Failure 401 {object} middlewares.ResponseError

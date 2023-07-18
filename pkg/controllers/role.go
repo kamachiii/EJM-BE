@@ -22,7 +22,7 @@ type RoleController struct {
 }
 
 type IRoleService interface {
-	CreateRole(role *dto.CreateRole, userLoginID uint) (models.Role, error)
+	CreateRole(role *dto.CreateRole) (models.Role, error)
 	FindRoles(getRoles *dto.GetRoles) ([]models.Role, *models.Paginate, error)
 	FindRoleById(roleId uint) (models.Role, error)
 	DeleteRole(roleId uint) error
@@ -101,7 +101,7 @@ func (roleConttroller *RoleController) UpdateRole(c echo.Context) error {
 
 	errAkses := roleService.SetAccessRole(&dto.SetAccessRole{
 		RoleId:  request.ID,
-		Actions: request.Actions,
+		// Actions: request.Actions,
 	})
 	if errAkses != nil {
 		// roleRepoDB.Rollback()
@@ -235,36 +235,33 @@ func (roleController *RoleController) CreateRole(c echo.Context) error {
 		return err
 	}
 
-	userLoginID := utils.User(c).ID
-	roleRepoDB := roleController.roleService.RoleRepository
+	// userLoginID := utils.User(c).ID
+	// roleRepoDB := roleController.roleService.RoleRepository
 
 	// service
 	var roleService IRoleService
 	roleService = roleController.roleService
 
-	data, err := roleService.CreateRole(request, userLoginID)
+	data, err := roleService.CreateRole(request)
 	if err != nil {
-		roleRepoDB.Rollback()
+		// roleRepoDB.Rollback()
 		return err
 	}
 
-	errAkses := roleService.SetAccessRole(&dto.SetAccessRole{
-		RoleId:  data.ID,
-		Actions: request.Actions,
-	})
-	if errAkses != nil {
-		roleRepoDB.Rollback()
-		return errAkses
-	}
+	// errAkses := roleService.SetAccessRole(&dto.SetAccessRole{
+	// 	RoleId:  data.ID,
+		// Actions: request.Actions,
+	// })
+	// if errAkses != nil {
+		// roleRepoDB.Rollback()
+	// 	return errAkses
+	// }
 
-	roleRepoDB.Commit()
+	// roleRepoDB.Commit()
 
 	res := utils.Response{
-		Data: data,
-		Translating: &i18n.Message{
-			ID:    "role.success",
-			Other: "Success Insert New Role",
-		},
+		Data:       data,
+		Message:    "Berhasil Insert data",
 		StatusCode: 201,
 	}
 

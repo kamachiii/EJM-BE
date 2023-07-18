@@ -183,15 +183,15 @@ type UpdateAction struct {
 type CreateRole struct {
 	Name          string        `json:"name" validate:"required"`
 	Description string        `validate:"required" json:"description"` //Main field
-	Actions       []MenusAction `json:"actions" validate:"required"`
-	ObjectActions []struct {
-		ID       int    `json:"id" validate:"required"`
-		Name     string `json:"name" validate:"required"`
-		ParentID uint   `json:"parentId"`
-		Path     string `json:"path" validate:"required"`
-		State    int    `json:"state"`
-		Type     string `json:"type" validate:"required"`
-	} `json:"object_actions" validate:"required,dive,required"`
+	// Actions       []MenusAction `json:"actions" validate:"required"`
+	// ObjectActions []struct {
+	// 	ID       int    `json:"id" validate:"required"`
+	// 	Name     string `json:"name" validate:"required"`
+	// 	ParentID uint   `json:"parentId"`
+	// 	Path     string `json:"path" validate:"required"`
+	// 	State    int    `json:"state"`
+	// 	Type     string `json:"type" validate:"required"`
+	// } `json:"object_actions" validate:"required,dive,required"`
 }
 
 type DeleteRoleBulk struct {
