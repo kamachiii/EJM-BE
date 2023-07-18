@@ -97,7 +97,7 @@ func (mappingBinCardObject *MappingBinCard) FindMappingBinCardByBin(bin string) 
 	mappingBinCard := models.MappingBinCard{}
 
 	if err := mappingBinCardObject.MappingBinCardModel().
-		First(&mappingBinCard, "bin = ?", bin).Error; err != nil {
+		First(&mappingBinCard, "id = ?", bin).Error; err != nil {
 		return err
 	}
 

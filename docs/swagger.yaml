@@ -58,6 +58,16 @@ definitions:
     - transactionGroup
     - transactionType
     type: object
+  dto.CreateNewMappingBinCard:
+    properties:
+      bank:
+        type: string
+      bin:
+        type: string
+    required:
+    - bank
+    - bin
+    type: object
   dto.CreateNewMappingCode:
     properties:
       active:
@@ -133,6 +143,16 @@ definitions:
     - object_actions
     type: object
   dto.DeleteActionBulk:
+    properties:
+      ids:
+        items:
+          type: integer
+        minItems: 1
+        type: array
+    required:
+    - ids
+    type: object
+  dto.DeleteMappingBinCardBulk:
     properties:
       ids:
         items:
@@ -1090,6 +1110,201 @@ paths:
       summary: API untuk Membuat Jenis Transaksi Baru
       tags:
       - Jenis Transaksi
+  /mappingBinCards:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Delete Mapping BinCard Bulk
+        in: body
+        name: mapping_BinCard_ids
+        required: true
+        schema:
+          $ref: '#/definitions/dto.DeleteMappingBinCardBulk'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Delete Mapping BinCard Bulk
+      tags:
+      - Mapping BinCards
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Halaman
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: Jumlah Data Per halaman
+        in: query
+        name: page_size
+        required: true
+        type: string
+      - description: Mencari Data
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponsePaginate'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Ambil semua daftar mapping BinCard
+      tags:
+      - Mapping BinCards
+  /mappingBinCards/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: BinCard ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Delete Mapping BinCard
+      tags:
+      - Mapping BinCards
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: BinCard ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update Mapping BinCard Baru
+        in: body
+        name: mappingBinCard
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateNewMappingBinCard'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Update Data Mapping BinCard
+      tags:
+      - Mapping BinCards
+  /mappingBinCards/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Daftar Mapping BinCard Baru
+        in: body
+        name: mappingBinCard
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateNewMappingBinCard'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Membuat Mapping BinCard Baru
+      tags:
+      - Mapping BinCards
   /mappingCodes:
     delete:
       consumes:

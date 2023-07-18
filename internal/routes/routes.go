@@ -28,6 +28,7 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 	menuController := controllers.NewMenuController(server)
 	actionController := controllers.NewActionController(server)
 	mappingCodeController := controllers.NewMappingCodeController(server)
+	mappingBinCardController := controllers.NewMappingBinCardController(server)
 	mappingKeywordListController := controllers.NewMappingKeywordListcontroller(server)
 	jenisTransaksiController := controllers.NewMJenisTransaksiController(server)
 
@@ -190,8 +191,19 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			mappingCodeRoutes.DELETE("", mappingCodeController.DeleteMappingCodeBulk)
 		}
 
+		//Mapping BinCard
+		mappingBinCardRoutes := prefix.Group("/mappingBinCards")
+		{
+			mappingBinCardRoutes.GET("", mappingBinCardController.FindMappingBinCards)
+			mappingBinCardRoutes.GET("/:id", mappingBinCardController.FindMappingBinCardById)
+			mappingBinCardRoutes.POST("/create", mappingBinCardController.CreateMappingBinCard)
+			mappingBinCardRoutes.PUT("/:id", mappingBinCardController.UpdateMappingBinCard)
+			mappingBinCardRoutes.DELETE("/:id", mappingBinCardController.DeleteMappingBinCard)
+			mappingBinCardRoutes.DELETE("", mappingBinCardController.DeleteMappingBinCardBulk)
+		}
 
-		// Mapping Keyword List 
+
+		// Mapping Keyword List
 		mappingKeywordListRoutes := prefix.Group("/mappingKeywordList")
 		{
 			mappingKeywordListRoutes.GET("", mappingKeywordListController.FindMappingkeywordlist)
