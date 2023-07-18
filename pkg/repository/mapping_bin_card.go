@@ -4,7 +4,7 @@ import (
 	"EJM/dto"
 	"EJM/pkg/models"
 
-	// "EJM/utils"
+	"EJM/utils"
 	// "errors"
 	"strings"
 
@@ -97,8 +97,8 @@ func (mappingBinCardObject *MappingBinCard) FindMappingBinCardByBin(bin string) 
 	mappingBinCard := models.MappingBinCard{}
 
 	if err := mappingBinCardObject.MappingBinCardModel().
-		First(&mappingBinCard, "bin = ?", bin).Error; err != nil {
-		return err
+		First(&mappingBinCard, "bin = ?", bin).Error; err == nil {
+		return utils.ErrBinAlreadyExists
 	}
 
 	return nil

@@ -44,7 +44,7 @@ func NewMappingBinCardService(service *MappingBinCardService) *MappingBinCardSer
 func (mappingBinCard *MappingBinCardService) CreateMappingBinCard(mappingBinCardDto *dto.CreateNewMappingBinCard) (models.MappingBinCard, error) {
 	mappingBinCards := mappingBinCard.MappingBinCardRepository
 
-	// Cek apakah definition sudah ada di database
+	// Cek apakah BIN sudah ada di database
 	BinIsExist := mappingBinCards.FindMappingBinCardByBin(mappingBinCardDto.Bin)
 
 	if BinIsExist != nil {
