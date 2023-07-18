@@ -34,6 +34,7 @@ func initMigration(cfg *config.Config, args []string) {
 			models.ListOpCode{},
 			models.MappingKeywordList{},
 
+
 		}
 		var filtered []interface{}
 		if args[0] != utils.ALL {

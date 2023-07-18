@@ -21,14 +21,14 @@ func NewRoleService(service *RoleService) *RoleService {
 	return service
 }
 
-func (role *RoleService) CreateRole(roleDto *dto.CreateRole, userLoginID uint) (models.Role, error) {
+func (role *RoleService) CreateRole(roleDto *dto.CreateRole) (models.Role, error) {
 	var roles repository.RoleRepository = role.RoleRepository
 
 	// check role exist in database
 	roleIsExist := roles.FindRoleByName(roleDto.Name)
 
 	if roleIsExist != nil {
-		return models.Role{}, roleIsExist
+		return models.Role{}, errors.New("Role already exists")
 	}
 
 	data, err := roles.CreateRole(roleDto)

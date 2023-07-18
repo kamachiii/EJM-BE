@@ -122,38 +122,14 @@ definitions:
     type: object
   dto.CreateRole:
     properties:
-      actions:
-        items:
-          $ref: '#/definitions/dto.MenusAction'
-        type: array
+      description:
+        description: Main field
+        type: string
       name:
         type: string
-      object_actions:
-        items:
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
-            parentId:
-              type: integer
-            path:
-              type: string
-            state:
-              type: integer
-            type:
-              type: string
-          required:
-          - id
-          - name
-          - path
-          - type
-          type: object
-        type: array
     required:
-    - actions
+    - description
     - name
-    - object_actions
     type: object
   dto.DeleteActionBulk:
     properties:
@@ -1123,80 +1099,7 @@ paths:
       summary: API untuk Membuat Jenis Transaksi Baru
       tags:
       - Jenis Transaksi
-  /listOpCode/{id}:
-    delete:
-      consumes:
-      - application/json
-      parameters:
-      - description: List Op Code ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/utils.Response'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-      summary: API untuk Delete List Op Code
-      tags:
-      - List Op Codes
-  /listOpCode/create:
-    post:
-      consumes:
-      - application/json
-      parameters:
-      - description: Daftar List Op Code Baru
-        in: body
-        name: listopcode
-        required: true
-        schema:
-          $ref: '#/definitions/dto.CreateListOpCode'
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/utils.Response'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/middlewares.ResponseError'
-      summary: API untuk Membuat List Op Code Baru
-      tags:
-      - List Op Codes
-  /listOpCodes:
+  /listOpCode:
     get:
       consumes:
       - application/json
@@ -1241,7 +1144,42 @@ paths:
       summary: API untuk Ambil semua daftar list op code
       tags:
       - List Op Codes
-  /listOpCodes/{id}:
+  /listOpCode/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: List Op ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Delete List Op Code
+      tags:
+      - List Op Codes
     put:
       consumes:
       - application/json
@@ -1281,6 +1219,43 @@ paths:
           schema:
             $ref: '#/definitions/middlewares.ResponseError'
       summary: API untuk Update Data List OpCode
+      tags:
+      - List Op Codes
+  /listOpCode/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Daftar List Op Code Baru
+        in: body
+        name: listopcode
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateListOpCode'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Membuat List Op Code Baru
       tags:
       - List Op Codes
   /mappingBinCards:

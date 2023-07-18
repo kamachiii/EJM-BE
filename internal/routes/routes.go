@@ -215,7 +215,7 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			mappingKeywordListRoutes.DELETE("/:id", mappingKeywordListController.DeleteMappingkeywordlist)
 		}
 
-		//Mapping Code
+		//Jenis Transaksi
 		jenisTransaksiRoutes := prefix.Group("/jenisTransaksi")
 		{
 			jenisTransaksiRoutes.GET("", jenisTransaksiController.FindJenisTransaksi)
@@ -224,7 +224,6 @@ func InitializeRoute(server *server.Server, cfg *config.Config) {
 			jenisTransaksiRoutes.PUT("/:id", jenisTransaksiController.UpdateJenisTransaksi)
 			jenisTransaksiRoutes.DELETE("/:id", jenisTransaksiController.DeleteJenisTransaksi)
 			// jenisTransaksiRoutes.DELETE("", jenisTransaksiController.DeleteMappingCodeBulk)
-
 		}
 
 		// list op code

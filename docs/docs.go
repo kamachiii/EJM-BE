@@ -995,119 +995,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/listOpCode/create": {
-            "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "List Op Codes"
-                ],
-                "summary": "API untuk Membuat List Op Code Baru",
-                "parameters": [
-                    {
-                        "description": "Daftar List Op Code Baru",
-                        "name": "listopcode",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.CreateListOpCode"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/utils.Response"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
-        "/listOpCode/{id}": {
-            "delete": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "List Op Codes"
-                ],
-                "summary": "API untuk Delete List Op Code",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "List Op Code ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/utils.Response"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/middlewares.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
-        "/listOpCodes": {
+        "/listOpCode": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -1175,7 +1063,64 @@ const docTemplate = `{
                 }
             }
         },
-        "/listOpCodes/{id}": {
+        "/listOpCode/create": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "List Op Codes"
+                ],
+                "summary": "API untuk Membuat List Op Code Baru",
+                "parameters": [
+                    {
+                        "description": "Daftar List Op Code Baru",
+                        "name": "listopcode",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CreateListOpCode"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/listOpCode/{id}": {
             "put": {
                 "consumes": [
                     "application/json"
@@ -1203,6 +1148,59 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/dto.CreateListOpCode"
                         }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "List Op Codes"
+                ],
+                "summary": "API untuk Delete List Op Code",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "List Op ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -3785,51 +3783,16 @@ const docTemplate = `{
         "dto.CreateRole": {
             "type": "object",
             "required": [
-                "actions",
-                "name",
-                "object_actions"
+                "description",
+                "name"
             ],
             "properties": {
-                "actions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/dto.MenusAction"
-                    }
+                "description": {
+                    "description": "Main field",
+                    "type": "string"
                 },
                 "name": {
                     "type": "string"
-                },
-                "object_actions": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "required": [
-                            "id",
-                            "name",
-                            "path",
-                            "type"
-                        ],
-                        "properties": {
-                            "id": {
-                                "type": "integer"
-                            },
-                            "name": {
-                                "type": "string"
-                            },
-                            "parentId": {
-                                "type": "integer"
-                            },
-                            "path": {
-                                "type": "string"
-                            },
-                            "state": {
-                                "type": "integer"
-                            },
-                            "type": {
-                                "type": "string"
-                            }
-                        }
-                    }
                 }
             }
         },
