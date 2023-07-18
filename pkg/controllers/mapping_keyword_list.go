@@ -34,10 +34,10 @@ func NewMappingKeywordListcontroller(srv *server.Server) *MappingKeyowrdListCont
 
 // Daftar Mapping Keyword List Baru
 // @Summary API untuk Membuat Mapping Keyword List Baru
-// @Tags    Mapping Keyword List
+// @Tags    Keyword List
 // @Accept  json
 // @Produce json
-// @Param   mappingkeywordlist body     dto.CreateMappiingKeywordList true "Daftar Mapping Keyword List Baru"
+// @Param   mappingkeywordlist body     dto.CreateMappingkeywordlist true "Daftar Mapping Keyword List Baru"
 // @Success 201  {object} utils.Response
 // @Failure 400  {object} middlewares.ResponseError
 // @Failure 401  {object} middlewares.ResponseError
@@ -74,7 +74,7 @@ func (mappingKeyowrdListController *MappingKeyowrdListController) CreateMappingK
 
 // Ambil Daftar Mapping Mapping keyword list
 // @Summary API untuk Ambil semua daftar mapping keyword list
-// @Tags    Mapping List
+// @Tags    Keyword List
 // @Accept  json
 // @Produce json
 // @Param   page      query    string true  "Halaman"
@@ -115,13 +115,13 @@ func (mappingKeyowrdListController *MappingKeyowrdListController) FindMappingkey
 }
 
 
-// Update Mapping keyword List
-// @Summary API untuk Update Data Mapping Keyword List
-// @Tags    Mapping Keyword List
+// Update Keyword List
+// @Summary API untuk Update Data Keyword List
+// @Tags    Keyword Lists
 // @Accept  json
 // @Produce json
-// @Param   id   path     int               true "Code ID"
-// @Param   mappingKeywordList body     dto.CreateMappingKeywordList true "Update Mapping Keyword List Baru"
+// @Param   id   path     int               true "ID"
+// @Param   mappingkeywordlist body     dto.UpdateMappingkeywordlist true "Update Keyword List Baru"
 // @Success 201  {object} utils.Response
 // @Failure 400  {object} middlewares.ResponseError
 // @Failure 401  {object} middlewares.ResponseError
@@ -130,53 +130,53 @@ func (mappingKeyowrdListController *MappingKeyowrdListController) FindMappingkey
 // @Router  /mappingKeywordList/{id} [put]
 
 func (mappingKeyowrdListController *MappingKeyowrdListController) UpdateMappingkeywordlist(c echo.Context) error  {
-		req := new(dto.UpdateMappingkeywordlist)
-		id, errConvert := strconv.Atoi(c.Param("id"))
-		if errConvert != nil {
-			return errConvert
-		}	 
-		req.ID = uint(id)
+	req := new(dto.UpdateMappingkeywordlist)
+	id, errConvert := strconv.Atoi(c.Param("id"))
+	if errConvert != nil {
+		return errConvert
+	}	 
+	req.ID = uint(id)
 
-		if err := c.Bind(req); err != nil{
-			return err
-		}
+	if err := c.Bind(req); err != nil{
+		return err
+	}
 
-		if err := c.Validate(req); err != nil {
-			return err
-		}
+	if err := c.Validate(req); err != nil {
+		return err
+	}
 
-		// check id available in database?
-		_, errFind := mappingKeyowrdListController.mappingKeywordListService.FindMappingkeywordlistById(uint(id))
-		if errFind != nil {
-			if errors.Is(errFind, utils.ErrMappingKeywordListNotFound) {
-				res := utils.Response{
-					Data: nil,
-					Message: "Data not found",
-					StatusCode: 404,
-				}
-
-				return res.ReturnSingleMessage(c)
+	// check id available in database?
+	_, errFind := mappingKeyowrdListController.mappingKeywordListService.FindMappingkeywordlistById(uint(id))
+	if errFind != nil {
+		if errors.Is(errFind, utils.ErrMappingKeywordListNotFound) {
+			res := utils.Response{
+				Data: nil,
+				Message: "Data not found",
+				StatusCode: 404,
 			}
-			return errFind
-		}
 
-		err := mappingKeyowrdListController.mappingKeywordListService.UpdateMappingkeywordlist(uint(id), req)
-		if err != nil {
-			return err
+			return res.ReturnSingleMessage(c)
 		}
+		return errFind
+	}
 
-		res := utils.Response{
-			Data: nil,
-			Message: "Berhasil update keyword",
-			StatusCode: 201,
-		}
+	err := mappingKeyowrdListController.mappingKeywordListService.UpdateMappingkeywordlist(uint(id), req)
+	if err != nil {
+		return err
+	}
 
-		return res.ReturnSingleMessage(c)
+	res := utils.Response{
+		Data: nil,
+		Message: "Berhasil update keyword",
+		StatusCode: 201,
+	}
+
+	return res.ReturnSingleMessage(c)
 }
 
 // Delete Mapping Keyword List
 // @Summary API untuk Delete Mapping Keywprd List
-// @Tags    Mapping Keyword List
+// @Tags    Keyword List
 // @Accept  json
 // @Produce json
 // @Param   id  path     int true "Keyword List ID"
@@ -213,19 +213,18 @@ func (mappingKeywordListController *MappingKeyowrdListController) DeleteMappingk
 }
 
 
-// Find Mapping Keyword List Berdasarkan ID
-// @Summary API untuk Find Mapping Keyword List By ID
-// @Tags    Mapping Keyword List
+// Find Keyword List By ID
+// @Summary API untuk Keyword List By ID
+// @Tags    Keyword List
 // @Accept  json
 // @Produce json
-// @Param   id  path     string true "Keywprd List ID"
+// @Param   id  path     int true "ID"
 // @Success 201 {object} utils.Response
 // @Failure 400 {object} middlewares.ResponseError
 // @Failure 401 {object} middlewares.ResponseError
 // @Failure 404 {object} middlewares.ResponseError
 // @Failure 500 {object} middlewares.ResponseError
 // @Router  /mappingKeywordList/{id} [GET]
-
 func (mappingKeywordListController *MappingKeyowrdListController) FindMappingkeywordlistById(c echo.Context) error  {
 	id, err := strconv.Atoi(c.Param("id"))
 

@@ -78,7 +78,6 @@ func (mappingKeywordList *MappingKeywordListService) UpdateMappingkeywordlist(id
 
 	return mappingKeywordListRepo.UpdateMappingkeywordlist(id, mapping_keyword_list)
 }
-
 // delete mapping keyword list
 func (mappingKeywordList *MappingKeywordListService) DeleteMappingkeywordlist(id uint) error {
 	var mappingKewordListRepo repository.MappingKeywordListRepository

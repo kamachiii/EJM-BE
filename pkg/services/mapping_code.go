@@ -78,13 +78,12 @@ func (mappingCode *MappingCodeService) FindMappingCodes(mappingCodes *dto.GetMap
 	return data, meta, nil
 }
 
-// update user [tested]
+// update code [tested]
 func ( mappingCode *MappingCodeService) UpdateMappingCode(id uint, mapping_code *dto.UpdateMappingCode) error {
 	var mappingCodeRepo repository.MappingCodeRepository
 	mappingCodeRepo = mappingCode.MappingCodeRepository
 
 	_, err := mappingCodeRepo.FindMappingCodeById(mapping_code.ID)
-
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			// return utils.ErrRoleNotExists

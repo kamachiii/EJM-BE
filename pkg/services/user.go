@@ -23,7 +23,8 @@ type IUserService interface {
 	ToggleActive(id uint, payload *bool) error                              // [activating the user]
 	RegisterUser(user *dto.CreateNewUser) (models.User, error)              // [register new user]
 	FindUsers(users *dto.GetUsers) ([]models.User, *models.Paginate, error) //[get all users]
-	UpdateUser(id uint, user *dto.UpdateUser) error                         //[update user by id]
+	UpdateUser(id uint, user *dto.UpdateUser) error   
+	ChangePassword(id uint, newPassword string) error
 	DeleteUser(id uint) error                                               // [delete user by id]
 	FindUserById(id uint) (models.User, error)                              // [find user by id]
 }
@@ -130,6 +131,20 @@ func (register *RegisterService) UpdateUser(id uint, user *dto.UpdateUser) error
 
 	return registerRepo.UpdateUser(id, user)
 }
+
+// update user [tested]
+func (register *RegisterService) ChangePassword(id uint, newPassword string) error {
+	// Cari id pengguna
+	registerRepo := register.RegisterRepository
+	_, err := registerRepo.FindFirst(id)
+	if err != nil {
+		return utils.ErrUserNotFound
+	}
+
+	return registerRepo.ChangePassword(id, newPassword)
+}
+
+
 
 // delete user [tested]
 func (register *RegisterService) DeleteUser(id uint) error {

@@ -84,9 +84,9 @@ func (mappingKeywordListObject *MappingKeywordList) FindMappingkeywordlistById(i
 		},
 	}
 
-	mappingKeywordListModel := mappingKeywordListObject.db.Model(&models.MappingKeywordList{})
+	mappingKeywordListModel := mappingKeywordListObject.MappingKeywordListModel()
 
-	err := mappingKeywordListModel.First(&findId, "id = ?", id).Error
+	err := mappingKeywordListModel.First(&findId).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			// ID not found in the database
