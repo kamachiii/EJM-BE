@@ -1,3 +1,5 @@
 vendor/
 .env
 docs/
+
+//list files or folders here so they don't upload
