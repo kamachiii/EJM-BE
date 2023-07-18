@@ -24,6 +24,22 @@ func NewMappingBinCardService(service *MappingBinCardService) *MappingBinCardSer
 }
 
 
+
+
+// type IMappingBinCardService interface {
+// 	FindMappingBinCards(mappingBinCards *dto.GetMappingBinCards) ([]models.MappingBinCard, *models.Paginate, error)
+// 	FindMappingBinCardById(id uint) (models.MappingBinCard, error)
+//  FindMappingBinCardByBin(bin string) error
+// 	CreateMappingBinCard(mappingBinCard *dto.CreateNewMappingBinCard) (models.MappingBinCard, error)
+// 	UpdateMappingBinCard(id uint, mappingBinCard *dto.UpdateMappingBinCard) error
+// 	DeleteMappingBinCard(id uint) error
+// }
+
+
+
+
+//
+
 // new mapping BinCard
 func (mappingBinCard *MappingBinCardService) CreateMappingBinCard(mappingBinCardDto *dto.CreateNewMappingBinCard) (models.MappingBinCard, error) {
 	mappingBinCards := mappingBinCard.MappingBinCardRepository

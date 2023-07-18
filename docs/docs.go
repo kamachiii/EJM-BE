@@ -995,6 +995,250 @@ const docTemplate = `{
                 }
             }
         },
+        "/listOpCode/create": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "List Op Codes"
+                ],
+                "summary": "API untuk Membuat List Op Code Baru",
+                "parameters": [
+                    {
+                        "description": "Daftar List Op Code Baru",
+                        "name": "listopcode",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CreateListOpCode"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/listOpCode/{id}": {
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "List Op Codes"
+                ],
+                "summary": "API untuk Delete List Op Code",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "List Op Code ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/listOpCodes": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "List Op Codes"
+                ],
+                "summary": "API untuk Ambil semua daftar list op code",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Halaman",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Jumlah Data Per halaman",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Mencari Data",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ResponsePaginate"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/listOpCodes/{id}": {
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "List Op Codes"
+                ],
+                "summary": "API untuk Update Data List OpCode",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Code ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update List Op Code Baru",
+                        "name": "listOpCode",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CreateListOpCode"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/utils.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/middlewares.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
         "/mappingBinCards": {
             "get": {
                 "consumes": [
@@ -1004,7 +1248,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Mapping BinCards"
+                    "Mapping Bin Cards"
                 ],
                 "summary": "API untuk Ambil semua daftar mapping BinCard",
                 "parameters": [
@@ -1070,7 +1314,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Mapping BinCards"
+                    "Mapping Bin Cards"
                 ],
                 "summary": "API untuk Delete Mapping BinCard Bulk",
                 "parameters": [
@@ -1127,7 +1371,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Mapping BinCards"
+                    "Mapping Bin Cards"
                 ],
                 "summary": "API untuk Membuat Mapping BinCard Baru",
                 "parameters": [
@@ -1184,7 +1428,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Mapping BinCards"
+                    "Mapping Bin Cards"
                 ],
                 "summary": "API untuk Update Data Mapping BinCard",
                 "parameters": [
@@ -1246,7 +1490,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Mapping BinCards"
+                    "Mapping Bin Cards"
                 ],
                 "summary": "API untuk Delete Mapping BinCard",
                 "parameters": [
@@ -3401,6 +3645,25 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "path": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.CreateListOpCode": {
+            "type": "object",
+            "required": [
+                "modelMesin",
+                "opCode",
+                "tipeTransaksi"
+            ],
+            "properties": {
+                "modelMesin": {
+                    "type": "string"
+                },
+                "opCode": {
+                    "type": "string"
+                },
+                "tipeTransaksi": {
                     "type": "string"
                 }
             }

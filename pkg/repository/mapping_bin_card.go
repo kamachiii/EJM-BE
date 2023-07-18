@@ -92,12 +92,12 @@ func (mappingBinCardObject *MappingBinCard) FindMappingBinCardById(id uint) (mod
 	return findId, nil
 }
 
-// find by definition
+// find by BIN
 func (mappingBinCardObject *MappingBinCard) FindMappingBinCardByBin(bin string) error {
 	mappingBinCard := models.MappingBinCard{}
 
 	if err := mappingBinCardObject.MappingBinCardModel().
-		First(&mappingBinCard, "id = ?", bin).Error; err != nil {
+		First(&mappingBinCard, "bin = ?", bin).Error; err != nil {
 		return err
 	}
 
@@ -122,7 +122,7 @@ func (mappingBinCard *MappingBinCard) CreateMappingBinCard(mapping_bin_card *dto
 
 // update mapping BinCard
 func (mappingBinCardObject *MappingBinCard) UpdateMappingBinCard(id uint, mappingBinCard *dto.UpdateMappingBinCard) error {
-	update := mappingBinCardObject.MappingBinCardModel().Where("mappingBinCards.id = ?", id).Updates(models.MappingBinCard{
+	update := mappingBinCardObject.MappingBinCardModel().Where("id = ?", id).Updates(models.MappingBinCard{
 		Bin:  mappingBinCard.Bin,
 		Bank: mappingBinCard.Bank,
 	})
@@ -136,9 +136,10 @@ func (mappingBinCardObject *MappingBinCard) UpdateMappingBinCard(id uint, mappin
 
 // delete mapping BinCard
 func (mappingBinCardObject *MappingBinCard) DeleteMappingBinCard(id uint) error {
-	deleteMappingBinCard := mappingBinCardObject.MappingBinCardModel().Where("mappingBinCards.id = ?", id).Delete(&models.MappingBinCard{})
+	deleteMappingBinCard := mappingBinCardObject.MappingBinCardModel().Where("id = ?", id).Delete(&models.MappingBinCard{})
 
-	if err := deleteMappingBinCard.Error; err != nil {
+	if err := deleteMappingBinCard.Error
+	err != nil {
 		return err
 	}
 

@@ -34,7 +34,7 @@ func NewMappingBinCardController(srv *server.Server) *MappingBinCardController {
 
 // Daftar Mapping BinCard Baru
 // @Summary API untuk Membuat Mapping BinCard Baru
-// @Tags    Mapping BinCards
+// @Tags    Mapping Bin Cards
 // @Accept  json
 // @Produce json
 // @Param   mappingBinCard body     dto.CreateNewMappingBinCard true "Daftar Mapping BinCard Baru"
@@ -56,10 +56,10 @@ func (mappingBinCardController *MappingBinCardController) CreateMappingBinCard(c
 
 	data, err := mappingBinCardController.mappingBinCardService.CreateMappingBinCard(req)
 	if err != nil {
-		if errors.Is(err, utils.ErrDefinitionAlreadyExists) {
+		if errors.Is(err, utils.ErrBinAlreadyExists) {
 			res := utils.Response{
 				Data:       nil,
-				Message:    "Definition Already Exist",
+				Message:    "BIN Already Exist",
 				StatusCode: 404,
 			}
 			return res.ReturnSingleMessage(c)
@@ -79,7 +79,7 @@ func (mappingBinCardController *MappingBinCardController) CreateMappingBinCard(c
 
 // Ambil Daftar Mapping BinCard
 // @Summary API untuk Ambil semua daftar mapping BinCard
-// @Tags    Mapping BinCards
+// @Tags    Mapping Bin Cards
 // @Accept  json
 // @Produce json
 // @Param   page      query    string true  "Halaman"
@@ -122,7 +122,7 @@ func (mappingBinCardController *MappingBinCardController) FindMappingBinCards(c 
 
 // Update Mapping BinCard
 // @Summary API untuk Update Data Mapping BinCard
-// @Tags    Mapping BinCards
+// @Tags    Mapping Bin Cards
 // @Accept  json
 // @Produce json
 // @Param   id   path     int               true "BinCard ID"
@@ -179,7 +179,7 @@ func (mappingBinCardController *MappingBinCardController) UpdateMappingBinCard(c
 
 // Delete Mapping BinCard
 // @Summary API untuk Delete Mapping BinCard
-// @Tags    Mapping BinCards
+// @Tags    Mapping Bin Cards
 // @Accept  json
 // @Produce json
 // @Param   id  path     int true "BinCard ID"
@@ -223,7 +223,7 @@ func (mappingBinCardController *MappingBinCardController) DeleteMappingBinCard(c
 
 // Delete Mapping BinCard Bulk
 // @Summary API untuk Delete Mapping BinCard Bulk
-// @Tags    Mapping BinCards
+// @Tags    Mapping Bin Cards
 // @Accept  json
 // @Produce json
 // @Param   mapping_BinCard_ids body     dto.DeleteMappingBinCardBulk true "Delete Mapping BinCard Bulk"
@@ -275,7 +275,7 @@ func (mappingBinCardController *MappingBinCardController) DeleteMappingBinCardBu
 
 // Find Mapping BinCard Berdasarkan ID
 // @Summary API untuk Find Mapping BinCard By ID
-// @Tags    Mapping BinCard
+// @Tags    Mapping Bin Card
 // @Accept  json
 // @Produce json
 // @Param   id  path     string true "BinCard ID"

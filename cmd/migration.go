@@ -31,6 +31,7 @@ func initMigration(cfg *config.Config, args []string) {
 			models.MappingBinCard{},
 			models.MappingKeywordList{},
 			models.MJenisTransaksi{},
+			models.ListOpCode{},
 			models.MappingKeywordList{},
 
 		}

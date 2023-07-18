@@ -181,13 +181,13 @@ type UpdateAction struct {
 
 // mapping bin card
 type CreateNewMappingBinCard struct {
-	Bank string `json:"bank" form:"bank" validate:"required"`
-	Bin   string `json:"bin" form:"bin" validate:"required"`
+	Bank 	string `json:"bank" form:"bank" validate:"required"`
+	Bin 	string `json:"bin" form:"bin" validate:"required"`
 }
 
 type GetMappingBinCards struct {
 	BasePagination
-	Bin string `json:"bin" form:"bin"`
+	Bin 	string `json:"bin" form:"bin"`
 }
 
 type DeleteMappingBinCardBulk struct {
@@ -276,4 +276,24 @@ type UpdateJenisTransaksi struct {
 
 type GetJenisTransaksi struct {
 	BasePagination
+}
+
+// list op code
+type CreateListOpCode struct {
+	OPCode string `json:"opCode" form:"opCode" gorm:"uniqueIndex" validate:"required"`
+	ModelMesin string `json:"modelMesin" form:"modelMesin" validate:"required"`
+	TipeTransaksi string `json:"tipeTransaksi" form:"tipeTransaksi" gorm:"uniqueIndex" validate:"required"`
+}
+
+type GetListOpCode struct {
+	BasePagination
+}
+
+type DeleteListOpCode struct {
+	ID uint `params:"id" validate:"required"`
+}
+
+type UpdateListOpCode struct {
+	ID uint `params:"id" validate:"required"`
+	CreateListOpCode
 }

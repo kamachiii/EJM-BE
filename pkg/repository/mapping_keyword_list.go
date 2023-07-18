@@ -60,7 +60,7 @@ func (mappingKeywordListObject *MappingKeywordList) FindMappingkeywordlist(pagin
 		}
 
 		if value != "" {
-			data.Order("mappingKeywordList.id = " + value + " descc")
+			data.Order("mappingKeywordList.id = " + value + " desc	")
 		}
 
 		// search data

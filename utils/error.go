@@ -65,6 +65,14 @@ var (
 		},
 	}
 
+	ErrListOpCodeNotFound = &BeError{
+		status: http.StatusNotFound,
+		msg: &i18n.Message{
+			ID:    "user.not.found",
+			Other: "User Not Found",
+		},
+	}
+
 	ErrJenisTransaksiNotFound = &BeError{
 		status: http.StatusNotFound,
 		msg: &i18n.Message{
@@ -121,6 +129,13 @@ var (
 		msg: &i18n.Message{
 			ID:    "mappingCode.already.exists",
 			Other: "Mapping Code already exists",
+		},
+	}
+	ErrBinAlreadyExists = &BeError{
+		status: http.StatusNotFound,
+		msg: &i18n.Message{
+			ID:    "mappingBinCard.already.exists",
+			Other: "Mapping Bin Card already exists",
 		},
 	}
 	ErrTransactionTypeAlreadyExists = &BeError{

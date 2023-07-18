@@ -29,6 +29,19 @@ definitions:
     - name
     - path
     type: object
+  dto.CreateListOpCode:
+    properties:
+      modelMesin:
+        type: string
+      opCode:
+        type: string
+      tipeTransaksi:
+        type: string
+    required:
+    - modelMesin
+    - opCode
+    - tipeTransaksi
+    type: object
   dto.CreateMappingkeywordlist:
     properties:
       MappingKeywordList:
@@ -1110,6 +1123,166 @@ paths:
       summary: API untuk Membuat Jenis Transaksi Baru
       tags:
       - Jenis Transaksi
+  /listOpCode/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: List Op Code ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Delete List Op Code
+      tags:
+      - List Op Codes
+  /listOpCode/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Daftar List Op Code Baru
+        in: body
+        name: listopcode
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateListOpCode'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Membuat List Op Code Baru
+      tags:
+      - List Op Codes
+  /listOpCodes:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Halaman
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: Jumlah Data Per halaman
+        in: query
+        name: page_size
+        required: true
+        type: string
+      - description: Mencari Data
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponsePaginate'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Ambil semua daftar list op code
+      tags:
+      - List Op Codes
+  /listOpCodes/{id}:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Code ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update List Op Code Baru
+        in: body
+        name: listOpCode
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateListOpCode'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/middlewares.ResponseError'
+      summary: API untuk Update Data List OpCode
+      tags:
+      - List Op Codes
   /mappingBinCards:
     delete:
       consumes:
@@ -1146,7 +1319,7 @@ paths:
             $ref: '#/definitions/middlewares.ResponseError'
       summary: API untuk Delete Mapping BinCard Bulk
       tags:
-      - Mapping BinCards
+      - Mapping Bin Cards
     get:
       consumes:
       - application/json
@@ -1190,7 +1363,7 @@ paths:
             $ref: '#/definitions/middlewares.ResponseError'
       summary: API untuk Ambil semua daftar mapping BinCard
       tags:
-      - Mapping BinCards
+      - Mapping Bin Cards
   /mappingBinCards/{id}:
     delete:
       consumes:
@@ -1226,7 +1399,7 @@ paths:
             $ref: '#/definitions/middlewares.ResponseError'
       summary: API untuk Delete Mapping BinCard
       tags:
-      - Mapping BinCards
+      - Mapping Bin Cards
     put:
       consumes:
       - application/json
@@ -1267,7 +1440,7 @@ paths:
             $ref: '#/definitions/middlewares.ResponseError'
       summary: API untuk Update Data Mapping BinCard
       tags:
-      - Mapping BinCards
+      - Mapping Bin Cards
   /mappingBinCards/create:
     post:
       consumes:
@@ -1304,7 +1477,7 @@ paths:
             $ref: '#/definitions/middlewares.ResponseError'
       summary: API untuk Membuat Mapping BinCard Baru
       tags:
-      - Mapping BinCards
+      - Mapping Bin Cards
   /mappingCodes:
     delete:
       consumes:
